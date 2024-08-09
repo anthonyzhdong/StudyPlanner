@@ -82,10 +82,15 @@ public:
 
 
 };
+
+void displayMenu(){
+    cout << "\n===== Paper Management System =====\n";
+    cout << "test\n";
+}
     
 
 int main() {
-
+    displayMenu();
     //test data
     // Create a new paper
     Paper compSci;
@@ -108,7 +113,7 @@ int main() {
     compSci.addAssignment(assignment("Data Structures", "Implement a linked list", "Intro to CS", 28, 0));
 
     // Display all information about the paper
-    compSci.displayPaperInfo();
+    //compSci.displayPaperInfo();
 
     return 0;
 }
