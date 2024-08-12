@@ -71,9 +71,14 @@ public:
         assignments.push_back(assignment);
     }
 
+    void setName(const string &name)
+    {
+        paperName = name;
+    }
+
     void displayPaperInfo()
     {
-        std::cout << "Paper: " << paperName << std::endl;
+        std::cout << "\nPaper: " << paperName << std::endl;
         std::cout << "Lectures: " << std::endl;
         for (int i = 0; i < lectures.size(); i++)
         {
@@ -101,8 +106,8 @@ void displayMenu()
 {
     cout << "\n===== Paper Management System =====\n";
     cout << "Type a command and press enter.\n";
-    cout << "Display item(s): display <papers|lectures|labs|tutorials|assignments>";
-    cout << "Add an item: add <paper|lecture|lab|tutorial|assignment>"; // After typing this, prompt the user to add details.
+    cout << "Display item(s): display <papers|lectures|labs|tutorials|assignments>\n";
+    cout << "Add an item: add <paper|lecture|lab|tutorial|assignment>\n"; // After typing this, prompt the user to add details.
     cout << "Remove an item: remove <paper|lecture|lab|tutorial|assignment>"; // After typing this, prompt the user to add details of what to delete.
 }
 
@@ -114,7 +119,7 @@ int main()
     // test data
     //  Create a new paper
     Paper compSci;
-    compSci.paperName = "CS101: Introduction to Computer Science";
+    compSci.setName("CS101: Introduction to Computer Science");
 
     // Add lectures
     compSci.addLecture(classInfo("Intro to CS", "Lecture", "Room 101", 1, 900));
@@ -133,7 +138,7 @@ int main()
     compSci.addAssignment(assignment("Data Structures", "Implement a linked list", "Intro to CS", 28, 0));
 
     // Display all information about the paper
-    // compSci.displayPaperInfo();
+    compSci.displayPaperInfo();
 
     return 0;
 }
