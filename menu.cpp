@@ -100,12 +100,17 @@ public:
 void displayMenu()
 {
     cout << "\n===== Paper Management System =====\n";
-    cout << "test\n";
+    cout << "Type a command and press enter.\n";
+    cout << "Display item(s): display <papers|lectures|labs|tutorials|assignments>";
+    cout << "Add an item: add <paper|lecture|lab|tutorial|assignment>"; // After typing this, prompt the user to add details.
+    cout << "Remove an item: remove <paper|lecture|lab|tutorial|assignment>"; // After typing this, prompt the user to add details of what to delete.
 }
 
 int main()
 {
     displayMenu();
+
+
     // test data
     //  Create a new paper
     Paper compSci;
