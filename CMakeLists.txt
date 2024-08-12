@@ -7,7 +7,7 @@ project(cosc345project)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add the executable
+# Add the executable(Add every file to this, space seperated
 add_executable(menu menu.cpp)
 
 # If you have any additional source files, add them here
