@@ -1,4 +1,5 @@
-./vscode
+/vscode
 menu
 menu.exe
 te
+/build/*
