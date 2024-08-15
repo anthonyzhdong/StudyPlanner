@@ -1,6 +1,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <iostream>
+#include <string>
 // macos /linux
 int getTerminalWidth() {
     struct winsize w;
@@ -10,6 +11,15 @@ int getTerminalWidth() {
 
 int main() {
     int width = getTerminalWidth();
+    std:: string s = "menu";
+
+    if(width %2 != 0){
+        width-=1;
+    }
+    int half = (width/2) - 2;
+    std::cout << half << std::endl;
+    std::cout << std::string(half, '-') << s << std::string(half, '-') << std::endl;
+
     std::cout << "The current terminal width is: " << width << " characters." << std::endl;
     
     // Demonstrate the width by printing a line of characters
