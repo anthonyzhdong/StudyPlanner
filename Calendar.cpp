@@ -1,9 +1,6 @@
 #include <vector>
 #include <iostream>
 
-class Event {
-    // Event class implementation
-};
 
 class Day {
 private:
