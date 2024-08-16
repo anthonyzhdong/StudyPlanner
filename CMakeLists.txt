@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add the executable(Add every file to this, space seperated
-add_executable(menu menu.cpp)
+add_executable(menu menu.cpp Calendar.h Calendar.cpp Event.h Event.cpp)
 
 # If you have any additional source files, add them here
 # add_executable(menu menu.cpp other_file.cpp another_file.cpp)
@@ -23,5 +23,5 @@ add_executable(menu menu.cpp)
 if(MSVC)
   target_compile_options(menu PRIVATE /W4)
 else()
-  target_compile_options(menu PRIVATE -Wall -Wextra -Wpedantic)
+  target_compile_options(menu PRIVATE -Wall -Wextra -pedantic)
 endif()

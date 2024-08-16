@@ -1,10 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Calendar.h"
+#include "Event.h"
 using namespace std;
 // g++ -o menu menu.cpp
 // ./menu
 
+
+Calendar calendar = Calendar();
 
 void displayMenu()
 {
@@ -28,6 +32,9 @@ void displayMenu()
         if(cin >> number){
             if(number == 1){
                 //display papers
+                cout << "Adding event" << endl;
+                Event e = Event("test", 1, 2, 3, 4);
+                calendar.addEvent(e);
                 break;
             }else if(number ==2){
                 //display calendar

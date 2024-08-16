@@ -1,18 +1,13 @@
-#ifndef CALENDAR_H
-#define CALENDAR_H
+#pragma once
 
 #include <vector>
+#include "Event.h"
 
 // Forward declaration of classes
 class Event;
 class Day;
 class Week;
 class Calendar;
-
-// Event class definition
-class Event {
-    // Event class implementation details
-};
 
 // Day class definition
 class Day {
@@ -22,6 +17,7 @@ private:
 
 public:
     Day(int dayNumber);
+    bool addEvent(const Event& e);
     // Additional methods for Day class
 };
 
@@ -33,6 +29,7 @@ private:
 
 public:
     Week(int weekNumber);
+    bool addEvent(const Event& e);
     // Additional methods for Week class
 };
 
@@ -49,6 +46,3 @@ public:
     bool editEvent(const Event& e);
     // Additional methods for Calendar class
 };
-
-#endif // CALENDAR_H
-

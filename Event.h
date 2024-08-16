@@ -1,5 +1,4 @@
-#ifndef EVENT_H
-#define EVENT_H
+#pragma once
 
 #include <string>
 
@@ -23,5 +22,3 @@ private:
     int day;
     int week;
 };
-
-#endif // EVENT_H
