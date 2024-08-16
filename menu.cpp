@@ -104,7 +104,13 @@ public:
 
 void displayMenu()
 {
-    cout << "\n===== Paper Management System =====\n";
+    cout << "\n"
+" ____  _             _         ____  _                             \n"
+"/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
+"\\___ \\| __| | | |/ _` | | | | | |_) | |/ _` | '_ \\| '_ \\ / _ \\ '__|\n"
+" ___) | |_| |_| | (_| | |_| | |  __/| | (_| | | | | | | |  __/ |   \n"
+"|____/ \\__|\\__,_|\\__,_|\\__, | |_|   |_|\\__,_|_| |_|_| |_|\\___|_|   \n"
+"                       |___/                                        \n";
     cout << "Type a command and press enter.\n";
     cout << "Display item(s): display <papers|lectures|labs|tutorials|assignments>\n";
     cout << "Add an item: add <paper|lecture|lab|tutorial|assignment>\n"; // After typing this, prompt the user to add details.
