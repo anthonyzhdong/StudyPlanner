@@ -80,7 +80,9 @@ void displayMenu()
                     cout << "Invalid input. Please enter another number." << endl;
                 }
             }
-        }else{
+        }
+        else
+        {
             cout << "Invalid input. Please enter an integer." << endl;
             cin.clear();                                                   // Clear error flags
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
