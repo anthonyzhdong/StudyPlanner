@@ -15,13 +15,13 @@ bool Day::addEvent(const Event& d) {
             std::cout << "Event overlaps with another event" << std::endl;
             return false;
         }
-        std::cout << "Event Name: " << e.getEventName() << std::endl;
-        std::cout << "Start Time: " << e.getStartTime() << std::endl;
-        std::cout << "End Time: " << e.getEndTime() << std::endl;
-        std::cout << "Day: " << e.getDay() << std::endl;
-        std::cout << "Week: " << e.getWeek() << std::endl;
-        std::cout << "-----------------------" << std::endl;
     }
+    std::cout << "Event Name: " << d.getEventName() << std::endl;
+    std::cout << "Start Time: " << d.getStartTime() << std::endl;
+    std::cout << "End Time: " << d.getEndTime() << std::endl;
+    std::cout << "Day: " << d.getDay() << std::endl;
+    std::cout << "Week: " << d.getWeek() << std::endl;
+    std::cout << "-----------------------" << std::endl;
     // If no overlap, add the event
     events.push_back(d);
     return true;
