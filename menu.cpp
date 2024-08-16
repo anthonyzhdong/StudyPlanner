@@ -22,6 +22,8 @@ void displayMenu()
     cout << "1. Display papers\n";
     cout << "2. Display calendar\n";
     cout << "3. Add event\n";
+    cout << "4. Start study session\n";
+    cout << "5. Exit\n";
     int number;
     // have to figure out how to switch between states
     while(true){
@@ -34,6 +36,12 @@ void displayMenu()
                 break;
             }else if(number ==3){
                 //add event
+                break;
+            }else if (number == 4){
+                //start study session
+                break;
+            }else if (number == 5){
+                //exit
                 break;
             }
         }else{

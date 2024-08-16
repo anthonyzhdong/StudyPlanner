@@ -21,7 +21,7 @@ public:
     }
     void displayInfo()
     {
-        std::cout << type << " for " << paperName << " at " << location << " on day " << day << " at " << time << std::endl;
+        cout << type << " for " << paperName << " at " << location << " on day " << day << " at " << time << endl;
     }
 };
 
