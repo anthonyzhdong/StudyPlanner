@@ -22,7 +22,6 @@ bool Day::addEvent(const Event& d) {
     std::cout << "Day: " << d.getDay() << std::endl;
     std::cout << "Week: " << d.getWeek() << std::endl;
     std::cout << "-----------------------" << std::endl;
-
     // If no overlap, add the event
     events.push_back(d);
     return true;
