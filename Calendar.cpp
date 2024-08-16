@@ -1,65 +1,85 @@
 #include <vector>
 #include <iostream>
-#include <Event.h>
+#include "Calendar.h"
+#include "Event.h"
 
-class Day {
-private:
-    std::vector<Event> events;
-    int dayNumber;
+using namespace std;
 
-public:
-    Day(int dayNumber) : dayNumber(dayNumber) {
+Day::Day(int dayNumber) : dayNumber(dayNumber) {
         // Constructor implementation
     }
-};
 
-class Week {
-private:
-    std::vector<Day> days;
-    int weekNumber;
-
-public:
-    Week(int weekNumber) : weekNumber(weekNumber) {
-        for(int i = 0; i < 7; i++) {
-            days.push_back(Day(i));
+bool Day::addEvent(const Event& d) {
+    for (const auto& e : events) {
+        if (d.getStartTime() < e.getEndTime() && d.getEndTime() > e.getStartTime()) {
+            std::cout << "Event overlaps with another event" << std::endl;
+            return false;
         }
+        std::cout << "Event Name: " << e.getEventName() << std::endl;
+        std::cout << "Start Time: " << e.getStartTime() << std::endl;
+        std::cout << "End Time: " << e.getEndTime() << std::endl;
+        std::cout << "Day: " << e.getDay() << std::endl;
+        std::cout << "Week: " << e.getWeek() << std::endl;
+        std::cout << "-----------------------" << std::endl;
     }
-};
-
-class Calendar {
-private:
-    std::vector<Week> weeks;
-
-public:
-    Calendar() {
-        for(int i = 0; i < 52; i++) {
-            weeks.push_back(Week(i));
-        }
-    }
-
-    void display() {
-        // Implement display logic
-    }
-
-    bool addEvent(const Event& e) {
-        // Implement logic to add event
-        return true;
-    }
-
-    bool removeEvent(const Event& e) {
-        // Implement logic to remove event
-        return true;
-    }
-
-    bool editEvent(const Event& e) {
-        // Implement logic to edit event
-        return true;
-    }
-};
-
-int main() {
-    Calendar calendar;
-    calendar.display();
-    // Additional logic for testing
-    return 0;
+    // If no overlap, add the event
+    events.push_back(d);
+    return true;
 }
+
+
+Week::Week(int weekNumber) : weekNumber(weekNumber) {
+    for(int i = 0; i < 7; i++) {
+        days.push_back(Day(i));
+    }
+}
+
+bool Week::addEvent(const Event& e) {
+    int day = e.getDay();
+    if(days[day].addEvent(e)){
+        return true;
+    }
+    else{
+        return false;   
+    }
+}
+
+Calendar::Calendar() {
+    for(int i = 0; i < 52; i++) {
+        weeks.push_back(Week(i));
+    }
+}
+
+void Calendar::display() {
+    // Implement display logic
+}
+
+bool Calendar::addEvent(const Event& e) {
+    string name = e.getEventName();
+    int week = e.getWeek();
+    int day = e.getDay();
+    int startTime = e.getStartTime();
+    int endTime = e.getEndTime();
+    weeks[week].addEvent(e);
+
+
+    // Implement logic to add event
+    return true;
+}
+
+bool Calendar::removeEvent(const Event& e) {
+    // Implement logic to remove event
+    return true;
+}
+
+bool Calendar::editEvent(const Event& e) {
+    // Implement logic to edit event
+    return true;
+}
+
+// int main() {
+//     Calendar calendar;
+//     calendar.display();
+//     // Additional logic for testing
+//     return 0;
+// }

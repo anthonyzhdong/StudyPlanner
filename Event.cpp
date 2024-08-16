@@ -1,54 +1,33 @@
-#include "Calendar.h"
 #include "Event.h"
-#include <string>
-#include <iostream>
 
-using namespace std;
-
-class event
+// Constructor Implementation
+Event::Event(std::string eventName, int startTime, int endTime, int day, int week)
+    : eventName(eventName), startTime(startTime), endTime(endTime), day(day), week(week) 
 {
+}
 
-public:
-    string eventName;
-    int startTime;
-    int endTime;
-    int day;
-    int week;
-    event(string eventName, int startTime, int endTime, int day, int week)
-    {
-        this->eventName = eventName;
-        this->startTime = startTime;
-        this->endTime = endTime;
-        this->day = day;
-        this->week = week;
-    }
+// Getter Implementations
+std::string Event::getEventName() const
+{
+    return eventName;
+}
 
-    string getEventName()
-    {
-        return eventName;
-    }
-    int getStartTime()
-    {
-        return startTime;
-    }
-    int getEndTime()
-    {
-        return endTime;
-    }
+int Event::getStartTime() const
+{
+    return startTime;
+}
 
-    int getDay()
-    {
-        return day;
-    }
+int Event::getEndTime() const
+{
+    return endTime;
+}
 
-    int getWeek()
-    {
-        return week;
-    }
+int Event::getDay() const
+{
+    return day;
+}
 
-    // void addEventToCalendar(Calendar& calendar)
-    // {
-    //     Event e(eventName, startTime, endTime);
-    //     calendar.addEvent(e);
-    // }
+int Event::getWeek() const
+{
+    return week;
 }
