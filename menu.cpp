@@ -41,6 +41,12 @@ void displayMenu()
                 Event e = Event("test", 1, 2, 3, 4);
                 calendar.addEvent(e);
                 break;
+            }else if (number == 4){
+                //start study session
+                break;
+            }else if (number == 5){
+                //exit
+                break;
             }
             else if (number == 2)
             {
