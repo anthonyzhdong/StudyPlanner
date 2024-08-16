@@ -15,7 +15,7 @@ public:
         return e;
     }
 
-    void AddEventMenu()
+    Event AddEventMenu()
     {
         char choice;
         std::cout << "Would you like to add an event? (y/n): ";
@@ -96,6 +96,8 @@ public:
             Event newEvent = createEvent(name, starttime, endtime, day, week);
             // Add the event to the schedule
             // ...
+
+            return newEvent;
         }
     }
 };
