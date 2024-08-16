@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
-#include "Event.cpp"
+#include "Event.h"
 
 class AddEvent
 {
 public:
     // Method to create an Event object
-    event createEvent(const std::string &name, const std::string &starttime, const std::string &endtime, int day, int week)
+    Event createEvent(const std::string &name, const std::string &starttime, const std::string &endtime, int day, int week)
     {
         // Assuming starttime and endtime should be converted to int
         int startTimeInt = std::stoi(starttime);
@@ -93,7 +93,7 @@ public:
             std::cout << "Enter week: ";
             std::cin >> week;
 
-            event newEvent = createEvent(name, starttime, endtime, day, week);
+            Event newEvent = createEvent(name, starttime, endtime, day, week);
             // Add the event to the schedule
             // ...
 
