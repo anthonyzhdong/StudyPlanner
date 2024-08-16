@@ -5,26 +5,45 @@
 
 using namespace std;
 
-class event{
+class event
+{
 
 public:
     string eventName;
     int startTime;
     int endTime;
-    event(string eventName, int startTime, int endTime){
+    int day;
+    int week;
+    event(string eventName, int startTime, int endTime, int day, int week)
+    {
         this->eventName = eventName;
         this->startTime = startTime;
         this->endTime = endTime;
+        this->day = day;
+        this->week = week;
     }
 
-    string getEventName(){
+    string getEventName()
+    {
         return eventName;
     }
-    string getStartTime(){
+    int getStartTime()
+    {
         return startTime;
     }
-    string getEndTime(){
+    int getEndTime()
+    {
         return endTime;
+    }
+
+    int getDay()
+    {
+        return day;
+    }
+
+    int getWeek()
+    {
+        return week;
     }
 
     // void addEventToCalendar(Calendar& calendar)
@@ -32,10 +51,4 @@ public:
     //     Event e(eventName, startTime, endTime);
     //     calendar.addEvent(e);
     // }
-
-
-
-
-
-
 }
