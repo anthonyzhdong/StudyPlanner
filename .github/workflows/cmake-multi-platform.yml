@@ -43,18 +43,18 @@ jobs:
 
     - name: Install OpenCppCoverage
       run: |
-        choco install opencppcoverage
-        echo "::add-path::C:/Program Files/OpenCppCoverage"
+        choco install OpenCppCoverage
+        echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
 
-    - name: Run OpenCppCoverage
+    - name: Generate Coverage Report
+      shell: cmd
       run: |
         OpenCppCoverage --export_type cobertura:coverage.xml --modules "*.exe" --cover_children -- ctest -C ${{ matrix.build_type }} --output-on-failure
-      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        codecov -f coverage.xml --root "${{ github.workspace }}"
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+    - name: Upload Report to Codecov
+      uses: codecov/codecov-action@v4
       with:
-        files: ${{ steps.strings.outputs.build-output-dir }}/coverage.xml
-        flags: unittests
         fail_ci_if_error: true
-        verbose: true
+        files: winci.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
