@@ -7,11 +7,8 @@ project(cosc345project)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Add the executable(Add every file to this, space seperated
+# Add the executable
 add_executable(menu menu.cpp Calendar.h Calendar.cpp Event.h Event.cpp)
-
-# If you have any additional source files, add them here
-# add_executable(menu menu.cpp other_file.cpp another_file.cpp)
 
 # If you need to link against any libraries, you can use target_link_libraries
 # target_link_libraries(menu some_library)
@@ -19,9 +16,24 @@ add_executable(menu menu.cpp Calendar.h Calendar.cpp Event.h Event.cpp)
 # If you have include directories, you can add them like this:
 # target_include_directories(menu PUBLIC include_directory)
 
-# If you want to enable warnings, you can add:
+# Enable warnings
 if(MSVC)
   target_compile_options(menu PRIVATE /W4)
 else()
   target_compile_options(menu PRIVATE -Wall -Wextra -pedantic)
 endif()
+
+# Add the test executable
+add_executable(test_runner Test.cpp Calendar.h Calendar.cpp Event.h Event.cpp AddEvent.cpp)
+
+# Enable warnings for tests
+if(MSVC)
+  target_compile_options(test_runner PRIVATE /W4)
+else()
+  target_compile_options(test_runner PRIVATE -Wall -Wextra -pedantic)
+endif()
+
+# Add tests
+enable_testing()
+
+add_test(NAME ExampleTest COMMAND test_runner)

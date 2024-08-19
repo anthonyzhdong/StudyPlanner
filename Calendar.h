@@ -44,5 +44,6 @@ public:
     bool addEvent(const Event& e);
     bool removeEvent(const Event& e);
     bool editEvent(const Event& e);
+    bool test();
     // Additional methods for Calendar class
 };
