@@ -12,11 +12,6 @@ jobs:
 
     strategy:
       fail-fast: false
-
-      # Set up a matrix to run the following configuration:
-      # <Windows, Release, latest MSVC compiler toolchain on the default runner image, default generator>
-      #
-      # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
         build_type: [Release]
         c_compiler: [cl]
