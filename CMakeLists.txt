@@ -19,9 +19,24 @@ add_executable(menu menu.cpp Calendar.h Calendar.cpp Event.h Event.cpp addPaper.
 # If you have include directories, you can add them like this:
 # target_include_directories(menu PUBLIC include_directory)
 
-# If you want to enable warnings, you can add:
+# Enable warnings
 if(MSVC)
   target_compile_options(menu PRIVATE /W4)
 else()
   target_compile_options(menu PRIVATE -Wall -Wextra -pedantic)
 endif()
+
+# Add the test executable
+add_executable(test_runner Test.cpp Calendar.h Calendar.cpp Event.h Event.cpp AddEvent.cpp)
+
+# Enable warnings for tests
+if(MSVC)
+  target_compile_options(test_runner PRIVATE /W4)
+else()
+  target_compile_options(test_runner PRIVATE -Wall -Wextra -pedantic)
+endif()
+
+# Add tests
+enable_testing()
+
+add_test(NAME ExampleTest COMMAND test_runner)
