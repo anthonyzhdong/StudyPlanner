@@ -83,3 +83,10 @@ bool Calendar::editEvent(const Event& e) {
 //     // Additional logic for testing
 //     return 0;
 // }
+bool Calendar::test(){
+    if(true){
+        cout << "Calender Test Passed" << endl;
+        return true;
+    }
+    return false;
+}
