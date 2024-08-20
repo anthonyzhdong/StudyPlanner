@@ -11,7 +11,10 @@ Day::Day(int dayNumber) : dayNumber(dayNumber) {
 
 bool Day::addEvent(const Event& d) {
     for (const auto& e : events) {
-        if (d.getStartTime() <= e.getEndTime() && d.getEndTime() >= e.getStartTime()) {
+        // Check if event d overlaps with event e
+        if ((d.getStartTime() < e.getEndTime() && d.getEndTime() > e.getStartTime()) ||
+            (e.getStartTime() < d.getEndTime() && e.getEndTime() > d.getStartTime())
+            || d.getStartTime() == e.getStartTime() && d.getEndTime() == e.getEndTime()) {
             std::cout << "Event overlaps with another event" << std::endl;
             return false;
         }
@@ -86,9 +89,10 @@ bool Calendar::editEvent(const Event& e) {
 // }
 bool Calendar::test(){
     Calendar testCalendar;
-    Event testEvent("Test Event", 0, 0, 0, 0);
+    Event testEvent("Test Event", 0, 6, 0, 0);
     testCalendar.addEvent(testEvent);
-    if(testCalendar.addEvent(testEvent) == false){ // Test that events cannot overlap
+    Event testEvent2("Test Event2", 2,10 , 0, 0);
+    if(testCalendar.addEvent(testEvent) == false && testCalendar.addEvent(testEvent2)==false){ // Test that events cannot overlap
         cout << "Calender Test Passed" << endl;
         return true;
     }
