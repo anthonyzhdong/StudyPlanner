@@ -1,69 +1,64 @@
 #include <iostream>
-#include <string>
 #include "lecture.h"
 
-class lecture{
-private:
-    std::string paperCode;
-    int startTime;
-    int endTime;
-    std::string location;
-    int day;
-    int week;
+using namespace std;
 
-public:
-    // constructor
-    lecture(std::string paperCode, int startTime, int endTime, std::string location, int day, int week){
-        this->paperCode = paperCode;
-        this->startTime = startTime;
-        this->endTime = endTime;
-        this->location = location;
-        this->day = day;
-        this->week = week;
-    }
+// constructor
+Lecture::Lecture(string paperCode, int startTime, int endTime, string location, int day, int week)
+    : paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
+}
 
-    // getters
-    std::string getPaperCode(){
-        return paperCode;
-    }
-    int getStartTime(){
-        return startTime;
-    }
-    int getEndTime(){
-        return endTime;
-    }
-    std::string getLocation(){
-        return location;
-    }
-    int getDay(){
-        return day;
-    }
-    int getWeek(){
-        return week;
-    }
+// getter methods
+string Lecture::getPaperCode() const {
+    return paperCode;
+}
 
-    // setters
-    void setPaperCode(std::string paperCode){
-        this->paperCode = paperCode;
-    }
-    void setStartTime(int startTime){
-        this->startTime = startTime;
-    }
-    void setEndTime(int endTime){
-        this->endTime = endTime;
-    }
-    void setLocation(std::string location){
-        this->location = location;
-    }
-    void setDay(int day){
-        this->day = day;
-    }
-    void setWeek(int week){
-        this->week = week;
-    }
+int Lecture::getStartTime() const {
+    return startTime;
+}
 
-    // display
-    void displayInfo(){
-        std::cout << "Lecture for " << paperCode << " at " << location << " on day " << day << " at " << startTime << " to " << endTime << std::endl;
-    }
+int Lecture::getEndTime() const {
+    return endTime;
+}
+
+string Lecture::getLocation() const {
+    return location;
+}
+
+int Lecture::getDay() const {
+    return day;
+}
+
+int Lecture::getWeek() const {
+    return week;
+}
+
+// setter methods
+void Lecture::setPaperCode(const string& paperCode) {
+    this->paperCode = paperCode;
+}
+
+void Lecture::setStartTime(int startTime) {
+    this->startTime = startTime;
+}
+
+void Lecture::setEndTime(int endTime) {
+    this->endTime = endTime;
+}
+
+void Lecture::setLocation(const string& location) {
+    this->location = location;
+}
+
+void Lecture::setDay(int day) {
+    this->day = day;
+}
+
+void Lecture::setWeek(int week) {
+    this->week = week;
+}
+
+// displays lecture information
+void Lecture::displayInfo() const {
+    cout << "Lecture for " << paperCode << " at " << location << " on day " << day << " of week " << week << " from " << startTime << " to " << endTime << endl;
 }

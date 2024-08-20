@@ -1,67 +1,64 @@
-#include "lab.h"
 #include <iostream>
+#include "lab.h"
 
-// Constructor
-lab::lab(std::string paperCode, int startTime, int endTime, std::string location, int day, int week) {
-    this->paperCode = paperCode;
-    this->startTime = startTime;
-    this->endTime = endTime;
-    this->location = location;
-    this->day = day;
-    this->week = week;
+using namespace std;
+
+// constructor
+Lab::Lab(string paperCode, int startTime, int endTime, string location, int day, int week)
+    : paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
 }
 
-// Getters
-std::string lab::getPaperCode() {
+// getter methods
+string Lab::getPaperCode() const {
     return paperCode;
 }
 
-int lab::getStartTime() {
+int Lab::getStartTime() const {
     return startTime;
 }
 
-int lab::getEndTime() {
+int Lab::getEndTime() const {
     return endTime;
 }
 
-std::string lab::getLocation() {
+std::string Lab::getLocation() const {
     return location;
 }
 
-int lab::getDay() {
+int Lab::getDay() const {
     return day;
 }
 
-int lab::getWeek() {
+int Lab::getWeek() const {
     return week;
 }
 
-// Setters
-void lab::setPaperCode(std::string paperCode) {
+// setter methods
+void Lab::setPaperCode(const string& paperCode) {
     this->paperCode = paperCode;
 }
 
-void lab::setStartTime(int startTime) {
+void Lab::setStartTime(int startTime) {
     this->startTime = startTime;
 }
 
-void lab::setEndTime(int endTime) {
+void Lab::setEndTime(int endTime) {
     this->endTime = endTime;
 }
 
-void lab::setLocation(std::string location) {
+void Lab::setLocation(const string& location) {
     this->location = location;
 }
 
-void lab::setDay(int day) {
+void Lab::setDay(int day) {
     this->day = day;
 }
 
-void lab::setWeek(int week) {
+void Lab::setWeek(int week) {
     this->week = week;
 }
 
-// Display
-void lab::displayInfo() {
-    std::cout << "lab for " << paperCode << " at " << location << " on day " << day << " at " << startTime << " to " << endTime << std::endl;
+// displays lab information
+void Lab::displayInfo() const {
+    cout << "Lab for " << paperCode << " at " << location << " on day " << day << " of week " << week << " from " << startTime << " to " << endTime << endl;
 }

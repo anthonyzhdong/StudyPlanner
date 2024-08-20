@@ -1,7 +1,9 @@
 #include <string>
 #pragma once
 
-class lecture {
+using namespace std;
+
+class Lecture {
 private:
     std::string paperCode;
     int startTime;
@@ -11,25 +13,25 @@ private:
     int week;
 
 public:
-    // Constructor
-    lecture(std::string paperCode, int startTime, int endTime, std::string location, int day, int week);
+    // constructor
+    Lecture(string paperCode, int startTime, int endTime, string location, int day, int week);
 
-    // Getters
-    std::string getPaperCode();
-    int getStartTime();
-    int getEndTime();
-    std::string getLocation();
-    int getDay();
-    int getWeek();
+    // getter methods
+    string getPaperCode() const;
+    int getStartTime() const;
+    int getEndTime() const;
+    string getLocation() const;
+    int getDay() const;
+    int getWeek() const;
 
-    // Setters
-    void setPaperCode(std::string paperCode);
+    // setter methods
+    void setPaperCode(const string& paperCode); 
     void setStartTime(int startTime);
     void setEndTime(int endTime);
-    void setLocation(std::string location);
+    void setLocation(const string& location);
     void setDay(int day);
     void setWeek(int week);
 
-    // Display
-    void displayInfo();
+    // displays lecture information
+    void displayInfo() const;
 };

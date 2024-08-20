@@ -99,5 +99,6 @@ public:
 
             return newEvent;
         }
+        //return std::nullopt;
     }
 };
