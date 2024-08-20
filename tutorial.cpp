@@ -1,79 +1,64 @@
-#include "tutorial.h"
 #include <iostream>
+#include "tutorial.h"
 
-class tutorial{
+using namespace std;
 
-private:
-    std::string paperCode;
-    int startTime;
-    int endTime;
-    std::string location;
-    int day;
-    int week;
-    
-public:
-    // Constructor
-    tutorial::tutorial(std::string paperCode, int startTime, int endTime, std::string location, int day, int week) {
-        this->paperCode = paperCode;
-        this->startTime = startTime;
-        this->endTime = endTime;
-        this->location = location;
-        this->day = day;
-        this->week = week;
-    }
+// constructor
+Tutorial::Tutorial(string paperCode, int startTime, int endTime, string location, int day, int week)
+    : paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
+}
 
-    // Getters
-    std::string tutorial::getPaperCode() {
-        return paperCode;
-    }
+// getter methods
+string Tutorial::getPaperCode() const {
+    return paperCode;
+}
 
-    int tutorial::getStartTime() {
-        return startTime;
-    }
+int Tutorial::getStartTime() const {
+    return startTime;
+}
 
-    int tutorial::getEndTime() {
-        return endTime;
-    }
+int Tutorial::getEndTime() const {
+    return endTime;
+}
 
-    std::string tutorial::getLocation() {
-        return location;
-    }
+string Tutorial::getLocation() const {
+    return location;
+}
 
-    int tutorial::getDay() {
-        return day;
-    }
+int Tutorial::getDay() const {
+    return day;
+}
 
-    int tutorial::getWeek() {
-        return week;
-    }
+int Tutorial::getWeek() const {
+    return week;
+}
 
-    // Setters
-    void tutorial::setPaperCode(std::string paperCode) {
-        this->paperCode = paperCode;
-    }
+// setter methods
+void Tutorial::setPaperCode(const string& paperCode) {
+    this->paperCode = paperCode;
+}
 
-    void tutorial::setStartTime(int startTime) {
-        this->startTime = startTime;
-    }
+void Tutorial::setStartTime(int startTime) {
+    this->startTime = startTime;
+}
 
-    void tutorial::setEndTime(int endTime) {
-        this->endTime = endTime;
-    }
+void Tutorial::setEndTime(int endTime) {
+    this->endTime = endTime;
+}
 
-    void tutorial::setLocation(std::string location) {
-        this->location = location;
-    }
+void Tutorial::setLocation(const string& location) {
+    this->location = location;
+}
 
-    void tutorial::setDay(int day) {
-        this->day = day;
-    }
+void Tutorial::setDay(int day) {
+    this->day = day;
+}
 
-    void tutorial::setWeek(int week) {
-        this->week = week;
-    }
+void Tutorial::setWeek(int week) {
+    this->week = week;
+}
 
-    // Display
-    void tutorial::displayInfo() {
-        std::cout << "tutorial for " << paperCode << " at " << location << " on day " << day << " at " << startTime << " to " << endTime << std::endl;
-    }
+// display tutorial information
+void Tutorial::displayInfo() const {
+    cout << "Tutorial for " << paperCode << " at " << location << " on day " << day << " of week " << week << " from " << startTime << " to " << endTime << endl;
 }

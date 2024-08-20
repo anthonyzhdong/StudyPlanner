@@ -3,13 +3,16 @@
 #include <string>
 #include "Calendar.h"
 #include "Event.h"
-#include "AddEvent.cpp"
-#include "Paper.h"
+#include "AddEvent.h"
+#include "paper.h"
+#include "addPaper.h"
 using namespace std;
 // g++ -o menu menu.cpp
 // ./menu
 
 Calendar calendar = Calendar();
+vector <paper> papers;
+addPaper paperHandler = (papers);
 
 void displayMenu()
 {
@@ -31,6 +34,7 @@ void displayMenu()
     cout << "5. Add paper\n";
     cout << "6. Exit\n";
     int number;
+
     // have to figure out how to switch between states
     while (true)
     {
@@ -43,34 +47,30 @@ void displayMenu()
                 Event e = Event("test", 1, 2, 3, 4);
                 calendar.addEvent(e);
                 break;
-            }else if (number == 4){
-                //start study session
-                break;
-            }else if (number == 6){
-                //exit
-                break;
             }
             else if (number == 2)
             {
                 // display calendar
                 break;
+            }else if (number == 3){
+                // add event
+                //AddEvent eventHandler; // Create an instance of AddEvent
+                //calendar.addEvent(eventHandler.AddEventMenu());
+
+                break;
             }else if (number == 4){
                 //start study session
                 break;
             }else if (number == 5){
-                //exit
-                break;
-            }
-            else if (number == 3)
-            {
-                // add event
-                AddEvent eventHandler; // Create an instance of AddEvent
-                calendar.addEvent(eventHandler.AddEventMenu());
+                //add paper
+                //cout << "hello" << endl;
+                paperHandler.addPaperMenu();
 
                 break;
-            }else if (number == 5){
-                paper newPaper;
-                
+            }
+           
+            else if (number == 6){
+                //exit
                 break;
             }
         }
@@ -81,7 +81,7 @@ void displayMenu()
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
         }
     }
-    cout << "input: " << number << endl;
+    //cout << "input: " << number << endl;
 }
 
 int main()

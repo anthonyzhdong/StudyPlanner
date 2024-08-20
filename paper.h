@@ -1,39 +1,40 @@
-#pragma once
-
 #include <string>
 #include <vector>
 #include "lecture.h"
 #include "tutorial.h"
 #include "lab.h"
+#pragma once
 
-class Paper {
+using namespace std;
+
+class paper {
 private:
-    std::string paperName;
-    std::string paperCode;
+    string paperName;
+    string paperCode;
     int paperPoints;
-    std::vector<lecture> lectures;
-    std::vector<tutorial> tutorials;
-    std::vector<lab> labs;
+    vector<Lecture> lectures;
+    vector<Tutorial> tutorials;
+    vector<Lab> labs;
 
 public:
-    // Constructor
-    Paper(std::string paperName, std::string paperCode, int paperPoints);
+    // constructor
+    paper(string paperName, string paperCode, int paperPoints);
 
-    // Getters
-    std::string getPaperName() const;
-    std::string getPaperCode() const;
+    // getter methods
+    string getPaperName() const;
+    string getPaperCode() const;
     int getPaperPoints() const;
 
-    // Setters
-    void setPaperName(const std::string& paperName);
-    void setPaperCode(const std::string& paperCode);
+    // setter methods
+    void setPaperName(const string& paperName);
+    void setPaperCode(const string& paperCode);
     void setPaperPoints(int paperPoints);
 
-    // Methods to add classes
-    void addLecture(const lecture& lecture);
-    void addTutorial(const tutorial& tutorial);
-    void addLab(const lab& lab);
+    // add classes methods
+    void addLecture(const Lecture& lecture);
+    void addTutorial(const Tutorial& tutorial);
+    void addLab(const Lab& lab);
 
-    // Method to display paper information
+    // display paper information
     void displayInfo() const;
 };
