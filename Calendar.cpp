@@ -15,7 +15,7 @@ bool Day::addEvent(const Event& d) {
         // Check if event d overlaps with event e
         if ((d.getStartTime() < e.getEndTime() && d.getEndTime() > e.getStartTime()) ||
             (e.getStartTime() < d.getEndTime() && e.getEndTime() > d.getStartTime())
-            || d.getStartTime() == e.getStartTime() && d.getEndTime() == e.getEndTime()) {
+            || (d.getStartTime() == e.getStartTime() && d.getEndTime() == e.getEndTime())) {
             std::cout << "Event overlaps with another event" << std::endl;
             return false;
         }
@@ -89,14 +89,24 @@ bool Calendar::editEvent(const Event& e) {
 //     return 0;
 // }
 bool Calendar::test(){
+    bool passed = true;
     Calendar testCalendar;
     Event testEvent("Test Event", 0, 6, 0, 0);
     testCalendar.addEvent(testEvent);
     Event testEvent2("Test Event2", 2,10 , 0, 0);
-    if(testCalendar.addEvent(testEvent) == false && testCalendar.addEvent(testEvent2)==false){ // Test that events cannot overlap
-        cout << "Calender Test Passed" << endl;
-        return true;
+    
+    Event testEvent3("Test Event3", 10,12 , 0, 0);
+
+    if(!(testCalendar.addEvent(testEvent) == false && testCalendar.addEvent(testEvent2)==false)){ // Test that events cannot overlap
+        passed = false;
     }
-    cout << "Calender Test Failed" << endl;
-    return false;
+    if(!(testCalendar.addEvent(testEvent3) == true)){ // Test that events that do not overlap can be added
+        passed = false;
+    }
+    if(passed){
+        cout << "Calender Test Passed" << endl;
+    }else{
+        cout << "Calender Test Failed" << endl;
+    }
+    return passed;
 }
