@@ -4,6 +4,7 @@
 #include "Calendar.h"
 #include "Event.h"
 #include "AddEvent.cpp"
+#include "Paper.h"
 using namespace std;
 // g++ -o menu menu.cpp
 // ./menu
@@ -26,6 +27,9 @@ void displayMenu()
     cout << "1. Display papers\n";
     cout << "2. Display calendar\n";
     cout << "3. Add event\n";
+    cout << "4. Start study session\n";
+    cout << "5. Add paper\n";
+    cout << "6. Exit\n";
     int number;
     // have to figure out how to switch between states
     while (true)
@@ -39,10 +43,22 @@ void displayMenu()
                 Event e = Event("test", 1, 2, 3, 4);
                 calendar.addEvent(e);
                 break;
+            }else if (number == 4){
+                //start study session
+                break;
+            }else if (number == 6){
+                //exit
+                break;
             }
             else if (number == 2)
             {
                 // display calendar
+                break;
+            }else if (number == 4){
+                //start study session
+                break;
+            }else if (number == 5){
+                //exit
                 break;
             }
             else if (number == 3)
@@ -51,6 +67,10 @@ void displayMenu()
                 AddEvent eventHandler; // Create an instance of AddEvent
                 calendar.addEvent(eventHandler.AddEventMenu());
 
+                break;
+            }else if (number == 5){
+                paper newPaper;
+                
                 break;
             }
         }
