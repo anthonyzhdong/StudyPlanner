@@ -49,8 +49,10 @@ jobs:
     - name: Generate Coverage Report
       shell: cmd
       run: |
-        OpenCppCoverage --export_type cobertura:coverage.xml --modules "*.exe" --cover_children -- ctest -C ${{ matrix.build_type }} --output-on-failure
-        codecov -f coverage.xml --root "${{ github.workspace }}"
+        OpenCppCoverage --export_type cobertura:coverage.xml --modules "D:\a\cosc345project\cosc345project\build\*.exe" --cover_children -- ctest -C Release --output-on-failure
+        curl -Os https://uploader.codecov.io/latest/windows/codecov.exe
+        codecov.exe -f coverage.xml --root "D:\a\cosc345project\cosc345project"
+
 
     - name: Upload Report to Codecov
       uses: codecov/codecov-action@v4
