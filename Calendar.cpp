@@ -97,5 +97,6 @@ bool Calendar::test(){
         cout << "Calender Test Passed" << endl;
         return true;
     }
+    cout << "Calender Test Failed" << endl;
     return false;
 }
