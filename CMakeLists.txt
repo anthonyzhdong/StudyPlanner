@@ -38,5 +38,6 @@ endif()
 
 # Add tests
 enable_testing()
+set(CTEST_OUTPUT_ON_FAILURE TRUE)
 
 add_test(NAME ExampleTest COMMAND test_runner)
