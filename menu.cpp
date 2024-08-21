@@ -90,10 +90,10 @@ void displayMenu()
         else
         {
 
-            cout << "Invalid input. Please enter an integer." << endl;
-            cin.clear();                                                   // Clear error flags
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
-        }
+        //     cout << "Invalid input. Please enter an integer." << endl;
+        //     cin.clear();                                                   // Clear error flags
+        //     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+        // }
         if(running){
             cout << "Press enter to go back to main menu";
             cin.ignore();
