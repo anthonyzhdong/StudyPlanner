@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add the executable(Add every file to this, space seperated
-add_executable(menu menu.cpp Calendar.h Calendar.cpp Event.h Event.cpp addPaper.h addPaper.cpp AddEvent.h AddEvent.cpp paper.h paper.cpp lab.h lab.cpp lecture.h lecture.cpp tutorial.h tutorial.cpp)
+add_executable(menu menu.cpp Calendar.h Calendar.cpp Event.h Event.cpp addPaper.h addPaper.cpp AddEvent.h AddEvent.cpp paper.h paper.cpp lab.h lab.cpp lecture.h lecture.cpp tutorial.h tutorial.cpp addNewEvent.h addNewEvent.cpp eventSkeleton.h eventSkeleton.cpp) 
 
 # If you have any additional source files, add them here
 # add_executable(menu menu.cpp other_file.cpp another_file.cpp)

@@ -4,17 +4,20 @@
 using namespace std;
 
 // constructor
+// Tutorial::Tutorial(string eventType, string paperCode, int startTime, int endTime, string location, int day, int week)
+//     : eventType(eventType), paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
+// }
 Tutorial::Tutorial(string eventType, string paperCode, int startTime, int endTime, string location, int day, int week)
-    : eventType(eventType), paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
+    : eventSkeleton(paperCode, day, week),eventType(eventType), startTime(startTime), endTime(endTime), location(location) {
 }
 
 // getter methods
 string Tutorial::getEventType() {
     return eventType;
 }
-string Tutorial::getPaperCode()  {
-    return paperCode;
-}
+// string Tutorial::getPaperCode()  {
+//     return paperCode;
+// }
 
 int Tutorial::getStartTime()  {
     return startTime;
@@ -28,21 +31,21 @@ string Tutorial::getLocation()  {
     return location;
 }
 
-int Tutorial::getDay()  {
-    return day;
-}
+// int Tutorial::getDay()  {
+//     return day;
+// }
 
-int Tutorial::getWeek()  {
-    return week;
-}
+// int Tutorial::getWeek()  {
+//     return week;
+// }
 
 // setter methods
 void Tutorial::setEventType(string& eventType) {
     this->eventType = eventType;
 }
-void Tutorial::setPaperCode( string& paperCode) {
-    this->paperCode = paperCode;
-}
+// void Tutorial::setPaperCode( string& paperCode) {
+//     this->paperCode = paperCode;
+// }
 
 void Tutorial::setStartTime(int startTime) {
     this->startTime = startTime;
@@ -56,15 +59,15 @@ void Tutorial::setLocation( string& location) {
     this->location = location;
 }
 
-void Tutorial::setDay(int day) {
-    this->day = day;
-}
+// void Tutorial::setDay(int day) {
+//     this->day = day;
+// }
 
-void Tutorial::setWeek(int week) {
-    this->week = week;
-}
+// void Tutorial::setWeek(int week) {
+//     this->week = week;
+// }
 
 // display tutorial information
 void Tutorial::displayInfo()  {
-    cout << "Tutorial for " << paperCode << " at " << location << " on day " << day << " of week " << week << " from " << startTime << " to " << endTime << endl;
+    cout << "Tutorial for " << getPaperCode() << " at " << location << " on day " << getDay() << " of week " << getWeek() << " from " << startTime << " to " << endTime << endl;
 }

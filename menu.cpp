@@ -48,8 +48,8 @@ void displayMenu()
                 case 1: {
                     // display papers
                     cout << "Adding event" << endl;
-                    Event e = Event("test", 1, 2, 3, 4);
-                    calendar.addEvent(e);
+                    // Event e = Event("test", 1, 2, 3, 4);
+                    // calendar.addEvent(e);
                     
                     break;
                 }
