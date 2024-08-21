@@ -12,7 +12,7 @@ using namespace std;
 // ./menu
 
 Calendar calendar = Calendar();
-vector <paper> papers;
+vector<paper> papers;
 addPaper paperHandler = (papers);
 
 void displayMenu()
@@ -41,49 +41,62 @@ void displayMenu()
     {
         if (cin >> number)
         {
-            // TODO: Turn into a switch statement instead of if else
-            if (number == 1)
+            switch (number)
+            {
+            case 1:
             {
                 // display papers
-                cout << "Adding event" << endl;
-                Event e = Event("test", 1, 2, 3, 4);
-                calendar.addEvent(e);
+                // cout << "Adding event" << endl;
+                // Event e = Event("test", 1, 2, 3, 4);
+                // calendar.addEvent(e);
                 break;
             }
-            else if (number == 2)
+            case 2:
             {
-                // display calendar
+                // Display calendar
                 break;
-            }else if (number == 3){
-                // add event
-                //AddEvent eventHandler; // Create an instance of AddEvent
-                //calendar.addEvent(eventHandler.AddEventMenu());
+            }
+            case 3:
+            {
+                // Add event
+                // AddEvent eventHandler; // Create an instance of AddEvent
+                // calendar.addEvent(eventHandler.AddEventMenu());
 
                 break;
-            }else if (number == 4){
-                //start study session
+            }
+            case 4:
+            {
+                // Start study session
                 break;
-            }else if (number == 5){
-                //add paper
-                //cout << "hello" << endl;
+            }
+            case 5:
+            {
+                // add paper
+                // cout << "hello" << endl;
                 paperHandler.addPaperMenu();
 
                 break;
             }
-           
-            else if (number == 6){
-                //exit
+            case 6:
+            {
+                // Exit
                 break;
+            }
+            default:
+                cout << "Invalid input. Please enter an integer." << endl;
+                cin.clear();                                                   // Clear error flags
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
             }
         }
         else
         {
+
             cout << "Invalid input. Please enter an integer." << endl;
             cin.clear();                                                   // Clear error flags
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input}
+            // cout << "input: " << number << endl;
         }
     }
-    //cout << "input: " << number << endl;
 }
 
 int main()
