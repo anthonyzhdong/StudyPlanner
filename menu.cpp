@@ -41,6 +41,7 @@ void displayMenu()
     {
         if (cin >> number)
         {
+            // TODO: Turn into a switch statement instead of if else
             if (number == 1)
             {
                 // display papers
