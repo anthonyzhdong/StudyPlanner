@@ -7,7 +7,6 @@
 #include "paper.h"
 #include "addPaper.h"
 #include <limits>
-#include <limits>
 using namespace std;
 // g++ -o menu menu.cpp
 // ./menu
