@@ -5,6 +5,8 @@
 #include "lecture.h"
 #include "tutorial.h"
 #include "lab.h"
+#include "exam.h"
+#include "assignment.h"
 
 using namespace std;
 
@@ -67,17 +69,17 @@ void paper::addLab( Lab& lab)
 void paper::displayInfo()  {
     cout << "Paper: " << paperName << " (" << paperCode << ")" << endl;
     cout << "Points: " << paperPoints << endl;
-    
+
     cout << "Lectures:" << endl;
     for ( auto& lecture : lectures) {
         lecture.displayInfo();
     }
-    
+
     cout << "Labs:" << endl;
     for ( auto& lab : labs) {
         lab.displayInfo();
     }
-    
+
     cout << "Tutorials:" << endl;
     for ( auto& tutorial : tutorials) {
         tutorial.displayInfo();
