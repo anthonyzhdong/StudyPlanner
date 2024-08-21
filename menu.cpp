@@ -12,7 +12,7 @@ using namespace std;
 // ./menu
 
 Calendar calendar = Calendar();
-vector <paper> papers;
+vector<paper> papers;
 addPaper paperHandler = (papers);
 
 void displayMenuOptions(){
@@ -81,9 +81,15 @@ void displayMenu()
                     cout << "Invalid input. Please enter another number." << endl;
                 }
             }
+            default:
+                cout << "Invalid input. Please enter an integer." << endl;
+                cin.clear();                                                   // Clear error flags
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+            }
         }
         else
         {
+
             cout << "Invalid input. Please enter an integer." << endl;
             cin.clear();                                                   // Clear error flags
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
@@ -95,7 +101,7 @@ void displayMenu()
         }
     }
     //cout << "input: " << number << endl;
-}
+
 
 int main()
 {
