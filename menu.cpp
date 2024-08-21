@@ -90,6 +90,7 @@ void displayMenu()
             cin.get();
         }
     }
+}
     //cout << "input: " << number << endl;
 
 
