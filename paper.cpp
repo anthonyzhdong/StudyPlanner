@@ -7,13 +7,14 @@
 #include "lab.h"
 #include "exam.h"
 #include "assignment.h"
+#include "eventSkeleton.h"
 
 using namespace std;
 
 // constructor
 paper::paper(string paperName, string paperCode, int paperPoints)
     : paperName(paperName), paperCode(paperCode), paperPoints(paperPoints),
-      lectures(), tutorials(), labs() // initialize the vectors
+      events() // initialize the vectors
 {
 }
 
@@ -50,38 +51,46 @@ void paper::setPaperPoints(int paperPoints)
 }
 
 // add lecture, tutorial, lab methods
-void paper::addLecture( Lecture& lecture)
-{
-    lectures.push_back(lecture);
-}
+// void paper::addLecture( Lecture& lecture)
+// {
+//     lectures.push_back(lecture);
+// }
 
-void paper::addTutorial( Tutorial& tutorial)
-{
-    tutorials.push_back(tutorial);
-}
+// void paper::addTutorial( Tutorial& tutorial)
+// {
+//     tutorials.push_back(tutorial);
+// }
 
-void paper::addLab( Lab& lab)
+// void paper::addLab( Lab& lab)
+// {
+//     labs.push_back(lab);
+// }
+void paper::addEvent(eventSkeleton& event)
 {
-    labs.push_back(lab);
+    events.push_back(event);
 }
 
 // display paper information
 void paper::displayInfo()  {
     cout << "Paper: " << paperName << " (" << paperCode << ")" << endl;
     cout << "Points: " << paperPoints << endl;
-
-    cout << "Lectures:" << endl;
-    for ( auto& lecture : lectures) {
-        lecture.displayInfo();
+    cout << "Events:" << endl;
+    for ( auto& event : events) {
+        cout << "Event on day " << event.getDay() << " of week " << event.getWeek() << endl;
     }
 
-    cout << "Labs:" << endl;
-    for ( auto& lab : labs) {
-        lab.displayInfo();
-    }
+    // cout << "Lectures:" << endl;
+    // for ( auto& lecture : lectures) {
+    //     lecture.displayInfo();
+    // }
 
-    cout << "Tutorials:" << endl;
-    for ( auto& tutorial : tutorials) {
-        tutorial.displayInfo();
-    }
+    // cout << "Labs:" << endl;
+    // for ( auto& lab : labs) {
+    //     lab.displayInfo();
+    // }
+
+    // cout << "Tutorials:" << endl;
+    // for ( auto& tutorial : tutorials) {
+    //     tutorial.displayInfo();
+    // }
 }
