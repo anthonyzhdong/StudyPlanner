@@ -29,7 +29,7 @@ bool Day::addEvent(const Event& d) {
     events.push_back(d);
     return true;
 }
-
+//
 
 Week::Week(int weekNumber) : weekNumber(weekNumber) {
     for(int i = 0; i < 7; i++) {

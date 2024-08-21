@@ -7,14 +7,14 @@
 
 using namespace std;
 
-// Constructor
+// constructor
 addPaper::addPaper(vector<paper>& papers) : papers(papers) {}
 
 void addPaper::addPaperMenu() {
     string paperName, paperCode;
     int paperPoints;
 
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clear any leftover newline characters
+    cin.ignore(numeric_limits<std::streamsize>::max(), '\n');  // Clear any leftover newline characters
 
     cout << "Enter the paper name: ";
     getline(cin, paperName);
