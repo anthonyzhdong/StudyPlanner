@@ -4,37 +4,43 @@
 using namespace std;
 
 // constructor
-Tutorial::Tutorial(string paperCode, int startTime, int endTime, string location, int day, int week)
-    : paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
+Tutorial::Tutorial(string eventType, string paperCode, int startTime, int endTime, string location, int day, int week)
+    : eventType(eventType), paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
 }
 
 // getter methods
-string Tutorial::getPaperCode() const {
+string Tutorial::getEventType() {
+    return eventType;
+}
+string Tutorial::getPaperCode()  {
     return paperCode;
 }
 
-int Tutorial::getStartTime() const {
+int Tutorial::getStartTime()  {
     return startTime;
 }
 
-int Tutorial::getEndTime() const {
+int Tutorial::getEndTime()  {
     return endTime;
 }
 
-string Tutorial::getLocation() const {
+string Tutorial::getLocation()  {
     return location;
 }
 
-int Tutorial::getDay() const {
+int Tutorial::getDay()  {
     return day;
 }
 
-int Tutorial::getWeek() const {
+int Tutorial::getWeek()  {
     return week;
 }
 
 // setter methods
-void Tutorial::setPaperCode(const string& paperCode) {
+void Tutorial::setEventType(string& eventType) {
+    this->eventType = eventType;
+}
+void Tutorial::setPaperCode( string& paperCode) {
     this->paperCode = paperCode;
 }
 
@@ -46,7 +52,7 @@ void Tutorial::setEndTime(int endTime) {
     this->endTime = endTime;
 }
 
-void Tutorial::setLocation(const string& location) {
+void Tutorial::setLocation( string& location) {
     this->location = location;
 }
 
@@ -59,6 +65,6 @@ void Tutorial::setWeek(int week) {
 }
 
 // display tutorial information
-void Tutorial::displayInfo() const {
+void Tutorial::displayInfo()  {
     cout << "Tutorial for " << paperCode << " at " << location << " on day " << day << " of week " << week << " from " << startTime << " to " << endTime << endl;
 }

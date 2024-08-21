@@ -4,37 +4,47 @@
 using namespace std;
 
 // constructor
-Lab::Lab(string paperCode, int startTime, int endTime, string location, int day, int week)
-    : paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
+Lab::Lab(string eventType, string paperCode, int startTime, int endTime, string location, int day, int week)
+    : eventType(eventType), paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), day(day), week(week) {
 }
 
 // getter methods
-string Lab::getPaperCode() const {
+string Lab::getEventType(){
+    return eventType;
+}
+
+string Lab::getPaperCode()  {
     return paperCode;
 }
 
-int Lab::getStartTime() const {
+int Lab::getStartTime()  {
     return startTime;
 }
 
-int Lab::getEndTime() const {
+int Lab::getEndTime()  {
     return endTime;
 }
 
-std::string Lab::getLocation() const {
+std::string Lab::getLocation()  {
     return location;
 }
 
-int Lab::getDay() const {
+int Lab::getDay()  {
     return day;
 }
 
-int Lab::getWeek() const {
+int Lab::getWeek()  {
     return week;
 }
 
+
+
 // setter methods
-void Lab::setPaperCode(const string& paperCode) {
+void Lab:: setEventType(string& eventType) {
+    this->eventType = eventType;
+}
+
+void Lab::setPaperCode( string& paperCode) {
     this->paperCode = paperCode;
 }
 
@@ -46,7 +56,7 @@ void Lab::setEndTime(int endTime) {
     this->endTime = endTime;
 }
 
-void Lab::setLocation(const string& location) {
+void Lab::setLocation( string& location) {
     this->location = location;
 }
 
@@ -59,6 +69,6 @@ void Lab::setWeek(int week) {
 }
 
 // displays lab information
-void Lab::displayInfo() const {
+void Lab::displayInfo()  {
     cout << "Lab for " << paperCode << " at " << location << " on day " << day << " of week " << week << " from " << startTime << " to " << endTime << endl;
 }

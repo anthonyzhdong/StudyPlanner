@@ -16,28 +16,28 @@ paper::paper(string paperName, string paperCode, int paperPoints)
 }
 
 // getter methods
-string paper::getPaperName() const
+string paper::getPaperName() 
 {
     return paperName;
 }
 
-string paper::getPaperCode() const
+string paper::getPaperCode() 
 {
     return paperCode;
 }
 
-int paper::getPaperPoints() const
+int paper::getPaperPoints() 
 {
     return paperPoints;
 }
 
 // setter methods
-void paper::setPaperName(const string& paperName)
+void paper::setPaperName( string& paperName)
 {
     this->paperName = paperName;
 }
 
-void paper::setPaperCode(const string& paperCode)
+void paper::setPaperCode( string& paperCode)
 {
     this->paperCode = paperCode;
 }
@@ -48,38 +48,38 @@ void paper::setPaperPoints(int paperPoints)
 }
 
 // add lecture, tutorial, lab methods
-void paper::addLecture(const Lecture& lecture)
+void paper::addLecture( Lecture& lecture)
 {
     lectures.push_back(lecture);
 }
 
-void paper::addTutorial(const Tutorial& tutorial)
+void paper::addTutorial( Tutorial& tutorial)
 {
     tutorials.push_back(tutorial);
 }
 
-void paper::addLab(const Lab& lab)
+void paper::addLab( Lab& lab)
 {
     labs.push_back(lab);
 }
 
 // display paper information
-void paper::displayInfo() const {
+void paper::displayInfo()  {
     cout << "Paper: " << paperName << " (" << paperCode << ")" << endl;
     cout << "Points: " << paperPoints << endl;
     
     cout << "Lectures:" << endl;
-    for (const auto& lecture : lectures) {
+    for ( auto& lecture : lectures) {
         lecture.displayInfo();
     }
     
     cout << "Labs:" << endl;
-    for (const auto& lab : labs) {
+    for ( auto& lab : labs) {
         lab.displayInfo();
     }
     
     cout << "Tutorials:" << endl;
-    for (const auto& tutorial : tutorials) {
+    for ( auto& tutorial : tutorials) {
         tutorial.displayInfo();
     }
 }

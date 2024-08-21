@@ -21,20 +21,20 @@ public:
     paper(string paperName, string paperCode, int paperPoints);
 
     // getter methods
-    string getPaperName() const;
-    string getPaperCode() const;
-    int getPaperPoints() const;
+    string getPaperName() ;
+    string getPaperCode() ;
+    int getPaperPoints() ;
 
     // setter methods
-    void setPaperName(const string& paperName);
-    void setPaperCode(const string& paperCode);
+    void setPaperName( string& paperName);
+    void setPaperCode( string& paperCode);
     void setPaperPoints(int paperPoints);
 
     // add classes methods
-    void addLecture(const Lecture& lecture);
-    void addTutorial(const Tutorial& tutorial);
-    void addLab(const Lab& lab);
+    void addLecture( Lecture& lecture);
+    void addTutorial( Tutorial& tutorial);
+    void addLab( Lab& lab);
 
     // display paper information
-    void displayInfo() const;
+    void displayInfo() ;
 };
