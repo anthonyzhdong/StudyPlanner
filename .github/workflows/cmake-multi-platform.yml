@@ -47,10 +47,11 @@ jobs:
         echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
 
     - name: Generate Coverage Report
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
       shell: cmd
       run: | 
         tree 
-        OpenCppCoverage --export_type cobertura:coverage.xml --modules "D:\a\cosc345project\cosc345project\build" --cover_children -- ctest --build-config Release --output-on-failure
+        OpenCppCoverage --export_type cobertura:coverage.xml --modules "\build" --cover_children -- ctest --build-config Release --output-on-failure
         curl -Os https://uploader.codecov.io/latest/windows/codecov.exe
         codecov.exe -f coverage.xml --root "D:\a\cosc345project\cosc345project\
         tree"
