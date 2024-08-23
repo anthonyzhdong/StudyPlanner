@@ -50,9 +50,9 @@ jobs:
       shell: cmd
       run: | 
         tree -l
-        OpenCppCoverage --export_type cobertura:coverage.xml --modules "\build\*.exe" --cover_children -- ctest -C Release --output-on-failure
+        OpenCppCoverage --export_type cobertura:coverage.xml --modules "D:/a/cosc345project/cosc345project/build" --cover_children -- ctest -C Release --output-on-failure
         curl -Os https://uploader.codecov.io/latest/windows/codecov.exe
-        codecov.exe -f coverage.xml --root "D:\cosc345project"
+        codecov.exe -f coverage.xml --root "D:/a/cosc345project/cosc345project/"
 
 
     - name: Upload Report to Codecov
