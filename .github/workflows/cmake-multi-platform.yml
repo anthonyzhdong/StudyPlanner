@@ -51,7 +51,7 @@ jobs:
       shell: cmd
       run: | 
         tree 
-        OpenCppCoverage --export_type cobertura:coverage.xml --modules "D:\a\cosc345project\cosc345project\build\*.exe" --cover_children -- ctest --build-config Release --output-on-failure
+        OpenCppCoverage --export_type cobertura:coverage.xml --modules="D:\a\cosc345project\cosc345project\build\Release" --cover_children -- ctest --build-config Release --output-on-failure
         curl -Os https://uploader.codecov.io/latest/windows/codecov.exe
         codecov.exe -f coverage.xml --root "D:\a\cosc345project\cosc345project\
         tree"
