@@ -4,40 +4,35 @@
 using namespace std;
 
 // constructor
-Assignment::Assignment(string paperCode, string assignmentName, int dueTime, int dueDate)
-    : paperCode(paperCode), assignmentName(assignmentName), dueTime(dueTime), dueDate(dueDate)
+Assignment::Assignment(string paperCode, string assignmentName, int dueTime, int day, int week)
+    : eventSkeleton(paperCode, day, week), eventType(eventType), assignmentName(assignmentName), dueTime(dueTime)
 {
 }
 
 // getter methods
-string Assignment::getPaperCode() const
+string Assignment::getEventType()
 {
-    return paperCode;
+    return eventType;
 }
 
-string Assignment::getAssignmentName() const
+string Assignment::getAssignmentName()
 {
     return assignmentName;
 }
 
-int Assignment::getDueTime() const
+int Assignment::getDueTime()
 {
     return dueTime;
 }
 
-int Assignment::getDueDate() const
-{
-    return dueDate;
-}
-
 // setter methods
 
-void Assignment::setPaperCode(const string &paperCode)
+void Assignment::setEventType(string &eventType)
 {
-    this->paperCode = paperCode;
+    this->eventType = eventType;
 }
 
-void Assignment::setAssignmentName(const string &assignmentName)
+void Assignment::setAssignmentName(string &assignmentName)
 {
     this->assignmentName = assignmentName;
 }
@@ -47,16 +42,8 @@ void Assignment::setDueTime(int dueTime)
     this->dueTime = dueTime;
 }
 
-void Assignment::setDueDate(int dueDate)
-{
-    this->dueDate = dueDate;
-}
-
 // displays assignment information
-void Assignment::displayInfo() const
+void Assignment::displayInfo()
 {
-    cout << "Assignment Name: " << assignmentName << endl;
-    cout << "Paper Code: " << paperCode << endl;
-    cout << "Due Time: " << dueTime << endl;
-    cout << "Due Date: " << dueDate << endl;
+    cout << "Assignment for " << getPaperCode() << " Due on " << getDay() << " of week " << getWeek() << " at " << dueTime << endl;
 }

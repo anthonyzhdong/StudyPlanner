@@ -4,42 +4,37 @@
 using namespace std;
 
 // constructor
-Exam::Exam(string paperCode, int startTime, int endTime, string location, int date)
-    : paperCode(paperCode), startTime(startTime), endTime(endTime), location(location), date(date)
+Exam::Exam(string eventType, string paperCode, int startTime, int endTime, string location, int day, int week)
+    : eventSkeleton(paperCode, day, week), eventType(eventType), startTime(startTime), endTime(endTime), location(location)
 {
 }
 
 // getter methods
-string Exam::getPaperCode() const
+string Exam::getEventType()
 {
-    return paperCode;
+    return eventType;
 }
 
-int Exam::getStartTime() const
+int Exam::getStartTime()
 {
     return startTime;
 }
 
-int Exam::getEndTime() const
+int Exam::getEndTime()
 {
     return endTime;
 }
 
-std::string Exam::getLocation() const
+string Exam::getLocation()
 {
     return location;
 }
 
-int Exam::getDate() const
-{
-    return date;
-}
-
 // setter methods
 
-void Exam::setPaperCode(const string &paperCode)
+void Exam::setEventType(string &eventType)
 {
-    this->paperCode = paperCode;
+    this->eventType = eventType;
 }
 
 void Exam::setStartTime(int startTime)
@@ -52,22 +47,13 @@ void Exam::setEndTime(int endTime)
     this->endTime = endTime;
 }
 
-void Exam::setLocation(const string &location)
+void Exam::setLocation(string &location)
 {
     this->location = location;
 }
 
-void Exam::setDate(int date)
-{
-    this->date = date;
-}
-
 // displays exam information
-void Exam::displayInfo() const
+void Exam::displayInfo()
 {
-    cout << "Paper Code: " << paperCode << endl;
-    cout << "Start Time: " << startTime << endl;
-    cout << "End Time: " << endTime << endl;
-    cout << "Location: " << location << endl;
-    cout << "Date: " << date << endl;
+    cout << "Exam for " << getPaperCode() << " at " << location << " on day " << getDay() << " of week " << getWeek() << " from " << startTime << " to " << endTime << endl;
 }

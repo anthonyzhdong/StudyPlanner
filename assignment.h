@@ -1,32 +1,31 @@
 #include <string>
+#include "eventSkeleton.h"
 #pragma once
 
 using namespace std;
 
-class Assignment
+class Assignment : public eventSkeleton
 {
 private:
-    string paperCode;
+    string eventType;
     string assignmentName;
     int dueTime;
-    int dueDate;
 
 public:
     // constructor
-    Assignment(string paperCode, string assignmentName, int dueTime, int dueDate);
+    Assignment(string paperCode, string assignmentName, int dueTime, int day, int week);
 
     // getter methods
-    string getPaperCode() const;
-    string getAssignmentName() const;
-    int getDueTime() const;
-    int getDueDate() const;
+    string getEventType();
+    string getAssignmentName();
+    int getDueTime();
 
     // setter methods
-    void setPaperCode(const string &paperCode);
-    void setAssignmentName(const string &assignmentName);
+    void setEventType(string &eventType);
+    void setAssignmentName(string &assignmentName);
     void setDueTime(int dueTime);
     void setDueDate(int dueDate);
 
     // displays assignment information
-    void displayInfo() const;
+    void displayInfo() override;
 };
