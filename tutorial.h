@@ -4,7 +4,8 @@
 
 using namespace std;
 
-class Tutorial : public eventSkeleton {
+class Tutorial : public eventSkeleton
+{
 private:
     string eventType;
     int startTime;
@@ -17,16 +18,16 @@ public:
 
     // getter methods
     string getEventType();
-    int getStartTime() ;
-    int getEndTime() ;
-    string getLocation() ;
+    int getStartTime();
+    int getEndTime();
+    string getLocation();
 
     // setter methods
-    void setEventType(string& eventType);
+    void setEventType(string &eventType);
     void setStartTime(int startTime);
     void setEndTime(int endTime);
-    void setLocation( string& location);
+    void setLocation(string &location);
 
     // display tutorial information
-    void displayInfo() override;
+    void displayInfo();
 };

@@ -4,7 +4,8 @@
 
 using namespace std;
 
-class Lecture : public eventSkeleton{
+class Lecture : public eventSkeleton
+{
 private:
     string eventType;
     // string paperCode;
@@ -20,22 +21,22 @@ public:
 
     // getter methods
     string getEventType();
-    //string getPaperCode() ;
-    int getStartTime() ;
-    int getEndTime() ;
-    string getLocation() ;
+    // string getPaperCode() ;
+    int getStartTime();
+    int getEndTime();
+    string getLocation();
     // int getDay() ;
     // int getWeek() ;
 
     // setter methods
-    void setEventType(string& eventType);
-    //void setPaperCode( string& paperCode); 
+    void setEventType(string &eventType);
+    // void setPaperCode( string& paperCode);
     void setStartTime(int startTime);
     void setEndTime(int endTime);
-    void setLocation( string& location);
+    void setLocation(string &location);
     // void setDay(int day);
     // void setWeek(int week);
 
     // displays lecture information
-    void displayInfo() override;
+    void displayInfo();
 };

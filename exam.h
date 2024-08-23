@@ -29,5 +29,5 @@ public:
     void setLocation(string &location);
 
     // displays exam information
-    void displayInfo() override;
+    void displayInfo();
 };
