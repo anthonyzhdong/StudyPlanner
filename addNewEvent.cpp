@@ -24,7 +24,13 @@ int timeValidation(const string &prompt, int minTime = 0)
     {
         cout << prompt;
         cin >> time;
-        if (time < 0 || time > 2359 || (time % 100) >= 60)
+        if (cin.fail())
+        {
+            cin.clear();                                         // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
+            cout << "Invalid input. Please enter a valid integer for time.\n";
+        }
+        else if (time < 0 || time > 2359 || (time % 100) >= 60)
         {
             cout << "Invalid time. Please enter a valid 24-hour time (e.g., 0930 for 9:30 AM, 1430 for 2:30 PM).\n";
         }
@@ -48,7 +54,13 @@ int dayValidation()
     {
         cout << "Enter day between 0 (Sunday) and 7 (Saturday): ";
         cin >> day;
-        if (day < 0 || day > 7)
+        if (cin.fail())
+        {
+            cin.clear();                                         // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
+            cout << "Invalid input. Please enter a valid integer for day.\n";
+        }
+        else if (day < 0 || day > 7)
         {
             cout << "Invalid day. Please enter a day between 0 (Sunday) and 7 (Saturday).\n";
         }
@@ -68,7 +80,13 @@ int weekValidation()
     {
         cout << "Enter week between 0 and 52: ";
         cin >> week;
-        if (week < 0 || week > 52)
+        if (cin.fail())
+        {
+            cin.clear();                                         // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
+            cout << "Invalid input. Please enter a valid integer for week.\n";
+        }
+        else if (week < 0 || week > 52)
         {
             cout << "Invalid week. Please enter a positive integer between 0 and 52.\n";
         }
@@ -148,7 +166,7 @@ void addNewEvent::addNewEventMenu()
         day = dayValidation();
 
         week = weekValidation();
-        }
+    }
     else
     {
         startTime = timeValidation("Enter start time: ");
