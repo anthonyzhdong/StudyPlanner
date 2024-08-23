@@ -27,5 +27,5 @@ public:
     void setDueDate(int dueDate);
 
     // displays assignment information
-    void displayInfo() override;
+    void displayInfo();
 };

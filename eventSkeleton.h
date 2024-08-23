@@ -2,7 +2,8 @@
 #pragma once
 using namespace std;
 
-class eventSkeleton{
+class eventSkeleton
+{
 private:
     string paperCode;
     int day;
@@ -10,7 +11,7 @@ private:
 
 public:
     // Constructor
-    eventSkeleton(string paperCode,  int day, int week);
+    eventSkeleton(string paperCode, int day, int week);
 
     // Getters
     string getPaperCode();
@@ -18,9 +19,9 @@ public:
     int getWeek();
 
     // setters
-    void setPaperCode(string& paperCode);
+    void setPaperCode(string &paperCode);
     void setDay(int day);
     void setWeek(int week);
-    
-    virtual void displayInfo();
+
+    void displayInfo();
 };
