@@ -16,98 +16,199 @@ using namespace std;
 
 vector<eventSkeleton> events;
 
-// need input validation
+int timeValidation(const string &prompt, int minTime = 0)
+{
+    int time;
+    bool valid = false;
+    while (!valid)
+    {
+        cout << prompt;
+        cin >> time;
+        if (cin.fail())
+        {
+            cin.clear();                                         // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
+            cout << "Invalid input. Please enter a valid integer for time.\n";
+        }
+        else if (time < 0 || time > 2359 || (time % 100) >= 60)
+        {
+            cout << "Invalid time. Please enter a valid 24-hour time (e.g., 0930 for 9:30 AM, 1430 for 2:30 PM).\n";
+        }
+        else if (time < minTime)
+        {
+            cout << "Invalid time. Time must be greater than or equal to start time of " << minTime << ".\n";
+        }
+        else
+        {
+            valid = true;
+        }
+    }
+    return time;
+}
 
-//enum lecture, tutorial, lab, assignment, exam
+int dayValidation()
+{
+    int day;
+    bool valid = false;
+    while (!valid)
+    {
+        cout << "Enter day between 0 (Sunday) and 7 (Saturday): ";
+        cin >> day;
+        if (cin.fail())
+        {
+            cin.clear();                                         // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
+            cout << "Invalid input. Please enter a valid integer for day.\n";
+        }
+        else if (day < 0 || day > 7)
+        {
+            cout << "Invalid day. Please enter a day between 0 (Sunday) and 7 (Saturday).\n";
+        }
+        else
+        {
+            valid = true;
+        }
+    }
+    return day;
+}
 
+int weekValidation()
+{
+    int week;
+    bool valid = false;
+    while (!valid)
+    {
+        cout << "Enter week between 0 and 52: ";
+        cin >> week;
+        if (cin.fail())
+        {
+            cin.clear();                                         // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
+            cout << "Invalid input. Please enter a valid integer for week.\n";
+        }
+        else if (week < 0 || week > 52)
+        {
+            cout << "Invalid week. Please enter a positive integer between 0 and 52.\n";
+        }
+        else
+        {
+            valid = true;
+        }
+    }
+    return week;
+}
+
+// enum lecture, tutorial, lab, assignment, exam
 
 // Constructor to initialize papers
-addNewEvent::addNewEvent(vector<paper>& papers) : papers(papers) {}
+addNewEvent::addNewEvent(vector<paper> &papers) : papers(papers)
+{
+}
 
-void addNewEvent::addNewEventMenu() {
+void addNewEvent::addNewEventMenu()
+{
     EventType eventType;
-    eventType = EventType::LECTURE;
     string paperCode, location;
     int startTime, endTime, day, week, typeChoice;
-
 
     cout << "Choose paper code:\n";
     // displays paper codes by getting menu's vector<paper> papers
     int index = 1;
-    for(auto& paper : papers){
-        cout << index << ". " << paper.getPaperCode() << " - " << paper.getPaperName() << "\n" << endl;
+    for (auto &paper : papers)
+    {
+        cout << index << ". " << paper.getPaperCode() << " - " << paper.getPaperName() << "\n"
+             << endl;
         index++;
     }
     cin >> paperCode;
 
     cout << "Choose the type of event to add:\n1. Lecture\n2. Tutorial\n3. Lab\n4. Assignment\n5. Exam\n";
-    cin >> typeChoice;
+    while (true)
+    {
+        cin >> typeChoice;
+        if (typeChoice < 1 || typeChoice > 5)
+        {
+            cout << "Invalid choice. Please choose a number between 1 and 5.\n";
+        }
+        else
+        {
+            break;
+        }
+    }
     // need to add input validation if they put outside of input range
-    switch(typeChoice) {
-        case 1:
-            eventType = EventType::LECTURE;
-            break;
-        case 2:
-            eventType = EventType::TUTORIAL;
-            break;
-        case 3:
-            eventType = EventType::LAB;
-            break;
-        case 4:
-            eventType = EventType::ASSIGNMENT;
-            break;
-        case 5:
-            eventType = EventType::EXAM;
-            break;
-        default:
-            cout << "bad input";
+    switch (typeChoice)
+    {
+    case 1:
+        eventType = EventType::LECTURE;
+        break;
+    case 2:
+        eventType = EventType::TUTORIAL;
+        break;
+    case 3:
+        eventType = EventType::LAB;
+        break;
+    case 4:
+        eventType = EventType::ASSIGNMENT;
+        break;
+    case 5:
+        eventType = EventType::EXAM;
+        break;
+    default:
+        cout << "bad input";
     }
 
-    
+    // depending on type/enum, ask for properties tied to specific event e.g. lecture has different properties to assignment
 
-    //depending on type/enum, ask for properties tied to specific event e.g. lecture has different properties to assignment
-    cout << "Enter start time: ";
-    cin >> startTime;
+    if (eventType == EventType::ASSIGNMENT)
+    {
+        endTime = timeValidation("Enter due time: ");
 
-    cout << "Enter end time: ";
-    cin >> endTime;
+        day = dayValidation();
 
-    cout << "Enter location: ";
-    cin >> location;
+        week = weekValidation();
+    }
+    else
+    {
+        startTime = timeValidation("Enter start time: ");
 
-    cout << "Enter day: ";
-    cin >> day;
-    // may need to also ask for range of weeks? - can sort out later
-    cout << "Enter week: ";
-    cin >> week;
+        endTime = timeValidation("Enter end time: ", startTime);
 
-    //pseudo
-    if(eventType == EventType::TUTORIAL){
+        cout << "Enter location: ";
+        cin >> location;
+
+        day = dayValidation();
+
+        week = weekValidation();
+    }
+
+    // pseudo
+    if (eventType == EventType::TUTORIAL)
+    {
         Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
         events.push_back(newTutorial);
     }
-    else if(eventType == EventType::LAB){
+    else if (eventType == EventType::LAB)
+    {
         Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
         events.push_back(newLab);
     }
-    else if(eventType == EventType::LECTURE){
+    else if (eventType == EventType::LECTURE)
+    {
         Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
         events.push_back(newLecture);
     }
-    else if(eventType == EventType::ASSIGNMENT){
+    else if (eventType == EventType::ASSIGNMENT)
+    {
         Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
         events.push_back(newAssignment);
     }
-    else if(eventType == EventType::EXAM){
+    else if (eventType == EventType::EXAM)
+    {
         Exam newExam = Exam(paperCode, day, week, startTime, endTime, location);
         events.push_back(newExam);
     }
-    else{
+    else
+    {
         cout << "Invalid event type.";
     }
-    }
-
-
-
-
-
+}
