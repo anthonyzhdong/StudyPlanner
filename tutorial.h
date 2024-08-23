@@ -28,5 +28,5 @@ public:
     void setLocation( string& location);
 
     // display tutorial information
-    void displayInfo() ;
+    void displayInfo() override;
 };

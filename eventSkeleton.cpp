@@ -29,5 +29,8 @@ void eventSkeleton::setDay(int day){
 void eventSkeleton::setWeek(int week){
     this->week = week;
 }
+virtual void displayInfo(){
+
+}
 
 

@@ -62,7 +62,7 @@ void addNewEvent::addNewEventMenu() {
     cout << "Enter week: ";
     cin >> week;
 
-    // create object based on enum then push to events
+    // create object based on enum then push to events AND also the paper 
 
     //pseudo
     // if eventType == tutorial 

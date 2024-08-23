@@ -21,4 +21,6 @@ public:
     void setPaperCode(string& paperCode);
     void setDay(int day);
     void setWeek(int week);
+    
+    virtual void displayInfo();
 };
