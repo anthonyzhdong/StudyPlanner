@@ -4,28 +4,10 @@
 
 using namespace std;
 
-class Assignment : public eventSkeleton
-{
-private:
-    string eventType;
-    string assignmentName;
-    int dueTime;
-
+class Assignment : public eventSkeleton {
 public:
-    // constructor
-    Assignment(string paperCode, string assignmentName, int dueTime, int day, int week);
 
-    // getter methods
-    string getEventType();
-    string getAssignmentName();
-    int getDueTime();
+    Assignment(string paperCode, int day, int week, int startTime, int endTime, string location)
+        : eventSkeleton(EventType::ASSIGNMENT, paperCode, day, week, startTime, endTime, location) {}
 
-    // setter methods
-    void setEventType(string &eventType);
-    void setAssignmentName(string &assignmentName);
-    void setDueTime(int dueTime);
-    void setDueDate(int dueDate);
-
-    // displays assignment information
-    void displayInfo();
 };
