@@ -126,7 +126,13 @@ void addNewEvent::addNewEventMenu()
     while (true)
     {
         cin >> typeChoice;
-        if (typeChoice < 1 || typeChoice > 5)
+        if (cin.fail())
+        {
+            cin.clear();                                         // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
+            cout << "Invalid input. Please enter a valid integer for week.\n";
+        }
+        else if (typeChoice < 1 || typeChoice > 5)
         {
             cout << "Invalid choice. Please choose a number between 1 and 5.\n";
         }
@@ -200,6 +206,7 @@ void addNewEvent::addNewEventMenu()
     else if (eventType == EventType::ASSIGNMENT)
     {
         Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
+
         events.push_back(newAssignment);
     }
     else if (eventType == EventType::EXAM)
