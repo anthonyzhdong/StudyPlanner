@@ -50,7 +50,7 @@ jobs:
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
       shell: cmd
       run: | 
-        tree 
+        tree /F
         OpenCppCoverage --export_type cobertura:coverage.xml --modules "*.exe" --cover_children -- ctest --build-config Release --output-on-failure"
 
 
