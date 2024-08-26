@@ -49,5 +49,5 @@ jobs:
       uses: codecov/codecov-action@v3
       with:
         fail_ci_if_error: true
-        files: ${{ steps.strings.outputs.build-output-dir }}/coverage.xml
+        files: coverage.xml
         token: ${{ secrets.CODECOV_TOKEN }}
