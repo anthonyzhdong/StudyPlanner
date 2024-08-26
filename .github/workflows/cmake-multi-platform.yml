@@ -46,7 +46,7 @@ jobs:
         OpenCppCoverage --export_type cobertura:coverage.xml --cover_children -- ctest -C Debug --test-dir ${{ steps.strings.outputs.build-output-dir }}
 
     - name: Upload Report to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         fail_ci_if_error: true
         files: ${{ steps.strings.outputs.build-output-dir }}/coverage.xml
