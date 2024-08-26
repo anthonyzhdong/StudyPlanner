@@ -9,6 +9,10 @@
 #include "eventSkeleton.h"
 #include "addNewEvent.h"
 #include <limits>
+
+#include <iomanip>
+#include <thread>
+#include <chrono>
 using namespace std;
 // g++ -o menu menu.cpp
 // ./menu
@@ -17,7 +21,28 @@ Calendar calendar = Calendar();
 vector<paper> papers;
 addPaper paperHandler = (papers);
 
+void clearScreen() {
+    #ifdef _WIN32
+        std::system("cls");
+    #else
+        std::system("clear");
+    #endif
+}
+
+// void loadingBar() {
+//     std::cout << "Loading menu ";
+//     for (int i = 0; i < 20; ++i) {
+//         std::cout << "█";
+//         std::cout.flush();
+//         std::this_thread::sleep_for(std::chrono::milliseconds(100));
+//     }
+//     std::cout << std::endl;
+// }
+
 void displayMenuOptions(){
+
+    loadingBar();
+    clearScreen();
     cout << "\n"
         " ____  _             _         ____  _                             \n"
         "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
