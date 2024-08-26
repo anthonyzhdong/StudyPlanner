@@ -13,4 +13,6 @@ public:
     addNewEvent(vector<paper>& papers);
     
     void addNewEventMenu();
+
+    vector<eventSkeleton> getEvents();
 };

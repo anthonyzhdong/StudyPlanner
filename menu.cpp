@@ -58,6 +58,7 @@ void displayMenu()
                 }
                 case 2: {
                     // display calendar
+                    calendar.display();
                     break;
                 }
                 case 3: {

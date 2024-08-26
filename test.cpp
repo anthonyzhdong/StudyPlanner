@@ -1,4 +1,13 @@
+#include <iostream>
+#include <vector>
+#include <string>
 #include "Calendar.h"
+#include "Event.h"
+#include "AddEvent.h"
+#include "paper.h"
+#include "addPaper.h"
+#include "eventSkeleton.h"
+#include "addNewEvent.h"
 #include <iostream>
 
 
