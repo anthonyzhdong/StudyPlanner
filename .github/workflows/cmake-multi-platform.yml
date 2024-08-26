@@ -43,11 +43,11 @@ jobs:
       shell: cmd
       run: | 
         tree /F
-        OpenCppCoverage --export_type cobertura:coverage.xml --cover_children -- ctest -C Debug --test-dir build
+        OpenCppCoverage --export_type cobertura:coverage.xml --cover_children -- ctest -C Debug --test-dir ${{ steps.strings.outputs.build-output-dir }}
 
     - name: Upload Report to Codecov
       uses: codecov/codecov-action@v4
       with:
         fail_ci_if_error: true
-        files: coverage.xml
+        files: ${{ steps.strings.outputs.build-output-dir }}/coverage.xml
         token: ${{ secrets.CODECOV_TOKEN }}
