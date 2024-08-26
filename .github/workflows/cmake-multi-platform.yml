@@ -51,14 +51,12 @@ jobs:
       shell: cmd
       run: | 
         tree 
-        OpenCppCoverage --export_type cobertura:coverage.xml --modules "*.exe" --cover_children -- ctest --build-config Release --output-on-failure
-        curl -Os https://uploader.codecov.io/latest/windows/codecov.exe
-        codecov.exe -f coverage.xml --root "D:\a\cosc345project\cosc345project"
+        OpenCppCoverage --export_type cobertura:coverage.xml --modules "*.exe" --cover_children -- ctest --build-config Release --output-on-failure"
 
 
     - name: Upload Report to Codecov
       uses: codecov/codecov-action@v4
       with:
         fail_ci_if_error: true
-        files: winci.xml
+        files: coverage.xml
         token: ${{ secrets.CODECOV_TOKEN }}
