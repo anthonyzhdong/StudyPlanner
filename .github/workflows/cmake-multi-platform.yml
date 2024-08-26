@@ -10,13 +10,6 @@ jobs:
   build:
     runs-on: windows-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type: [Release]
-        c_compiler: [cl]
-        cpp_compiler: [cl]
-
     steps:
     - uses: actions/checkout@v4
 
@@ -29,17 +22,17 @@ jobs:
     - name: Configure CMake
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
-        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DCMAKE_CXX_COMPILER=cl
+        -DCMAKE_C_COMPILER=cl
+        -DCMAKE_BUILD_TYPE=Release
         -S ${{ github.workspace }}
 
     - name: Build
-      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config Release
 
     - name: Test
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: ctest --build-config ${{ matrix.build_type }}
+      run: ctest --build-config Release
 
     - name: Install OpenCppCoverage
       run: |
@@ -51,9 +44,7 @@ jobs:
       shell: cmd
       run: | 
         tree /F
-        OpenCppCoverage --export_type cobertura:coverage.xml --cover_children -- ctest -C Debug --test-dir
-
-
+        OpenCppCoverage --export_type cobertura:coverage.xml --cover_children -- ctest -C Release --test-dir .  # Provide a specific argument for --test-dir
 
     - name: Upload Report to Codecov
       uses: codecov/codecov-action@v4
