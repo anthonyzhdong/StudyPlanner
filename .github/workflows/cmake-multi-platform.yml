@@ -44,7 +44,7 @@ jobs:
       shell: cmd
       run: | 
         tree /F
-        OpenCppCoverage --export_type cobertura:coverage.xml --cover_children -- ctest -C Release --test-dir .  # Provide a specific argument for --test-dir
+        OpenCppCoverage --export_type cobertura:coverage.xml --cover_children -- ctest -C Release --test-dir .
 
     - name: Upload Report to Codecov
       uses: codecov/codecov-action@v4
