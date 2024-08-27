@@ -9,101 +9,167 @@
 #include "eventSkeleton.h"
 #include "addNewEvent.h"
 #include <limits>
+#include "StudySession.h"
+#include "MenuItem.h"
 using namespace std;
 // g++ -o menu menu.cpp
 // ./menu
 
+bool running = true;
 Calendar calendar = Calendar();
 vector<paper> papers;
 addPaper paperHandler = (papers);
 
-void displayMenuOptions(){
+// Study session variables
+StudySession *studySession = nullptr;
+
+// Menu items
+// To add a menu item, add a declaration first here so they are recognised as a function.
+void displayMenuOptions();
+void startStudySession();
+void endStudySession();
+void addPaperMenuItem();
+void exitMenu();
+
+vector<MenuItem> menuItems = {
+    // Add a MenuItem() here, linking to a pointer to the function that manages the item.
+    // Do not include the parentheses as it is a pointer to a function.
+    // When the user selects the item, it will execute the function.
+    MenuItem("Display all menu options", displayMenuOptions),
+
+    // MenuItem("Display all papers.", displayPapers);
+    // MenuItem("Display calendar", displayCalendar);
+    // MenuItem("Add event", addEvent);
+    MenuItem("Start study session", startStudySession),
+    MenuItem("End study session", endStudySession),
+    // MenuItem("Add paper", addPaperMenuItem);
+    MenuItem("Exit", exitMenu)};
+void displayMenuOptions()
+{
     cout << "\n"
-        " ____  _             _         ____  _                             \n"
-        "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
-        "\\___ \\| __| | | |/ _` | | | | | |_) | |/ _` | '_ \\| '_ \\ / _ \\ '__|\n"
-        " ___) | |_| |_| | (_| | |_| | |  __/| | (_| | | | | | | |  __/ |   \n"
-        "|____/ \\__|\\__,_|\\__,_|\\__, | |_|   |_|\\__,_|_| |_|_| |_|\\___|_|   \n"
-        "                       |___/                                        \n";
-    cout << "1. Display papers\n";
-    cout << "2. Display calendar\n";
-    cout << "3. Add event\n";
-    cout << "4. Start study session\n";
-    cout << "5. Add paper\n";
-    cout << "6. Exit\n";
+            " ____  _             _         ____  _                             \n"
+            "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
+            "\\___ \\| __| | | |/ _` | | | | | |_) | |/ _` | '_ \\| '_ \\ / _ \\ '__|\n"
+            " ___) | |_| |_| | (_| | |_| | |  __/| | (_| | | | | | | |  __/ |   \n"
+            "|____/ \\__|\\__,_|\\__,_|\\__, | |_|   |_|\\__,_|_| |_|_| |_|\\___|_|   \n"
+            "                       |___/                                        \n";
+    // cout << "1. Display papers\n";
+    // cout << "2. Display calendar\n";
+    // cout << "3. Add event\n";
+    // cout << "4. Start study session\n";
+    // cout << "5. Add paper\n";
+    // cout << "6. Exit\n";
+    // cout << "7. End study session\n";
+
+    for (size_t i = 0; i < menuItems.size(); ++i)
+    {
+        cout << i + 1 << ". " << menuItems[i].getName() << "\n";
+    }
+    cout << "Enter a number: ";
 }
 
 void displayMenu()
-{   
-    bool running = true;
-    int number;
+{
+    unsigned int number;
+    displayMenuOptions();
 
-    // basic switch statements using a boolean to control the loop
     while (running)
     {
-        displayMenuOptions();
-        cout << "Enter a number: ";
 
         if (cin >> number)
         {
-            switch (number)
+            if (number >= 1 && number <= menuItems.size())
             {
-                case 1: {
-                    // display papers
-                    cout << "Adding event" << endl;
-                    // Event e = Event("test", 1, 2, 3, 4);
-                    // calendar.addEvent(e);
-                    
-                    break;
-                }
-                case 2: {
-                    // display calendar
-                    calendar.display();
-                    break;
-                }
-                case 3: {
-                    // add event
-                    addNewEvent eventHandler(papers);
-                    eventHandler.addNewEventMenu();
-
-                    //AddEvent eventHandler; // Create an instance of AddEvent
-                    //calendar.addEvent(eventHandler.AddEventMenu());
-                    break;
-                }
-                case 4: {
-                    //start study session
-                    break;
-                }
-                case 5: {
-                    paperHandler.addPaperMenu();
-
-                    break;
-                }
-                case 6: {
-                    //exit
-                    running = false;
-                    break;
-                }
-                default: 
-                cout << "Invalid input. Please enter an integer." << endl;
-                cin.clear();                                                   // Clear error flags
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+                menuItems[number - 1].execute();
+            }
+            else
+            {
+                cout << "Invalid input. Please enter a number between 1 and " << menuItems.size() << "." << endl;
             }
         }
-
-        if(running){
-            cout << "Press enter to go back to main menu";
-            cin.ignore();
-            cin.get();
+        else
+        {
+            cout << "Invalid input. Please enter an integer." << endl;
+            cin.clear();                                                   // Clear error flags
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
         }
     }
-}
-    //cout << "input: " << number << endl;
 
+    if (running)
+    {
+        cout << "Press enter to go back to main menu.";
+        cin.ignore();
+        cin.get();
+    }
+}
+// cout << "input: " << number << endl;
 
 int main()
 {
     displayMenu();
 
     return 0;
+}
+
+void startStudySession()
+{
+    // Start the study session
+    if (studySession == nullptr)
+    {
+        // Ask for paper code, day, and week.
+        // TODO: Automatically set day and week and add data validation
+
+        string paperCode;
+        int day, week;
+
+        cout << "Enter the paper code: ";
+        cin >> paperCode;
+        cout << "Enter the day: ";
+        cin >> day;
+        cout << "Enter the week: ";
+        cin >> week;
+
+        studySession = new StudySession(paperCode, day, week);
+        studySession->startSession();
+    }
+    else
+    {
+        cout << "A study session is already in progress. Please end the current session before starting a new one." << endl;
+    }
+    cout << "Press 1 to display menu options" << endl;
+}
+
+void endStudySession()
+{
+    // End study session
+    if (studySession != nullptr)
+    {
+        studySession->endSession();
+        double duration = studySession->getDuration();
+        cout << "Study session duration: " << duration << " seconds." << endl;
+
+        // Now for cleanup
+        delete studySession;    // Delete from memory
+        studySession = nullptr; // Assign to null pointer.
+    }
+    else
+    {
+        // No study sessions are in progress
+        cout << "There is not a study session in progress." << endl;
+    }
+    cout << "Press 1 to display menu options" << endl;
+}
+
+void addPaperMenuItem()
+{
+    // Does nothing at the moment.
+    // TODO: add functionality
+    return;
+}
+
+void exitMenu()
+{
+    // Exits the program.
+    running = false;
+    cout << "Exiting menu..." << endl;
 }

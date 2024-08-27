@@ -11,6 +11,7 @@
 #include "lecture.h"
 #include "Calendar.h"
 #include "eventSkeleton.h"
+#include <limits>
 
 using namespace std;
 

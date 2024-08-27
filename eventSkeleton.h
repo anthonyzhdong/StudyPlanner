@@ -10,6 +10,7 @@ enum class EventType {
     LAB,
     ASSIGNMENT,
     EXAM,
+    STUDY_SESSION,
 };
 
 class eventSkeleton
