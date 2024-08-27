@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include "paper.h"
+#include "Calendar.h"
 #pragma once
 
 using namespace std;
@@ -8,9 +9,9 @@ using namespace std;
 class addNewEvent{
 private:
     vector<paper>& papers;
-
+    Calendar calendar;
 public:
-    addNewEvent(vector<paper>& papers);
+    addNewEvent(vector<paper>& papers, Calendar &calendar);
     
     void addNewEventMenu();
 
