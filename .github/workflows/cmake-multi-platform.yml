@@ -10,13 +10,6 @@ jobs:
   build:
     runs-on: windows-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type: [Release]
-        c_compiler: [cl]
-        cpp_compiler: [cl]
-
     steps:
     - uses: actions/checkout@v4
 
@@ -29,17 +22,17 @@ jobs:
     - name: Configure CMake
       run: >
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
-        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
-        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DCMAKE_CXX_COMPILER=cl
+        -DCMAKE_C_COMPILER=cl
+        -DCMAKE_BUILD_TYPE=Debug
         -S ${{ github.workspace }}
 
     - name: Build
-      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config Debug
 
     - name: Test
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: ctest --build-config ${{ matrix.build_type }}
+      run: ctest --build-config Debug
 
     - name: Install OpenCppCoverage
       run: |
@@ -47,18 +40,14 @@ jobs:
         echo "C:\Program Files\OpenCppCoverage" >> $env:GITHUB_PATH
 
     - name: Generate Coverage Report
-      working-directory: ${{ steps.strings.outputs.build-output-dir }}
       shell: cmd
       run: | 
-        tree 
-        OpenCppCoverage --export_type cobertura:coverage.xml --modules "*.exe" --cover_children -- ctest --build-config Release --output-on-failure
-        codecov.exe -f coverage.xml --root "D:\a\cosc345project\cosc345project\
-        tree"
-
+        tree /F
+        OpenCppCoverage --export_type cobertura:coverage.xml --cover_children -- ctest -C Debug --test-dir ${{ steps.strings.outputs.build-output-dir }}
 
     - name: Upload Report to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         fail_ci_if_error: true
-        files: winci.xml
+        files: coverage.xml
         token: ${{ secrets.CODECOV_TOKEN }}
