@@ -24,8 +24,27 @@ else()
 endif()
 
 # Add the test executable
-add_executable(test_runner Test.cpp Calendar.h Calendar.cpp Event.h Event.cpp AddEvent.cpp)
-
+# Add the executable for the tests
+add_executable(test_runner
+    Test.cpp 
+    Calendar.h
+    Calendar.cpp
+    Event.h
+    Event.cpp
+    addPaper.h 
+    addPaper.cpp 
+    AddEvent.h 
+    AddEvent.cpp 
+    paper.h 
+    paper.cpp
+    lab.h 
+    lecture.h 
+    tutorial.h 
+    addNewEvent.h 
+    addNewEvent.cpp 
+    eventSkeleton.h 
+    eventSkeleton.cpp
+)
 # Enable warnings for tests
 if(MSVC)
   target_compile_options(test_runner PRIVATE /W4)

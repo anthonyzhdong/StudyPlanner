@@ -106,6 +106,10 @@ addNewEvent::addNewEvent(vector<paper> &papers) : papers(papers)
 {
 }
 
+vector<eventSkeleton> addNewEvent::getEvents()
+{
+    return events;
+}
 void addNewEvent::addNewEventMenu()
 {
     EventType eventType;
