@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ctime>
 
-StudySession::StudySession(string paperCode, int day, int week) : eventSkeleton(paperCode, day, week)
+StudySession::StudySession(string paperCode, int day, int week) : eventSkeleton(EventType::STUDY_SESSION, paperCode, day, week, 0, 0, "")
 {
     this->startTime = 0;
     this->endTime = 0;

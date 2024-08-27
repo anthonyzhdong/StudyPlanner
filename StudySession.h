@@ -1,7 +1,7 @@
+#pragma once
 #include "eventSkeleton.h"
 #include <string>
 #include <chrono>
-#pragma #once
 using namespace std;
 using namespace chrono;
 

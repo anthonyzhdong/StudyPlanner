@@ -2,12 +2,14 @@
 #include <functional>
 #include <string>
 
-class MenuItem {
+class MenuItem
+{
 private:
     std::string name;
     std::function<void()> action;
+
 public:
-    MenuItem(const std::string& name, std::function<void()> action);
+    MenuItem(const std::string &name, std::function<void()> action);
 
     std::string getName() const;
 
