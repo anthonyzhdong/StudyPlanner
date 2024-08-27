@@ -1,6 +1,6 @@
+#pragma once
 #include <string>
 #include "eventSkeleton.h"
-#pragma once
 
 using namespace std;
 

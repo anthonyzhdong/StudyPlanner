@@ -2,9 +2,10 @@
 
 #include <vector>
 #include "eventSkeleton.h"
+#include "assignment.h"
+#include "exam.h"
 
 // Forward declaration of classes
-class Event;
 class Day;
 class Week;
 class Calendar;
@@ -13,13 +14,19 @@ class Calendar;
 class Day {
 public:
     vector<eventSkeleton> events;
+    vector<Assignment> assignments;
+    vector<Exam> exams;
     int dayNumber;
 
 public:
     Day(int dayNumber);
     bool addEvent(eventSkeleton& e);
     // Additional methods for Day class
+private:
+    bool addEventToCalendar(eventSkeleton& d);
 };
+
+ 
 
 // Week class definition
 class Week {
