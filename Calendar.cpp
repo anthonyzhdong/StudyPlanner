@@ -15,7 +15,7 @@ Day::Day(int dayNumber) : dayNumber(dayNumber) {
 }
 
 bool Day::addEvent(eventSkeleton& d) {
-    /*for (auto& e : events) {
+    for (auto& e : events) {
         // Check if event d overlaps with event e
         if ((d.getStartTime() < e.getEndTime() && d.getEndTime() > e.getStartTime()) ||
             (e.getStartTime() < d.getEndTime() && e.getEndTime() > d.getStartTime())
@@ -23,7 +23,7 @@ bool Day::addEvent(eventSkeleton& d) {
             std::cout << "Event overlaps with another event" << std::endl;
             return false;
         }
-    }*/
+    }
     std::cout << "Start Time: " << d.getStartTime() << std::endl;
     std::cout << "End Time: " << d.getEndTime() << std::endl;
     std::cout << "Day: " << d.getDay() << std::endl;
@@ -102,26 +102,29 @@ bool Calendar::editEvent(eventSkeleton& e) {
 bool Calendar::test(){
     bool passed = true;
     Calendar testCalendar;
-    //eventSkeleton testEvent(EventType::LAB, 0, 6, 0, 0);
-    
+    // Base event
     Lecture newLecture = Lecture("COSC203", 3, 7, 900, 1000, "Lecture Theatre");
     testCalendar.addEvent(newLecture);
     
-  //  testCalendar.addEvent(EventType::LAB);
-    Event testEvent2("Test Event2", 2,10 , 0, 0);
-    
-    Event testEvent3("Test Event3", 10,12 , 0, 0);
-/*
-    if(!(testCalendar.addEvent(testEvent) == false && testCalendar.addEvent(testEvent2)==false)){ // Test that events cannot overlap
+    // Event that overlap 
+    Lab newLab = Lab("COSC203", 3, 7, 930, 1030, "Lecture 23");
+
+    // Event that exactly overlap 
+    Lab newLab2 = Lab("COSC203", 3, 7, 900, 1000, "Lecture 23");
+
+    // Event that does not overlap
+    Lecture newLecut1= Lecture("COSC203", 3, 7, 1000, 1030, "Lecture 28");
+
+    if(!(testCalendar.addEvent(newLab) == false && testCalendar.addEvent(newLab2)==false)){ // Test that events cannot overlap
         passed = false;
     }
-    if(!(testCalendar.addEvent(testEvent3) == true)){ // Test that events that do not overlap can be added
+    if(!(testCalendar.addEvent(newLecut1) == true)){ // Test that events that do not overlap can be added
         passed = false;
     }
     if(passed){
         cout << "Calender Test Passed" << endl;
     }else{
         cout << "Calender Test Failed" << endl;
-    }*/
+    }
     return passed;
 }
