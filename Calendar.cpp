@@ -7,6 +7,8 @@
 #include "lab.h"
 #include "assignment.h"
 #include "exam.h"
+#include <iomanip> 
+#include <sstream>
 
 using namespace std;
 
@@ -56,22 +58,85 @@ Calendar::Calendar() {
         weeks.push_back(Week(i));
     }
 }
+int incrementTime(int time) {
+    int hour = time / 100;  
+    int minute = time % 100;  
+
+    // Increment the hour
+    hour += 1;
+
+    // Handle overflow if the hour goes beyond 23 (24-hour format)
+    if (hour == 24) {
+        hour = 0;
+    }
+
+    // Return the new time in HHMM format
+    return (hour * 100) + minute;
+}
 
 void Calendar::display() {
-    // Implement display logic
     for (int i = 0; i < 52; i++) {
+        std::cout << "\nWeek " << i + 1 << ":" << std::endl;
+        std::cout << "==================================================================================================================" << std::endl;
+        
+        // Print day headers
+        std::cout << "|     Time    |    Monday   |    Tuesday  |   Wednesday  |   Thursday   |   Friday    |  Saturday   |    Sunday   |" << std::endl;
+        std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
+        
+        // Initialize earliest and latest times
+        int earliestTime = 2400;
+        int latestTime = 0;
+        
+        // Find the earliest start time and latest end time across all days in the week
         for (int j = 0; j < 7; j++) {
-            for (auto& e : weeks[i].days[j].events) {
-                std::cout << "Start Time: " << e.getStartTime() << std::endl;
-                std::cout << "End Time: " << e.getEndTime() << std::endl;
-                std::cout << "Day: " << e.getEndTime() << std::endl;
-                std::cout << "Week: " << e.getWeek() << std::endl;
-                std::cout << "-----------------------" << std::endl;
+            for ( auto& e : weeks[i].days[j].events) {
+                if (e.getStartTime() < earliestTime) earliestTime = e.getStartTime();
+                if (e.getEndTime() > latestTime) latestTime = e.getEndTime();
             }
         }
+        
+        // If no events, skip to the next week
+        if (earliestTime == 2400 && latestTime == 0) {
+            std::cout << "|   No Events Scheduled for this Week                                                                             |" << std::endl;
+            std::cout << "===================================================================================================================" << std::endl;
+            continue;
+        }
+        
+        // Normalize times to the nearest hour
+        earliestTime = (earliestTime / 100) * 100;
+        latestTime = ((latestTime + 99) / 100) * 100; // Round up to the next hour
+        
+        // Loop through each time slot from earliest to latest time
+        for (int currentTime = earliestTime; currentTime <= latestTime; currentTime = incrementTime(currentTime)) {
+            std::cout << "| " << std::setw(4) << std::setfill(' ') << currentTime << " - "
+                      << std::setw(4) << std::setfill(' ') << incrementTime(currentTime) << " |";
+            for (int j = 0; j < 7; j++) {
+                std::string eventName = "";
+                
+                // Check for events that occupy the current time slot
+                for ( auto& e : weeks[i].days[j].events) {
+                    if (e.getStartTime() <= currentTime && e.getEndTime() > currentTime) {
+                        eventName = e.getPaperCode();
+                        if (eventName.length() > 10) {
+                            eventName = eventName.substr(0, 10) + "...";
+                        }
+                        break; // This currently assumes only one event per hour max.
+                    }
+                }
+                
+                // Print the event name or empty space
+                std::cout << " " << std::setw(11) << (eventName.empty() ? "" : eventName+" ") << " |";
+            }
+            std::cout << std::endl;
+        }
+        
+        std::cout << "===================================================================================================================" << std::endl;
     }
-    std::cout << "-----------------------" << std::endl;
 }
+
+
+
+
 
 bool Calendar::addEvent(eventSkeleton& e) {
     int week = e.getWeek();
@@ -121,6 +186,13 @@ bool Calendar::test(){
     if(!(testCalendar.addEvent(newLecut1) == true)){ // Test that events that do not overlap can be added
         passed = false;
     }
+
+    std::cout << "-----------------------" << std::endl;
+    std::cout << "\n\n\nAdding events passed\n\n\n" << std::endl;
+    std::cout << "-----------------------\n-----------------------" << std::endl;
+    testCalendar.display();
+
+
     if(passed){
         cout << "Calender Test Passed" << endl;
     }else{
