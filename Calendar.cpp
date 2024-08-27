@@ -1,7 +1,6 @@
 #include <vector>
 #include <iostream>
 #include "Calendar.h"
-#include "Event.h"
 #include "eventSkeleton.h"
 #include "lecture.h"
 #include "lab.h"
@@ -17,6 +16,18 @@ Day::Day(int dayNumber) : dayNumber(dayNumber) {
 }
 
 bool Day::addEvent(eventSkeleton& d) {
+    if(d.getEventType() == EventType::EXAM){
+        assignments.push_back(static_cast<Assignment&>(d));
+        return true;
+    }else if(d.getEventType() == EventType::ASSIGNMENT){
+        exams.push_back(static_cast<Exam&>(d));
+        return true;
+    }else{
+        return addEventToCalendar(d);
+    }
+}
+
+bool Day::addEventToCalendar(eventSkeleton& d) {
     for (auto& e : events) {
         // Check if event d overlaps with event e
         if ((d.getStartTime() < e.getEndTime() && d.getEndTime() > e.getStartTime()) ||
@@ -35,7 +46,6 @@ bool Day::addEvent(eventSkeleton& d) {
     events.push_back(d);
     return true;
 }
-//
 
 Week::Week(int weekNumber) : weekNumber(weekNumber) {
     for(int i = 0; i < 7; i++) {
