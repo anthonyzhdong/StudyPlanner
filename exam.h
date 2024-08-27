@@ -1,13 +1,13 @@
+#pragma once
 #include <string>
 #include "eventSkeleton.h"
-#pragma once
 
 using namespace std;
 
-class Exam : public eventSkeleton {
+class exam : public eventSkeleton {
 public:
 
-    Exam(string paperCode, int day, int week, int startTime, int endTime, string location)
+    exam(string paperCode, int day, int week, int startTime, int endTime, string location)
         : eventSkeleton(EventType::EXAM, paperCode, day, week, startTime, endTime, location) {}
 
 };
