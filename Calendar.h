@@ -51,6 +51,8 @@ public:
     bool addEvent(eventSkeleton& e);
     bool removeEvent(eventSkeleton& e);
     bool editEvent(eventSkeleton& e);
+    void displayWeek(int week);
+    void displaySemester(int semester);
     bool test();
     // Additional methods for Calendar class
 };
