@@ -19,6 +19,17 @@ using namespace std;
 
 vector<eventSkeleton> events;
 
+/**
+ * @brief Validates and retrieves a time input from the user.
+ *
+ * This function prompts the user to enter a time in the 24-hour format (e.g., 0930 for 9:30 AM).
+ * It ensures the input is an integer, within the valid time range (0000-2359), and the minutes part is less than 60.
+ * Additionally, it checks that the time is greater than or equal to the specified minimum time.
+ *
+ * @param prompt The message displayed to the user for input.
+ * @param minTime The minimum valid time that can be entered (default is 0).
+ * @return int The validated time in 24-hour format.
+ */
 int timeValidation(const string &prompt, int minTime = 0)
 {
     int time;
@@ -49,6 +60,16 @@ int timeValidation(const string &prompt, int minTime = 0)
     return time;
 }
 
+
+/**
+ * @brief Validates and retrieves a day input from the user.
+ *
+ * This function prompts the user to enter a day of the week, where 0 represents Sunday and 7 represents Saturday.
+ * It ensures the input is an integer within the valid day range (0-7).
+ *
+ * @param none
+ * @return int The validated day as an integer.
+ */
 int dayValidation()
 {
     int day;
@@ -74,7 +95,14 @@ int dayValidation()
     }
     return day;
 }
-
+/**
+ * @brief Validates and retrieves a week input from the user.
+ *
+ * This function prompts the user to enter a week number, ensuring it is within the valid range (0-52).
+ *
+ * @param none
+ * @return int The validated week number as an integer.
+ */
 int weekValidation()
 {
     int week;
@@ -112,6 +140,16 @@ vector<eventSkeleton> addNewEvent::getEvents()
 {
     return events;
 }
+
+/**
+ * @brief Displays the menu for adding a new event and handles user input.
+ *
+ * This function presents a menu to the user to select a paper and the type of event they wish to add.
+ * Based on the event type, it prompts for the appropriate details (e.g., time, day, week) and adds the event to the Calendar.
+ *
+ * @param none
+ * @return none
+ */
 void addNewEvent::addNewEventMenu()
 {
     EventType eventType;
