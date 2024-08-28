@@ -18,6 +18,24 @@ Calendar* calendar = new Calendar();
 vector<paper> papers;
 addPaper paperHandler = (papers);
 
+void clearScreen() {
+    #ifdef _WIN32
+        std::system("cls");
+    #else
+        std::system("clear");
+    #endif
+}
+
+// void loadingBar() {
+//     std::cout << "Loading menu ";
+//     for (int i = 0; i < 20; ++i) {
+//         std::cout << "█";
+//         std::cout.flush();
+//         std::this_thread::sleep_for(std::chrono::milliseconds(100));
+//     }
+//     std::cout << std::endl;
+// }
+
 // Study session variables
 StudySession *studySession = nullptr;
 
