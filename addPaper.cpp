@@ -10,6 +10,16 @@ using namespace std;
 // constructor
 addPaper::addPaper(vector<paper>& papers) : papers(papers) {}
 
+
+/**
+ * @brief Creates the add paper menu for the user to create a paper.
+ *
+ * This function prompts the user to enter a papers name, code, points and then displays the papers information
+ * and displays the papers information that they added aswell as promting them that the paper has been successfully added.
+ *
+ * @param none
+ * @return none
+ */
 void addPaper::addPaperMenu() {
     string paperName, paperCode;
     int paperPoints;
