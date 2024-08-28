@@ -8,3 +8,4 @@ Link to our Jira [here](https://no-pie-charts.atlassian.net/jira/software/projec
 
 [![Build Status](https://github.com/acush0/cosc345project/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/acush0/cosc345project/actions)
 [![codecov](https://codecov.io/gh/acush0/cosc345project/branch/main/graph/badge.svg)](https://codecov.io/gh/acush0/cosc345project/)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/320f95ddc9ec438bb67e5fb31f00ecc9)](https://app.codacy.com/gh/acush0/cosc345project/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
