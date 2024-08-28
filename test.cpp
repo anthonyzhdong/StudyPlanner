@@ -12,22 +12,16 @@
 
 int main(){
     Calendar calendar;
-    if(calendar.test()){
+    eventSkeleton testEvent = eventSkeleton(EventType::LECTURE, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+    //Because it returns either we create a bool called passed then return based on it at end  or we can just do it like this
+    if(calendar.test()&&testEvent.test()){
         std::cout << "Testing Passed" << std::endl;
-        return 0;
     }else{
         std::cout << "Testing Failed" << std::endl;
         return 1;
     }
     
-    eventSkeleton testEvent = eventSkeleton(EventType::LECTURE, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
-    if(testEvent.test()){
-        std::cout << "Testing Passed" << std::endl;
-        return 0;
-    }else{
-        std::cout << "Testing Failed" << std::endl;
-        return 1;
-    }
+
     
 
     
