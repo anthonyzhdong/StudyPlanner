@@ -97,12 +97,8 @@ void displayMenu()
 
 int main()
 {
-    /**
+    
     displayMenu();
-*/
-    addNewEvent addNewEvent(papers, calendar);
-    addNewEvent.addNewEventMenu();
-    calendar->display();
     return 0;
 }
 
@@ -159,12 +155,10 @@ void addEventMenuItem()
 {
     addNewEvent newEvent(papers, calendar);
     newEvent.addNewEventMenu();
-    return;
 }
 void addPaperMenuItem() {
     addPaper newPaper(papers);
     newPaper.addPaperMenu();
-    return;
 }
 
 void exitMenu()

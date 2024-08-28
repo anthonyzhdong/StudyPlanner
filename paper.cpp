@@ -24,7 +24,7 @@ string paper::getPaperName()
     return paperName;
 }
 
-string paper::getPaperCode() 
+string paper::getPaperCode() const
 {
     return paperCode;
 }

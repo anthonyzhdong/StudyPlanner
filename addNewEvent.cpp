@@ -12,6 +12,8 @@
 #include "Calendar.h"
 #include "eventSkeleton.h"
 #include <limits>
+#include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -102,7 +104,7 @@ int weekValidation()
 // enum lecture, tutorial, lab, assignment, exam
 
 // Constructor to initialize papers
-addNewEvent::addNewEvent(vector<paper> &papers,Calendar* calendar) : papers(papers), calendar(calendar)
+addNewEvent::addNewEvent(vector<paper> &papers, Calendar *calendar) : papers(papers), calendar(calendar)
 {
 }
 
@@ -116,16 +118,23 @@ void addNewEvent::addNewEventMenu()
     string paperCode, location;
     int startTime, endTime, day, week, typeChoice;
 
-    cout << "Choose paper code:\n";
+    cout << "Available papers:\n";
+    cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+    cout << "-------------------------------------------------------";
     // displays paper codes by getting menu's vector<paper> papers
-    int index = 1;
     for (auto &paper : papers)
     {
-        cout << index << ". " << paper.getPaperCode() << " - " << paper.getPaperName() << "\n"
-             << endl;
-        index++;
+        cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
     }
+    cout << "\n-----------------------------------------------------";
+    cout << "\nPlease enter the paper code: ";
     cin >> paperCode;
+
+
+    // Returns if the paper code is valid.
+    auto it = find_if(papers.begin(), papers.end(), [&paperCode](const paper &paperObj) {
+        return paperObj.getPaperCode() == paperCode;
+    });
 
     cout << "Choose the type of event to add:\n1. Lecture\n2. Tutorial\n3. Lab\n4. Assignment\n5. Exam\n";
     while (true)

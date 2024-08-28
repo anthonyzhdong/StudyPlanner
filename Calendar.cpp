@@ -196,9 +196,11 @@ void Calendar::displaySemester(int semester) {
 bool Calendar::addEvent(eventSkeleton& e) {
     int week = e.getWeek();
     if(weeks[week].addEvent(e)){
+        cout << "HERE" << endl;
         return true;
     }
     else{
+        cout << "NOT HERE" << endl;
         return false;
     }
 }
