@@ -10,7 +10,10 @@ class Day;
 class Week;
 class Calendar;
 
-// Day class definition
+/**
+ * @class Day
+ * @brief Represents a single day in a calendar, containing events, assignments, and exams.
+ */
 class Day {
 public:
     vector<eventSkeleton> events;
@@ -28,7 +31,10 @@ private:
 
  
 
-// Week class definition
+/**
+ * @class Week
+ * @brief Represents a week in a calendar, containing multiple days.
+ */
 class Week {
 public:
     std::vector<Day> days;
@@ -40,7 +46,10 @@ public:
     // Additional methods for Week class
 };
 
-// Calendar class definition
+/**
+ * @class Calendar
+ * @brief Represents a calendar, containing multiple weeks.
+ */
 class Calendar {
 private:
     std::vector<Week> weeks;
