@@ -175,5 +175,5 @@ void exitMenu()
 }
 
 void viewCalendarMenuItem() {
-    calendar.display();
+    calendar->display();
 }
