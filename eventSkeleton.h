@@ -44,5 +44,5 @@ public:
     void setLocation(string& location);
     
     void displayInfo();
-    bool test();
+    bool test(eventSkeleton testEvent);
 };
