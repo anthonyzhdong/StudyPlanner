@@ -26,21 +26,21 @@ StudySession *studySession = nullptr;
 void displayMenuOptions();
 void startStudySession();
 void endStudySession();
-void addPaperMenuItem();
+void addEventMenuItem();
 void exitMenu();
+void addPaperMenuItem();
+void viewCalendarMenuItem();
 
 vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
     // Do not include the parentheses as it is a pointer to a function.
     // When the user selects the item, it will execute the function.
     MenuItem("Display all menu options", displayMenuOptions),
-
-    // MenuItem("Display all papers.", displayPapers);
-    // MenuItem("Display calendar", displayCalendar);
-    // MenuItem("Add event", addEvent);
+    MenuItem("View calendar", viewCalendarMenuItem),
+    MenuItem("Add event", addEventMenuItem),
+    MenuItem("Add paper", addPaperMenuItem),
     MenuItem("Start study session", startStudySession),
     MenuItem("End study session", endStudySession),
-    // MenuItem("Add paper", addPaperMenuItem);
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {
@@ -51,13 +51,6 @@ void displayMenuOptions()
             " ___) | |_| |_| | (_| | |_| | |  __/| | (_| | | | | | | |  __/ |   \n"
             "|____/ \\__|\\__,_|\\__,_|\\__, | |_|   |_|\\__,_|_| |_|_| |_|\\___|_|   \n"
             "                       |___/                                        \n";
-    // cout << "1. Display papers\n";
-    // cout << "2. Display calendar\n";
-    // cout << "3. Add event\n";
-    // cout << "4. Start study session\n";
-    // cout << "5. Add paper\n";
-    // cout << "6. Exit\n";
-    // cout << "7. End study session\n";
 
     for (size_t i = 0; i < menuItems.size(); ++i)
     {
@@ -158,10 +151,15 @@ void endStudySession()
     cout << "Press 1 to display menu options" << endl;
 }
 
-void addPaperMenuItem()
+void addEventMenuItem()
 {
-    // Does nothing at the moment.
-    // TODO: add functionality
+    addNewEvent newEvent(papers, calendar);
+    newEvent.addNewEventMenu();
+    return;
+}
+void addPaperMenuItem() {
+    addPaper newPaper(papers);
+    newPaper.addPaperMenu();
     return;
 }
 
@@ -170,4 +168,8 @@ void exitMenu()
     // Exits the program.
     running = false;
     cout << "Exiting menu..." << endl;
+}
+
+void viewCalendarMenuItem() {
+    calendar.display();
 }
