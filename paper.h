@@ -23,7 +23,7 @@ public:
 
     // getter methods
     string getPaperName() ;
-    string getPaperCode() ;
+    string getPaperCode() const;
     int getPaperPoints() ;
 
     // setter methods
