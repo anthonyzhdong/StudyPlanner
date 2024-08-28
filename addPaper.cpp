@@ -22,57 +22,48 @@ void addPaper::addPaperMenu() {
     cout << "Enter the paper code: ";
     getline(cin, paperCode);
 
-    cout << "Enter the paper points: ";
-    cin >> paperPoints;
+    //cout << "Enter the paper points: ";
+    paperPoints = getValidInteger();
 
     paper newPaper(paperName, paperCode, paperPoints);
     papers.push_back(newPaper);
+
     //displays paper info
     papers.back().displayInfo();
     cout << "Paper added successfully!" << endl;
 }
 
-// #include <iostream>
-// #include <string>
-// #include <vector>
-// #include "paper.h"
-// #include "addPaper.h"
+int addPaper::getValidInteger(){
+    string input;
+    long long number;
+    char* endpoint;
 
-// using namespace std;
+    while (true) {
+        cout << "Enter the papers points: ";
+        getline(cin,input);
 
-// // add input validation
-// class addPaper{
+        // empty input
+        if(input.empty()){
+            cout << "Invalid input. Please try again.\n";
+            continue;
+        }
 
-// private:
-//     vector <paper>& papers;
+        // converts string to long long
+        number = strtoll(input.c_str(), &endpoint, 10);
 
-// public:
-//     //constructor
-//     addPaper::addPaper(vector <paper>& papers){
-//         this->papers = papers;
-//     }
+        // checks if entire string was converted to long long
+        if(*endpoint != '\0'){
+            cout << "Invalid input. Please try again.\n";
+            continue;
+        }
 
+        // checks range
+        if(number > INT_MAX || number <= 0){
+            cout << "Number is out of range. Please try again.\n";
+            continue;
+        }
 
-//     void addPaperMenu(){
-//         string paperName, paperCode;
-//         int paperPoints;
-
-//         cout << "Enter the paper name: ";
-//         getline(cin, paperName);
-
-//         cout << "Enter the paper code: ";
-//         getline(cin, paperCode);
-
-        
-//         cout << "Enter the paper points: ";
-//         cin >> paperPoints;
-
-//         paper newPaper = paper(paperName, paperCode, paperPoints);
-//         papers.push_back(newPaper);
-
-//         cout << "Paper added successfully!" << endl;
-
-
-//     }
-
-// };
+        // returns as int
+        return static_cast<int>(number);
+    }
+}

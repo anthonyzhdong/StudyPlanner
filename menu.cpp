@@ -125,9 +125,10 @@ int main()
     /**
     displayMenu();
 */
-    addNewEvent addNewEvent(papers, calendar);
-    addNewEvent.addNewEventMenu();
-    calendar->display();
+    //paperHandler.addPaperMenu();
+    // addNewEvent addNewEvent(papers, calendar);
+    // addNewEvent.addNewEventMenu();
+    // calendar->display();
     return 0;
 }
 

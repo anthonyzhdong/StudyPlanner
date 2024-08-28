@@ -15,4 +15,5 @@ public:
 
     // Method to add a paper
     void addPaperMenu();
+    int getValidInteger();
 };
