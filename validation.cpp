@@ -18,7 +18,7 @@ int validation::getValidInteger(int min, int max, string &prompt){
 
         // empty input
         if(input.empty()){
-            cout << "Invalid input. Please try again5.\n";
+            cout << "Invalid input. Please try again.\n";
             continue;
         }
         try{
@@ -49,7 +49,7 @@ string validation::getValidString(const std::string &prompt){
         getline(cin,input);
         
         // empty input
-        if(input.length() < 1){
+        if(input.empty()){
             cout << "Input is too short\n";
             continue;
         }

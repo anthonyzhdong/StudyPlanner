@@ -9,6 +9,7 @@
 #include <limits>
 #include "StudySession.h"
 #include "MenuItem.h"
+#include "validation.h"
 using namespace std;
 // g++ -o menu menu.cpp
 // ./menu
@@ -17,6 +18,7 @@ bool running = true;
 Calendar* calendar = new Calendar();
 vector<paper> papers;
 addPaper paperHandler = (papers);
+validation validate;
 
 void clearScreen() {
     #ifdef _WIN32
@@ -79,28 +81,17 @@ void displayMenuOptions()
 
 void displayMenu()
 {
-    unsigned int number;
-    displayMenuOptions();
-
+    int input;
+    string p ="";
+    
     while (running)
     {
-
-        if (cin >> number)
-        {
-            if (number >= 1 && number <= menuItems.size())
-            {
-                menuItems[number - 1].execute();
-            }
-            else
-            {
-                cout << "Invalid input. Please enter a number between 1 and " << menuItems.size() << "." << endl;
-            }
-        }
-        else
-        {
-            cout << "Invalid input. Please enter an integer." << endl;
-            cin.clear();                                                   // Clear error flags
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+        displayMenuOptions();
+        input = validate.getValidInteger(1, menuItems.size(), p);
+        if(input >= 1 && input <= menuItems.size()){
+            menuItems[input - 1].execute();
+        }else{
+            cout << "Invalid input. Please enter a number between 1 and " << menuItems.size() << "." << endl;
         }
     }
 
@@ -115,7 +106,7 @@ void displayMenu()
 
 int main()
 {
-    
+
     displayMenu();
     return 0;
 }
@@ -171,8 +162,31 @@ void endStudySession()
 
 void addEventMenuItem()
 {
-    addNewEvent newEvent(papers, calendar);
-    newEvent.addNewEventMenu();
+    if(papers.empty()){
+       // cout << "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+        string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+        int choice = validate.getValidInteger(1, 2, choicePrompt);
+        
+        switch (choice) {
+            case 1:
+                addPaperMenuItem();
+                break;
+            case 2:
+                //displayMenuOptions();
+                clearScreen();
+                break;
+            default:
+                cout << "Invalid choice. Returning to main menu.\n";
+                clearScreen();
+                displayMenuOptions();
+                break;
+        }
+
+
+    }else{
+        addNewEvent newEvent(papers, calendar);
+        newEvent.addNewEventMenu();
+    }
 }
 void addPaperMenuItem() {
     addPaper newPaper(papers);

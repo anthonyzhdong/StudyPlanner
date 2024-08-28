@@ -15,7 +15,7 @@ void addPaper::addPaperMenu() {
     string paperName, paperCode;
     int paperPoints;
 
-    cin.ignore(numeric_limits<std::streamsize>::max(), '\n');  // Clear any leftover newline characters
+    //cin.ignore(numeric_limits<std::streamsize>::max(), '\n');  // Clear any leftover newline characters
 
     paperName = validate.getValidString("Enter the paper name: ");
 
