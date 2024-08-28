@@ -16,6 +16,17 @@ Day::Day(int dayNumber) : dayNumber(dayNumber) {
         // Constructor implementation
 }
 
+/**
+ * @brief Adds an event to the day
+ *
+ * This function adds an event to the day. It first checks if the event is an exam
+ * or assignment and if it is then it will return true otherwise it will return what addEventToCalendar
+ * returns.
+ *
+ * @param d The event to be added
+ * @return true if the event was added successfully
+ * @return false if the event could not be added
+ */
 bool Day::addEvent(eventSkeleton& d) {
     if(d.getEventType() == EventType::EXAM){
         assignments.push_back(static_cast<Assignment&>(d));
@@ -28,6 +39,16 @@ bool Day::addEvent(eventSkeleton& d) {
     }
 }
 
+/**
+ * @brief Checks an event to see if it overlaps with another even on calendar.
+ *
+ * This function checks if an event overlaps with any other event on the calendar.
+ * If no overlap is found then it adds it as an event to calendar.
+ *
+ * @param d The event to be added to calendar
+ * @return true if the event does not overlap with any other event
+ * @return false if the event overlaps with another event
+ */
 bool Day::addEventToCalendar(eventSkeleton& d) {
     for (auto& e : events) {
         // Check if event d overlaps with event e
