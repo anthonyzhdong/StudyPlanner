@@ -45,7 +45,7 @@ endif()
 # Add the test executable
 # Add the executable for the tests
 add_executable(test_runner
-    Test.cpp 
+    test.cpp 
     Calendar.h
     Calendar.cpp
     addPaper.h 

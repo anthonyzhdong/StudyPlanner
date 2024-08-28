@@ -19,7 +19,7 @@ int main(){
         std::cout << "Testing Failed" << std::endl;
         return 1;
     }
-    
+    //default test event, variables mean nothing as test creates a new test object
     eventSkeleton testEvent = eventSkeleton(EventType::LECTURE, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
     if(testEvent.test()){
         std::cout << "Testing Passed" << std::endl;

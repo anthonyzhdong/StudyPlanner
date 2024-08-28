@@ -64,6 +64,8 @@
         "algorithm": "cpp",
         "iomanip": "cpp",
         "__tree": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "charconv": "cpp",
+        "execution": "cpp"
     }
 }
