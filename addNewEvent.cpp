@@ -117,24 +117,35 @@ void addNewEvent::addNewEventMenu()
     EventType eventType;
     string paperCode, location;
     int startTime, endTime, day, week, typeChoice;
-
-    cout << "Available papers:\n";
-    cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-    cout << "-------------------------------------------------------";
-    // displays paper codes by getting menu's vector<paper> papers
-    for (auto &paper : papers)
+    while (true)
     {
-        cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+        cout << "Available papers:\n";
+        cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+        cout << "-------------------------------------------------------";
+        // displays paper codes by getting menu's vector<paper> papers
+        for (auto &paper : papers)
+        {
+            cout << "\n"
+                 << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+        }
+        cout << "\n-----------------------------------------------------";
+        cout << "\nPlease enter the paper code: ";
+        cin >> paperCode;
+
+        // Returns if the paper code is valid.
+        auto it = find_if(papers.begin(), papers.end(), [&paperCode](const paper &paperObj)
+                          { return paperObj.getPaperCode() == paperCode; });
+
+        if (it != papers.end())
+        {
+            cout << "You selected: " << it->getPaperName() << endl;
+            break;
+        }
+        else
+        {
+            cout << "Invalid paper code, please try again.\n";
+        }
     }
-    cout << "\n-----------------------------------------------------";
-    cout << "\nPlease enter the paper code: ";
-    cin >> paperCode;
-
-
-    // Returns if the paper code is valid.
-    auto it = find_if(papers.begin(), papers.end(), [&paperCode](const paper &paperObj) {
-        return paperObj.getPaperCode() == paperCode;
-    });
 
     cout << "Choose the type of event to add:\n1. Lecture\n2. Tutorial\n3. Lab\n4. Assignment\n5. Exam\n";
     while (true)
