@@ -16,63 +16,82 @@ void addPaper::addPaperMenu() {
 
     cin.ignore(numeric_limits<std::streamsize>::max(), '\n');  // Clear any leftover newline characters
 
-    cout << "Enter the paper name: ";
-    getline(cin, paperName);
+    paperName = getValidString("Enter the paper name: ");
 
-    cout << "Enter the paper code: ";
-    getline(cin, paperCode);
-
-    cout << "Enter the paper points: ";
-    cin >> paperPoints;
+    paperCode = getValidString("Enter the paper code: ");
+    
+    paperPoints = getValidInteger();
 
     paper newPaper(paperName, paperCode, paperPoints);
     papers.push_back(newPaper);
+
     //displays paper info
     papers.back().displayInfo();
     cout << "Paper added successfully!" << endl;
 }
 
-// #include <iostream>
-// #include <string>
-// #include <vector>
-// #include "paper.h"
-// #include "addPaper.h"
+int addPaper::getValidInteger(){
+    string input;
+    long long number;
+    char* endpoint;
 
-// using namespace std;
+    while (true) {
+        cout << "Enter the papers points: ";
+        getline(cin,input);
 
-// // add input validation
-// class addPaper{
+        // empty input
+        if(input.empty()){
+            cout << "Invalid input. Please try again.\n";
+            continue;
+        }
 
-// private:
-//     vector <paper>& papers;
+        // converts string to long long
+        number = strtoll(input.c_str(), &endpoint, 10);
 
-// public:
-//     //constructor
-//     addPaper::addPaper(vector <paper>& papers){
-//         this->papers = papers;
-//     }
+        // checks if entire string was converted to long long
+        if(*endpoint != '\0'){
+            cout << "Invalid input. Please try again.\n";
+            continue;
+        }
 
+        // checks range
+        if(number > INT_MAX || number <= 0){
+            cout << "Number is out of range. Please try again.\n";
+            continue;
+        }
 
-//     void addPaperMenu(){
-//         string paperName, paperCode;
-//         int paperPoints;
+        // returns as int
+        return static_cast<int>(number);
+    }
+}
 
-//         cout << "Enter the paper name: ";
-//         getline(cin, paperName);
+string addPaper::getValidString(const string &prompt){
+    string input;
+    // filter
+    string allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
 
-//         cout << "Enter the paper code: ";
-//         getline(cin, paperCode);
-
+    while (true) {
+        cout << prompt;
+        getline(cin,input);
         
-//         cout << "Enter the paper points: ";
-//         cin >> paperPoints;
+        // empty input
+        if(input.length() < 1){
+            cout << "Input is too short\n";
+            continue;
+        }
+        bool invalid = false;
+        // checks each character to see if it's in filter
+        for(char character : input){
+            if(allowedCharacters.find(character) == string::npos){
+                cout << "Invalid character: " << character << "\n";
+                invalid = true;
+                break;
+            }
+        }
+        if(invalid){
+            continue;
+        }
 
-//         paper newPaper = paper(paperName, paperCode, paperPoints);
-//         papers.push_back(newPaper);
-
-//         cout << "Paper added successfully!" << endl;
-
-
-//     }
-
-// };
+        return input;
+    }
+}

@@ -27,6 +27,8 @@ add_executable(menu
   StudySession.cpp 
   MenuItem.h 
   MenuItem.cpp
+  validation.h
+  validation.cpp
 ) 
 
 # If you need to link against any libraries, you can use target_link_libraries
@@ -45,7 +47,7 @@ endif()
 # Add the test executable
 # Add the executable for the tests
 add_executable(test_runner
-    Test.cpp 
+    test.cpp 
     Calendar.h
     Calendar.cpp
     addPaper.h 
