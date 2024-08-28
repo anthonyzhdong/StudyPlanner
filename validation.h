@@ -10,7 +10,7 @@ class validation{
 
 public:
 
-    int getValidInteger();
+    int getValidInteger(int min, int max);
     std::string getValidString(const std::string &prompt);
     int timeValidation(const std::string &prompt, int minTime);
     int dayValidation();
