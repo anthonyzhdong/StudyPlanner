@@ -102,7 +102,7 @@ int weekValidation()
 // enum lecture, tutorial, lab, assignment, exam
 
 // Constructor to initialize papers
-addNewEvent::addNewEvent(vector<paper> &papers) : papers(papers)
+addNewEvent::addNewEvent(vector<paper> &papers,Calendar* calendar) : papers(papers), calendar(calendar)
 {
 }
 
@@ -196,28 +196,28 @@ void addNewEvent::addNewEventMenu()
     if (eventType == EventType::TUTORIAL)
     {
         Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
-        events.push_back(newTutorial);
+        calendar->addEvent(newTutorial);
     }
     else if (eventType == EventType::LAB)
     {
         Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
-        events.push_back(newLab);
+        calendar->addEvent(newLab);
     }
     else if (eventType == EventType::LECTURE)
     {
         Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
-        events.push_back(newLecture);
+        calendar->addEvent(newLecture);
     }
     else if (eventType == EventType::ASSIGNMENT)
     {
         Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
 
-        events.push_back(newAssignment);
+        calendar->addEvent(newAssignment);
     }
     else if (eventType == EventType::EXAM)
     {
         Exam newExam = Exam(paperCode, day, week, startTime, endTime, location);
-        events.push_back(newExam);
+        calendar->addEvent(newExam);
     }
     else
     {
