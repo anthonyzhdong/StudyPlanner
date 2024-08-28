@@ -71,6 +71,15 @@ void paper::addEvent(eventSkeleton& event)
 }
 
 // display paper information
+/**
+ * @brief Displays a users papers different attributes.
+ *
+ * This function prints the papers name, code, and points, as well as
+ * all the events associated with the paper.
+ *
+ * @param none
+ * @return none
+ */
 void paper::displayInfo()  {
     cout << "Paper: " << paperName << " (" << paperCode << ")" << endl;
     cout << "Points: " << paperPoints << endl;
