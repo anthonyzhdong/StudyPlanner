@@ -9,9 +9,9 @@ using namespace std;
 class addNewEvent{
 private:
     vector<paper>& papers;
-    Calendar calendar;
+    Calendar* calendar;
 public:
-    addNewEvent(vector<paper>& papers, Calendar &calendar);
+    addNewEvent(vector<paper>& papers, Calendar* calendar);
     
     void addNewEventMenu();
 

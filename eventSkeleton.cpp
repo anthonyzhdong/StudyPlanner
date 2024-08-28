@@ -65,3 +65,58 @@ void eventSkeleton::displayInfo(){
               << " on day " << getDay() << " of week " << getWeek() 
               << " from " << getStartTime() << " to " << getEndTime() << endl;
 }
+
+bool test(){
+    bool passed = true;
+
+    // set up testEvent
+    eventSkeleton testEvent = eventSkeleton(EventType::LECTURE, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+    // change values
+    testEvent.setEventType(EventType::TUTORIAL);
+    string newCode = "COSC326";
+    testEvent.setPaperCode(newCode);
+    testEvent.setDay(2);
+    testEvent.setWeek(2);
+    testEvent.setStartTime(1400);
+    testEvent.setEndTime(1500);
+    string newLocation = "Mellor 3.2";
+    testEvent.setLocation(newLocation);
+
+    // test that values are set correctly
+    if (testEvent.getEventType() != EventType::TUTORIAL){
+        cout << "Error: EventType not set correctly." << endl;
+        passed = false;
+    }
+    if (testEvent.getPaperCode() != newCode){
+        cout << "Error: Paper code not set correctly." << endl;
+        passed = false;
+    }
+    if (testEvent.getDay() != 2){
+        cout << "Error: Day not set correctly." << endl;
+        passed = false;
+    }
+    if (testEvent.getWeek() != 2){
+        cout << "Error: Week not set correctly." << endl;
+        passed = false;
+    }
+    if (testEvent.getStartTime() != 1400){
+        cout << "Error: Start time not set correctly." << endl;
+        passed = false;
+    }
+    if (testEvent.getEndTime() != 1500){
+        cout << "Error: End time not set correctly." << endl;
+        passed = false;
+    }
+    if (testEvent.getLocation() != newLocation){
+        cout << "Error: Location not set correctly." << endl;
+        passed = false;
+    }
+    if(passed){
+        cout << "EventSkeleton Test Passed" << endl;
+    }else{
+        cout << "EventSkeleton Test Failed" << endl;
+    }
+
+    return passed;
+
+}

@@ -51,6 +51,9 @@ public:
     bool addEvent(eventSkeleton& e);
     bool removeEvent(eventSkeleton& e);
     bool editEvent(eventSkeleton& e);
+    void displayWeek(int week);
+    void displaySemester(int semester);
     bool test();
+    std::string getColour(string colour,bool background);
     // Additional methods for Calendar class
 };
