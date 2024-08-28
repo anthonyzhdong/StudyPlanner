@@ -8,6 +8,7 @@
 #include "exam.h"
 #include <iomanip> 
 #include <sstream>
+#include <map>            
 
 using namespace std;
 
@@ -91,7 +92,7 @@ void Calendar::display() {
 }
 
 void Calendar::displayWeek(int week){
-    std::cout << "\nWeek " << week + 1 << ":" << std::endl;
+    std::cout << "\nWeek " << week  << ":" << std::endl;
     std::cout << "==================================================================================================================" << std::endl;
     
     // Print day headers
@@ -135,10 +136,10 @@ void Calendar::displayWeek(int week){
                     if (eventName.length() > 10) {
                         eventName = eventName.substr(0, 10) + "...";
                     }
-                    break; // This currently assumes only one event per hour max.
+                    break; // This currently assumes only one event per hour max. need to change this to allow for assignments to be added
                 }
             }
-            
+            //Exams aswell and should be in red and yellow.
             // Print the event name or empty space
             std::cout << " " << std::setw(11) << (eventName.empty() ? "" : eventName+" ") << " |";
         }
@@ -147,6 +148,40 @@ void Calendar::displayWeek(int week){
     
     std::cout << "===================================================================================================================" << std::endl;
 
+}
+
+std::string Calendar::getColour(std::string colour, bool background) {
+    // Create a map to store color codes
+    std::map<std::string, std::string> colors;
+
+    // Insert foreground color codes into the map
+    colors["reset"] = "\033[0m";
+    colors["black"] = "\033[30m";
+    colors["red"] = "\033[31m";
+    colors["green"] = "\033[32m";
+    colors["yellow"] = "\033[33m";
+    colors["blue"] = "\033[34m";
+    colors["magenta"] = "\033[35m";
+    colors["cyan"] = "\033[36m";
+    colors["white"] = "\033[37m";
+
+    if (background) {
+        colors["black"] = "\033[40m";
+        colors["red"] = "\033[41m";
+        colors["green"] = "\033[42m";
+        colors["yellow"] = "\033[43m";
+        colors["blue"] = "\033[44m";
+        colors["magenta"] = "\033[45m";
+        colors["cyan"] = "\033[46m";
+        colors["white"] = "\033[47m";
+    }
+
+    if (colors.find(colour) != colors.end()) {
+        return colors[colour];
+    } else {
+        // If the color is not found, return reset code
+        return colors["reset"];
+    }
 }
 
 void Calendar::displaySemester(int semester) {
@@ -210,9 +245,20 @@ bool Calendar::test(){
     std::cout << "-----------------------" << std::endl;
     std::cout << "\n\n\nAdding events passed\n\n\n" << std::endl;
     std::cout << "-----------------------\n-----------------------" << std::endl;
-    testCalendar.display();
 
+    Assignment newAssignment = Assignment("COSC203", 3, 7, 900, 0, "");
+    if(!testCalendar.addEvent(newAssignment)){
+        passed = false;
+    }
+    
+    Exam newExam = Exam("COSC203", 3, 7, 930, 1230, "Mellor labs g10");
+    if(!testCalendar.addEvent(newExam)){
+        passed = false;
+    }
 
+    testCalendar.displayWeek(7);
+
+    
     if(passed){
         cout << "Calender Test Passed" << endl;
     }else{
@@ -220,3 +266,4 @@ bool Calendar::test(){
     }
     return passed;
 }
+

@@ -54,5 +54,6 @@ public:
     void displayWeek(int week);
     void displaySemester(int semester);
     bool test();
+    std::string getColour(string colour,bool background);
     // Additional methods for Calendar class
 };
