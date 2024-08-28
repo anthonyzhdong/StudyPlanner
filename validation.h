@@ -10,11 +10,9 @@ class validation{
 
 public:
 
-    int getValidInteger(int min, int max);
+    int getValidInteger(int min, int max, string &prompt);
     std::string getValidString(const std::string &prompt);
-    int timeValidation(const std::string &prompt, int minTime);
-    int dayValidation();
-    int weekValidation();
+    int timeValidation(std::string &prompt, int minTime);
 
 
 };

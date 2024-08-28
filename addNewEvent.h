@@ -2,6 +2,7 @@
 #include <vector>
 #include "paper.h"
 #include "Calendar.h"
+#include "validation.h"
 #pragma once
 
 using namespace std;
@@ -10,6 +11,7 @@ class addNewEvent{
 private:
     vector<paper>& papers;
     Calendar* calendar;
+    validation validator;
 public:
     addNewEvent(vector<paper>& papers, Calendar* calendar);
     

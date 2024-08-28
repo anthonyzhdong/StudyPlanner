@@ -19,90 +19,6 @@ using namespace std;
 
 vector<eventSkeleton> events;
 
-int timeValidation(const string &prompt, int minTime = 0)
-{
-    int time;
-    bool valid = false;
-    while (!valid)
-    {
-        cout << prompt;
-        cin >> time;
-        if (cin.fail())
-        {
-            cin.clear();                                         // Clear the error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
-            cout << "Invalid input. Please enter a valid integer for time.\n";
-        }
-        else if (time < 0 || time > 2359 || (time % 100) >= 60)
-        {
-            cout << "Invalid time. Please enter a valid 24-hour time (e.g., 0930 for 9:30 AM, 1430 for 2:30 PM).\n";
-        }
-        else if (time < minTime)
-        {
-            cout << "Invalid time. Time must be greater than or equal to start time of " << minTime << ".\n";
-        }
-        else
-        {
-            valid = true;
-        }
-    }
-    return time;
-}
-
-int dayValidation()
-{
-    int day;
-    bool valid = false;
-    while (!valid)
-    {
-        cout << "Enter day between 0 (Sunday) and 7 (Saturday): ";
-        cin >> day;
-        if (cin.fail())
-        {
-            cin.clear();                                         // Clear the error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
-            cout << "Invalid input. Please enter a valid integer for day.\n";
-        }
-        else if (day < 0 || day > 7)
-        {
-            cout << "Invalid day. Please enter a day between 0 (Sunday) and 7 (Saturday).\n";
-        }
-        else
-        {
-            valid = true;
-        }
-    }
-    return day;
-}
-
-int weekValidation()
-{
-    int week;
-    bool valid = false;
-    while (!valid)
-    {
-        cout << "Enter week between 0 and 52: ";
-        cin >> week;
-        if (cin.fail())
-        {
-            cin.clear();                                         // Clear the error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard the invalid input
-            cout << "Invalid input. Please enter a valid integer for week.\n";
-        }
-        else if (week < 0 || week > 52)
-        {
-            cout << "Invalid week. Please enter a positive integer between 0 and 52.\n";
-        }
-        else
-        {
-            valid = true;
-        }
-    }
-    return week;
-}
-
-// enum lecture, tutorial, lab, assignment, exam
-
 // Constructor to initialize papers
 addNewEvent::addNewEvent(vector<paper> &papers, Calendar *calendar) : papers(papers), calendar(calendar)
 {
@@ -178,27 +94,34 @@ void addNewEvent::addNewEventMenu()
     }
 
     // depending on type/enum, ask for properties tied to specific event e.g. lecture has different properties to assignment
+    string dayPrompt = "Enter the day of the week (1-7): ";
+    string weekPrompt = "Enter the week of the year (1-52): ";
+    string assignPrompt = "Enter due time: ";
+    string startPrompt = "Enter start time: ";
+    string endPrompt = "Enter end time: ";
+    string locationPrompt = "Enter location: ";
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     if (eventType == EventType::ASSIGNMENT)
     {
-        endTime = timeValidation("Enter due time: ");
+        endTime = validator.timeValidation(assignPrompt, 0);
 
-        day = dayValidation();
+        day = validator.getValidInteger(1, 7, dayPrompt);
 
-        week = weekValidation();
+        week = validator.getValidInteger(1, 52, weekPrompt);
     }
     else
     {
-        startTime = timeValidation("Enter start time: ");
+        startTime = validator.timeValidation(startPrompt,0);
 
-        endTime = timeValidation("Enter end time: ", startTime);
+        endTime = validator.timeValidation(endPrompt, startTime);
 
-        cout << "Enter location: ";
-        cin >> location;
+        location = validator.getValidString(locationPrompt);
+        
+        day = validator.getValidInteger(1, 7, dayPrompt);
 
-        day = dayValidation();
-
-        week = weekValidation();
+        week = validator.getValidInteger(1, 52, weekPrompt);
     }
 
     // pseudo

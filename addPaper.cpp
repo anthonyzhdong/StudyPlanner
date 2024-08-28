@@ -21,7 +21,8 @@ void addPaper::addPaperMenu() {
 
     paperCode = validate.getValidString("Enter the paper code: ");
     
-    paperPoints = validate.getValidInteger(1, 1000);
+    string pointsPrompt =  "Enter the paper points: ";
+    paperPoints = validate.getValidInteger(1, 1000, pointsPrompt);
 
     paper newPaper(paperName, paperCode, paperPoints);
     papers.push_back(newPaper);

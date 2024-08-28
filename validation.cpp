@@ -2,50 +2,47 @@
 #include <string>
 #include <iostream>
 #include <limits>
+#include <stdexcept>
 #include "addPaper.h"
 
 using namespace std;
 
 
-int validation::getValidInteger(int min, int max){
+int validation::getValidInteger(int min, int max, string &prompt){
     string input;
-    long long number;
-    char* endpoint;
+    int number;
 
     while (true) {
-        cout << "Enter the papers points: ";
+        cout << prompt;
         getline(cin,input);
 
         // empty input
         if(input.empty()){
-            cout << "Invalid input. Please try again.\n";
+            cout << "Invalid input. Please try again5.\n";
             continue;
         }
+        try{
+            number = stoi(input);
 
-        // converts string to long long
-        number = strtoll(input.c_str(), &endpoint, 10);
-
-        // checks if entire string was converted to long long
-        if(*endpoint != '\0'){
-            cout << "Invalid input. Please try again.\n";
-            continue;
+            if(number > max || number < min){
+                cout << "Number is out of range. Please input a number between " << min << " and " << max << "\n";
+                continue;
+            }
+            return number;
         }
-
-        // checks range
-        if(number > max || number <= min){
-            cout << "Number is out of range. Please try again.\n";
-            continue;
+        catch (const std::invalid_argument&) {
+            cout << "Invalid input. Please enter a valid integer.\n";
         }
-
-        // returns as int
-        return static_cast<int>(number);
+        catch (const std::out_of_range&) {
+            cout << "Number is out of range. Please input a number between " << min << " and " << max << "\n";
+        }
     }
 }
 
 string validation::getValidString(const std::string &prompt){
     string input;
     // filter
-    string allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+    string allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .";
 
     while (true) {
         cout << prompt;
@@ -68,17 +65,55 @@ string validation::getValidString(const std::string &prompt){
         if(invalid){
             continue;
         }
-
         return input;
     }
 }
 
-int validation::timeValidation(const std::string &prompt, int minTime = 0){
-    return 0;
+int validation::timeValidation(std::string &prompt, int minTime = 0){
+
+    string input;
+    int hours, minutes, inputTime;
+
+    while(true){
+        cout << prompt;
+        getline(cin,input);
+
+        if(input.length() != 4){
+            cout << "Invalid input. Please enter a 4 digit value e.g. 0930 for 9:30 AM\n";
+            continue;
+        }
+        bool allDigits = true;
+        for(char character : input){
+            if (character < '0' || character > '9'){
+                allDigits = false;
+                break;
+            }
+        }
+        if(!allDigits){
+            cout << "Invalid input. Please enter only digits\n";
+            continue;
+        }
+        try{
+            hours = stoi(input.substr(0,2));
+            minutes = stoi(input.substr(2,2));
+
+            if(hours < 0 || hours > 23 || minutes < 0 || minutes > 59){
+                throw out_of_range("time out of range\n");
+            }
+
+            inputTime = hours * 100 + minutes;
+
+            if(inputTime < minTime){
+                cout << "Invalid time. Time must be later than start time of " << minTime << ".\n";
+                continue;
+            }
+            return inputTime;
+
+        }catch (const exception&){
+            cout << "Invalid time. Please enter a valid 24-hour time\n";
+            continue;
+        }
+    }
+
 }
-int validation::dayValidation(){
-    return 0;
-}
-int validation::weekValidation(){
-    return 0;
-}
+
