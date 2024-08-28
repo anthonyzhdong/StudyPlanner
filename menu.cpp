@@ -14,7 +14,7 @@ using namespace std;
 // ./menu
 
 bool running = true;
-Calendar calendar = Calendar();
+Calendar* calendar = new Calendar();
 vector<paper> papers;
 addPaper paperHandler = (papers);
 
@@ -104,8 +104,12 @@ void displayMenu()
 
 int main()
 {
+    /**
     displayMenu();
-
+*/
+    addNewEvent addNewEvent(papers, calendar);
+    addNewEvent.addNewEventMenu();
+    calendar->display();
     return 0;
 }
 
