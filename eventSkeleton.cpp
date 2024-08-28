@@ -66,11 +66,10 @@ void eventSkeleton::displayInfo(){
               << " from " << getStartTime() << " to " << getEndTime() << endl;
 }
 
-bool test(){
+bool test(eventSkeleton testEvent){
     bool passed = true;
 
     // set up testEvent
-    eventSkeleton testEvent = eventSkeleton(EventType::LECTURE, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
     // change values
     testEvent.setEventType(EventType::TUTORIAL);
     string newCode = "COSC326";

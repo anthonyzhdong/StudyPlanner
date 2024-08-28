@@ -255,6 +255,7 @@ bool Calendar::test(){
     if(!testCalendar.addEvent(newExam)){
         passed = false;
     }
+    
 
     testCalendar.displayWeek(7);
 
