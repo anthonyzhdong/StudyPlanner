@@ -16,13 +16,10 @@ void addPaper::addPaperMenu() {
 
     cin.ignore(numeric_limits<std::streamsize>::max(), '\n');  // Clear any leftover newline characters
 
-    cout << "Enter the paper name: ";
-    getline(cin, paperName);
+    paperName = getValidString("Enter the paper name: ");
 
-    cout << "Enter the paper code: ";
-    getline(cin, paperCode);
-
-    //cout << "Enter the paper points: ";
+    paperCode = getValidString("Enter the paper code: ");
+    
     paperPoints = getValidInteger();
 
     paper newPaper(paperName, paperCode, paperPoints);
@@ -65,5 +62,36 @@ int addPaper::getValidInteger(){
 
         // returns as int
         return static_cast<int>(number);
+    }
+}
+
+string addPaper::getValidString(const string &prompt){
+    string input;
+    // filter
+    string allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
+
+    while (true) {
+        cout << prompt;
+        getline(cin,input);
+        
+        // empty input
+        if(input.length() < 1){
+            cout << "Input is too short\n";
+            continue;
+        }
+        bool invalid = false;
+        // checks each character to see if it's in filter
+        for(char character : input){
+            if(allowedCharacters.find(character) == string::npos){
+                cout << "Invalid character: " << character << "\n";
+                invalid = true;
+                break;
+            }
+        }
+        if(invalid){
+            continue;
+        }
+
+        return input;
     }
 }
