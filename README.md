@@ -4,3 +4,7 @@ Link to our planning doc [here](https://otagouni-my.sharepoint.com/:w:/r/persona
 
 
 Link to our Jira [here](https://no-pie-charts.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog)
+
+
+[![Build Status](https://github.com/acush0/cosc345project/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/acush0/cosc345project/actions)
+[![codecov](https://codecov.io/gh/acush0/cosc345project/branch/main/graph/badge.svg)](https://codecov.io/gh/acush0/cosc345project/)
