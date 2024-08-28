@@ -27,6 +27,8 @@ add_executable(menu
   StudySession.cpp 
   MenuItem.h 
   MenuItem.cpp
+  validation.h
+  validation.cpp
 ) 
 
 # If you need to link against any libraries, you can use target_link_libraries
