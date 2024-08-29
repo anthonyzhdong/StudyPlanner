@@ -11,7 +11,7 @@ class addNewEvent{
 private:
     vector<paper>& papers;
     Calendar* calendar;
-    validation validator;
+    validation validate;
     string getValidPaperCode();
 public:
     addNewEvent(vector<paper>& papers, Calendar* calendar);
