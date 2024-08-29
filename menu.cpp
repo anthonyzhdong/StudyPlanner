@@ -83,10 +83,12 @@ void displayMenu()
 {
     int input;
     string p ="";
+
+    displayMenuOptions();
     
     while (running)
     {
-        displayMenuOptions();
+       
         input = validate.getValidInteger(1, menuItems.size(), p);
         if(input >= 1 && input <= menuItems.size()){
             menuItems[input - 1].execute();
@@ -172,8 +174,8 @@ void addEventMenuItem()
                 addPaperMenuItem();
                 break;
             case 2:
-                //displayMenuOptions();
                 clearScreen();
+                displayMenuOptions();
                 break;
             default:
                 cout << "Invalid choice. Returning to main menu.\n";

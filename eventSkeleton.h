@@ -27,6 +27,7 @@ public:
 
     // Getters
     EventType getEventType();
+    string getEventTypeString(EventType type);
     string getPaperCode();
     int getDay();
     int getWeek();
