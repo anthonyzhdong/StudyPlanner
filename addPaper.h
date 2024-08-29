@@ -1,22 +1,33 @@
+/**
+ * @file addPaper.h
+ * @brief Defines the addPaper class for adding new papers to the system
+ */
+
 #pragma once
 
 #include <vector>
 #include "paper.h"
 #include "validation.h"
 
-using namespace std;
-
+/**
+ * @class addPaper
+ * @brief Manages the addition of new papers to the system
+ */
 class addPaper {
 private:
-    vector<paper>& papers;
+    std::vector<paper>& papers;
     validation validate;
 
 public:
-    // Constructor
-    addPaper(vector<paper>& papers);
+        /**
+     * @brief Construct a new addPaper object
+     * 
+     * @param papers Reference to the vector of papers in the system
+     */
+    addPaper(std::vector<paper>& papers);
 
-    // Method to add a paper
+    /**
+     * @brief Displays a menu and handles the process of adding a new paper
+     */
     void addPaperMenu();
-    //int getValidInteger();
-    //string getValidString(const string &prompt);
 };

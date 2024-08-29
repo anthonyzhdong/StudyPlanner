@@ -9,22 +9,18 @@
 #include "assignment.h"
 #include "eventSkeleton.h"
 
-using namespace std;
 
-// constructor
-paper::paper(string paperName, string paperCode, int paperPoints)
+paper::paper(std::string paperName, std::string paperCode, int paperPoints)
     : paperName(paperName), paperCode(paperCode), paperPoints(paperPoints),
-      events() // initialize the vectors
+      events()
 {
 }
-
-// getter methods
-string paper::getPaperName() 
+std::string paper::getPaperName() 
 {
     return paperName;
 }
 
-string paper::getPaperCode() const
+std::string paper::getPaperCode() const
 {
     return paperCode;
 }
@@ -35,12 +31,12 @@ int paper::getPaperPoints()
 }
 
 // setter methods
-void paper::setPaperName( string& paperName)
+void paper::setPaperName(std::string& paperName)
 {
     this->paperName = paperName;
 }
 
-void paper::setPaperCode( string& paperCode)
+void paper::setPaperCode(std::string& paperCode)
 {
     this->paperCode = paperCode;
 }
@@ -50,36 +46,11 @@ void paper::setPaperPoints(int paperPoints)
     this->paperPoints = paperPoints;
 }
 
-// add lecture, tutorial, lab methods
-// void paper::addLecture( Lecture& lecture)
-// {
-//     lectures.push_back(lecture);
-// }
-
-// void paper::addTutorial( Tutorial& tutorial)
-// {
-//     tutorials.push_back(tutorial);
-// }
-
-// void paper::addLab( Lab& lab)
-// {
-//     labs.push_back(lab);
-// }
 void paper::addEvent(eventSkeleton& event)
 {
     events.push_back(event);
 }
 
-// display paper information
-/**
- * @brief Displays a users papers different attributes.
- *
- * This function prints the papers name, code, and points, as well as
- * all the events associated with the paper.
- *
- * @param none
- * @return none
- */
 void paper::displayInfo()  {
     cout << "Paper: " << paperName << " (" << paperCode << ")" << endl;
     cout << "Points: " << paperPoints << endl;
@@ -87,19 +58,4 @@ void paper::displayInfo()  {
     for ( auto& event : events) {
         cout << "Event on day " << event.getDay() << " of week " << event.getWeek() << endl;
     }
-
-    // cout << "Lectures:" << endl;
-    // for ( auto& lecture : lectures) {
-    //     lecture.displayInfo();
-    // }
-
-    // cout << "Labs:" << endl;
-    // for ( auto& lab : labs) {
-    //     lab.displayInfo();
-    // }
-
-    // cout << "Tutorials:" << endl;
-    // for ( auto& tutorial : tutorials) {
-    //     tutorial.displayInfo();
-    // }
 }
