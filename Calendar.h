@@ -1,3 +1,7 @@
+/**
+ * @file Calendar.h
+ * @brief Header file for the Calendar class
+ */
 #pragma once
 
 #include <vector>
@@ -22,10 +26,24 @@ public:
     int dayNumber;
 
 public:
+    /**
+     * @brief Construct a new Day object
+     * @param dayNumber The number of the day
+     */
     Day(int dayNumber);
+    /**
+     * @brief Add an event to the day
+     * @param e The event to add
+     * @return true if the event was added successfully, false otherwise
+     */
     bool addEvent(eventSkeleton& e);
-    // Additional methods for Day class
+
 private:
+    /**
+     * @brief Add an event to the calendar
+     * @param d The event to add
+     * @return true if the event was added successfully, false otherwise
+     */
     bool addEventToCalendar(eventSkeleton& d);
 };
 
@@ -41,9 +59,18 @@ public:
     int weekNumber;
 
 public:
+    /**
+     * @brief Construct a new Week object
+     * @param weekNumber The number of the week
+     */
     Week(int weekNumber);
+    /**
+     * @brief Add an event to the week
+     * @param e The event to add
+     * @return true if the event was added successfully, false otherwise
+     */
     bool addEvent(eventSkeleton& e);
-    // Additional methods for Week class
+
 };
 
 /**
@@ -55,9 +82,28 @@ private:
     std::vector<Week> weeks;
 
 public:
+    /**
+     * @brief Construct a new Calendar object
+     */
     Calendar();
+
+    /**
+     * @brief Display the entire calendar
+     */
     void display();
+
+    /**
+     * @brief Add an event to the calendar
+     * @param e The event to add
+     * @return true if the event was added successfully, false otherwise
+     */
     bool addEvent(eventSkeleton& e);
+
+    /**
+     * @brief Remove an event from the calendar
+     * @param e The event to remove
+     * @return true if the event was removed successfully, false otherwise
+     */
     bool removeEvent(eventSkeleton& e);
     bool editEvent(eventSkeleton& e);
     void displayWeek(int week);
