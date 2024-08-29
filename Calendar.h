@@ -1,3 +1,7 @@
+/**
+ * @file Calendar.h
+ * @brief Header file for the Calendar class
+ */
 #pragma once
 
 #include <vector>
@@ -22,10 +26,24 @@ public:
     int dayNumber;
 
 public:
+    /**
+     * @brief Construct a new Day object
+     * @param dayNumber The number of the day
+     */
     Day(int dayNumber);
+    /**
+     * @brief Add an event to the day
+     * @param e The event to add
+     * @return true if the event was added successfully, false otherwise
+     */
     bool addEvent(eventSkeleton& e);
-    // Additional methods for Day class
+
 private:
+    /**
+     * @brief Add an event to the calendar
+     * @param d The event to add
+     * @return true if the event was added successfully, false otherwise
+     */
     bool addEventToCalendar(eventSkeleton& d);
 };
 
@@ -41,9 +59,18 @@ public:
     int weekNumber;
 
 public:
+    /**
+     * @brief Construct a new Week object
+     * @param weekNumber The number of the week
+     */
     Week(int weekNumber);
+    /**
+     * @brief Add an event to the week
+     * @param e The event to add
+     * @return true if the event was added successfully, false otherwise
+     */
     bool addEvent(eventSkeleton& e);
-    // Additional methods for Week class
+
 };
 
 /**
@@ -55,14 +82,60 @@ private:
     std::vector<Week> weeks;
 
 public:
+    /**
+     * @brief Construct a new Calendar object
+     */
     Calendar();
+
+    /**
+     * @brief Display the entire calendar
+     */
     void display();
+
+    /**
+     * @brief Add an event to the calendar
+     * @param e The event to add
+     * @return true if the event was added successfully, false otherwise
+     */
     bool addEvent(eventSkeleton& e);
+
+    /**
+     * @brief Remove an event from the calendar
+     * @param e The event to remove
+     * @return true if the event was removed successfully, false otherwise
+     */
     bool removeEvent(eventSkeleton& e);
+
+    /**
+     * @brief Edits an existing event in the calendar.
+     * @param e The event to be edited.
+     * @return true if the event was successfully edited, false otherwise.
+     */
     bool editEvent(eventSkeleton& e);
+
+    /**
+     * @brief Displays a specific week of the calendar.
+     * @param week The week number to display.
+     */
     void displayWeek(int week);
+
+    /**
+     * @brief Displays a specific semester.
+     * @param semester The semester number to display.
+     */
     void displaySemester(int semester);
+
+    /**
+     * @brief Tests the functionality of the Calendar class.
+     * @return true if all tests pass, false otherwise.
+     */
     bool test();
+
+    /**
+     * @brief Returns a color code for display purposes.
+     * @param colour The color name.
+     * @param background Whether the color is for background or foreground.
+     * @return A string representing the color code.
+     */
     std::string getColour(string colour,bool background);
-    // Additional methods for Calendar class
 };

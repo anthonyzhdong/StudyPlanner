@@ -11,6 +11,7 @@
 #include "lecture.h"
 #include "Calendar.h"
 #include "eventSkeleton.h"
+#include "validation.h"
 #include <limits>
 #include <iomanip>
 #include <algorithm>
@@ -24,38 +25,12 @@ addNewEvent::addNewEvent(vector<paper> &papers, Calendar *calendar) : papers(pap
 {
 }
 
-// checks if input matches a valid paper code
-string addNewEvent::getValidPaperCode(){
-    string code;
-    bool invalid = true;
-
-    while(invalid){
-        cout << "Enter code: ";
-        getline(cin, code);
-        for(auto &paper : papers){
-            if(paper.getPaperCode() == code){
-                return code;
-            }
-        }
-        cout << "Invalid paper code. Please try again.\n";
-    }
-    return code;
-}
-
 vector<eventSkeleton> addNewEvent::getEvents()
 {
     return events;
 }
 
-/**
- * @brief Displays the menu for adding a new event and handles user input.
- *
- * This function presents a menu to the user to select a paper and the type of event they wish to add.
- * Based on the event type, it prompts for the appropriate details (e.g., time, day, week) and adds the event to the Calendar.
- *
- * @param none
- * @return none
- */
+
 void addNewEvent::addNewEventMenu()
 {
     EventType eventType;
@@ -71,11 +46,11 @@ void addNewEvent::addNewEventMenu()
         cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
     }
     cout << "\n-----------------------------------------------------\n";
-    paperCode = getValidPaperCode();
+    paperCode = validate.getValidPaperCode(papers);
 
     cout << "Events:\n1. Lecture\n2. Tutorial\n3. Lab\n4. Assignment\n5. Exam\n";
     string typePrompt = "Enter the type of event to add: \n";
-    typeChoice = validator.getValidInteger(1, 5, typePrompt);
+    typeChoice = validate.getValidInteger(1, 5, typePrompt);
     switch (typeChoice)
     {
     case 1:
@@ -107,23 +82,23 @@ void addNewEvent::addNewEventMenu()
 
     if (eventType == EventType::ASSIGNMENT)
     {
-        endTime = validator.timeValidation(assignPrompt, 0);
+        endTime = validate.timeValidation(assignPrompt, 0);
 
-        day = validator.getValidInteger(1, 7, dayPrompt);
+        day = validate.getValidInteger(1, 7, dayPrompt);
 
-        week = validator.getValidInteger(1, 52, weekPrompt);
+        week = validate.getValidInteger(1, 52, weekPrompt);
     }
     else
     {
-        startTime = validator.timeValidation(startPrompt,0);
+        startTime = validate.timeValidation(startPrompt,0);
 
-        endTime = validator.timeValidation(endPrompt, startTime);
+        endTime = validate.timeValidation(endPrompt, startTime);
 
-        location = validator.getValidString(locationPrompt);
+        location = validate.getValidString(locationPrompt);
         
-        day = validator.getValidInteger(1, 7, dayPrompt);
+        day = validate.getValidInteger(1, 7, dayPrompt);
 
-        week = validator.getValidInteger(1, 52, weekPrompt);
+        week = validate.getValidInteger(1, 52, weekPrompt);
     }
 
     if (eventType == EventType::TUTORIAL)
@@ -165,7 +140,6 @@ void addNewEvent::addNewEventMenu()
     {
         cout << "Invalid event type.";
     }
-    //cout << "Event added successfully!" << endl;
-    cout << "\nPress 1 to display menu options" << endl;
+    
     
 }
