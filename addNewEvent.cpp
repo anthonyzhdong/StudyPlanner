@@ -30,15 +30,7 @@ vector<eventSkeleton> addNewEvent::getEvents()
     return events;
 }
 
-/**
- * @brief Displays the menu for adding a new event and handles user input.
- *
- * This function presents a menu to the user to select a paper and the type of event they wish to add.
- * Based on the event type, it prompts for the appropriate details (e.g., time, day, week) and adds the event to the Calendar.
- *
- * @param none
- * @return none
- */
+
 void addNewEvent::addNewEventMenu()
 {
     EventType eventType;
@@ -148,7 +140,6 @@ void addNewEvent::addNewEventMenu()
     {
         cout << "Invalid event type.";
     }
-    //cout << "Event added successfully!" << endl;
     
     
 }

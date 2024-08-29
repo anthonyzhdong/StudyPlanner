@@ -105,10 +105,37 @@ public:
      * @return true if the event was removed successfully, false otherwise
      */
     bool removeEvent(eventSkeleton& e);
+
+    /**
+     * @brief Edits an existing event in the calendar.
+     * @param e The event to be edited.
+     * @return true if the event was successfully edited, false otherwise.
+     */
     bool editEvent(eventSkeleton& e);
+
+    /**
+     * @brief Displays a specific week of the calendar.
+     * @param week The week number to display.
+     */
     void displayWeek(int week);
+
+    /**
+     * @brief Displays a specific semester.
+     * @param semester The semester number to display.
+     */
     void displaySemester(int semester);
+
+    /**
+     * @brief Tests the functionality of the Calendar class.
+     * @return true if all tests pass, false otherwise.
+     */
     bool test();
+
+    /**
+     * @brief Returns a color code for display purposes.
+     * @param colour The color name.
+     * @param background Whether the color is for background or foreground.
+     * @return A string representing the color code.
+     */
     std::string getColour(string colour,bool background);
-    // Additional methods for Calendar class
 };
