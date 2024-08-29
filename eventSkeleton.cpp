@@ -1,6 +1,7 @@
 #include "eventSkeleton.h"
 #include <string>
 #include <iostream>
+#include <unordered_map>
 using namespace std;
 
 // constructor
@@ -11,6 +12,18 @@ eventSkeleton::eventSkeleton(EventType eventType, string paperCode, int day, int
 // getter methods
 EventType eventSkeleton::getEventType(){
     return eventType;
+}
+
+string eventSkeleton::getEventTypeString(EventType type){
+    switch(type){
+        case EventType::LECTURE:    return "Lecture";
+        case EventType::TUTORIAL:   return "Tutorial";
+        case EventType::LAB:        return "Lab";
+        case EventType::ASSIGNMENT: return "Assignment";
+        case EventType::EXAM:       return "Exam";
+        case EventType::STUDY_SESSION: return "Study Session";
+        default:                    return "Unknown";
+    }
 }
 string eventSkeleton::getPaperCode(){
     return paperCode;
@@ -61,9 +74,7 @@ void eventSkeleton::setLocation(string& location){
 }
 
 void eventSkeleton::displayInfo(){
-    cout << static_cast<int>(getEventType()) << " for " << getPaperCode() << " at " << getLocation() 
-              << " on day " << getDay() << " of week " << getWeek() 
-              << " from " << getStartTime() << " to " << getEndTime() << endl;
+    cout << "Paper Code: " << getPaperCode() << "\nEvent Type: " << getEventTypeString(getEventType()) << "\nDay: " << getDay() << "\nWeek: " << getWeek() << "\nStart Time: " << getStartTime() << "\nEnd Time: " << getEndTime() << "\nLocation: " << getLocation() << endl;
 }
 
 bool eventSkeleton::test(){
