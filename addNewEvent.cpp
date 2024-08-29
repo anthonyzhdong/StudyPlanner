@@ -24,6 +24,26 @@ addNewEvent::addNewEvent(vector<paper> &papers, Calendar *calendar) : papers(pap
 {
 }
 
+string addNewEvent::getValidPaperCode(){
+    string code;
+
+    bool invalid = true;
+
+    while(invalid){
+        cout << "Enter code: ";
+        getline(cin, code);
+        for(auto &paper : papers){
+            if(paper.getPaperCode() == code){
+                return code;
+            }
+        }
+        cout << "Invalid paper code. Please try again.\n";
+    }
+
+
+    return code;
+}
+
 vector<eventSkeleton> addNewEvent::getEvents()
 {
     return events;
@@ -36,15 +56,16 @@ void addNewEvent::addNewEventMenu()
 
     cout << "Available papers:\n";
     cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-    cout << "-------------------------------------------------------";
+    cout << "-----------------------------------------------------";
     // displays paper codes by getting menu's vector<paper> papers
     for (auto &paper : papers)
     {
         cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
     }
-    cout << "\n-----------------------------------------------------";
-    cout << "\nPlease enter the paper code: ";
-    cin >> paperCode;
+    cout << "\n-----------------------------------------------------\n";
+    //cout << "\nPlease enter the paper code: ";
+    //cin >> paperCode;
+    paperCode = getValidPaperCode();
 
 
     // Returns if the paper code is valid.
