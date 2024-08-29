@@ -29,6 +29,8 @@ add_executable(menu
   MenuItem.cpp
   validation.h
   validation.cpp
+  Utilities.h
+  Utilities.cpp
 ) 
 
 # If you need to link against any libraries, you can use target_link_libraries

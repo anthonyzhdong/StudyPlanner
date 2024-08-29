@@ -10,22 +10,24 @@
 #include "StudySession.h"
 #include "MenuItem.h"
 #include "validation.h"
+#include "Utilities.h"
 using namespace std;
 // g++ -o menu menu.cpp
 // ./menu
 
 bool running = true;
-Calendar* calendar = new Calendar();
+Calendar *calendar = new Calendar();
 vector<paper> papers;
 addPaper paperHandler = (papers);
 validation validate;
 
-void clearScreen() {
-    #ifdef _WIN32
-        std::system("cls");
-    #else
-        std::system("clear");
-    #endif
+void clearScreen()
+{
+#ifdef _WIN32
+    std::system("cls");
+#else
+    std::system("clear");
+#endif
 }
 
 // void loadingBar() {
@@ -82,17 +84,20 @@ void displayMenuOptions()
 void displayMenu()
 {
     int input;
-    string p ="";
+    string p = "";
 
     displayMenuOptions();
-    
+
     while (running)
     {
-       
+
         input = validate.getValidInteger(1, menuItems.size(), p);
-        if(input >= 1 && input <= menuItems.size()){
+        if (input >= 1 && input <= menuItems.size())
+        {
             menuItems[input - 1].execute();
-        }else{
+        }
+        else
+        {
             cout << "Invalid input. Please enter a number between 1 and " << menuItems.size() << "." << endl;
         }
     }
@@ -124,8 +129,16 @@ void startStudySession()
         string paperCode;
         int day, week;
 
-        cout << "Enter the paper code: ";
-        cin >> paperCode;
+        while (true)
+        {
+            std::cout << "Enter the paper code: " << endl;
+            std::cin >> paperCode;
+            if (Utilities::isValidPaper(papers, paperCode))
+            {
+                break;
+            }
+            std::cout << "\033[A\33[2K\033[A"; // This moves the cursor up and clears it so that the user can retype their input if the paper code wasn't valid.
+        }
         cout << "Enter the day: ";
         cin >> day;
         cout << "Enter the week: ";
@@ -164,33 +177,36 @@ void endStudySession()
 
 void addEventMenuItem()
 {
-    if(papers.empty()){
-       // cout << "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+    if (papers.empty())
+    {
+        // cout << "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
-        
-        switch (choice) {
-            case 1:
-                addPaperMenuItem();
-                break;
-            case 2:
-                clearScreen();
-                displayMenuOptions();
-                break;
-            default:
-                cout << "Invalid choice. Returning to main menu.\n";
-                clearScreen();
-                displayMenuOptions();
-                break;
+
+        switch (choice)
+        {
+        case 1:
+            addPaperMenuItem();
+            break;
+        case 2:
+            clearScreen();
+            displayMenuOptions();
+            break;
+        default:
+            cout << "Invalid choice. Returning to main menu.\n";
+            clearScreen();
+            displayMenuOptions();
+            break;
         }
-
-
-    }else{
+    }
+    else
+    {
         addNewEvent newEvent(papers, calendar);
         newEvent.addNewEventMenu();
     }
 }
-void addPaperMenuItem() {
+void addPaperMenuItem()
+{
     addPaper newPaper(papers);
     newPaper.addPaperMenu();
 }
@@ -202,6 +218,7 @@ void exitMenu()
     cout << "Exiting menu..." << endl;
 }
 
-void viewCalendarMenuItem() {
+void viewCalendarMenuItem()
+{
     calendar->display();
 }
