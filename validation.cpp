@@ -3,10 +3,15 @@
 #include <iostream>
 #include <limits>
 #include <stdexcept>
+#include <sstream>
 #include "addPaper.h"
 
 using namespace std;
 
+void validation::mockUserInput(std::string& input){
+    std::istringstream iss(input);
+    std::cin.rdbuf(iss.rdbuf());
+}
 
 int validation::getValidInteger(int min, int max, string &prompt){
     string input;
@@ -132,6 +137,19 @@ string validation::getValidPaperCode(vector<paper>& papers){
         cout << "Invalid paper code. Please try again.\n";
     }
     return code;
+}
 
+bool validation::test(){
+    bool passed = true;
+    validation v;
+    string num = "5";
+    mockUserInput(num);
+
+    std::string prompt = "Enter a number between 1 and 10: ";
+    int result = v.getValidInteger(1, 10, prompt);
+    bool test1 = (result == 5);
+
+
+    return true;
 }
 

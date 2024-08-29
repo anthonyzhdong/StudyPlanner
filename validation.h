@@ -17,6 +17,8 @@
 class validation{
 
 public:
+
+    void mockUserInput(std::string& input);
     
     /**
      * @brief Get a valid integer input within a specified range.
@@ -49,5 +51,10 @@ public:
      */
     string getValidPaperCode(vector<paper>& papers);
 
+    /**
+     * @brief Tests the functionality of the validation class.
+     * @return true if all tests pass, false otherwise.
+     */
+    bool test();
 
 };
