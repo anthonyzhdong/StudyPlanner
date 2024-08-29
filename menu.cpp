@@ -10,9 +10,8 @@
 #include "StudySession.h"
 #include "MenuItem.h"
 #include "validation.h"
+#include <iomanip>
 using namespace std;
-// g++ -o menu menu.cpp
-// ./menu
 
 bool running = true;
 Calendar* calendar = new Calendar();
@@ -27,16 +26,6 @@ void clearScreen() {
         std::system("clear");
     #endif
 }
-
-// void loadingBar() {
-//     std::cout << "Loading menu ";
-//     for (int i = 0; i < 20; ++i) {
-//         std::cout << "█";
-//         std::cout.flush();
-//         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-//     }
-//     std::cout << std::endl;
-// }
 
 // Study session variables
 StudySession *studySession = nullptr;
@@ -63,7 +52,9 @@ vector<MenuItem> menuItems = {
     MenuItem("End study session", endStudySession),
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
-{
+{   
+    // commented out to see build errors
+    //clearScreen();
     cout << "\n"
             " ____  _             _         ____  _                             \n"
             "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
@@ -104,7 +95,6 @@ void displayMenu()
         cin.get();
     }
 }
-// cout << "input: " << number << endl;
 
 int main()
 {
@@ -115,30 +105,52 @@ int main()
 
 void startStudySession()
 {
+    if(papers.empty()){
+        string choicePrompt = "\nYou can't start a study sesion as no papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+        int choice = validate.getValidInteger(1, 2, choicePrompt);
+        
+        switch (choice) {
+            case 1:
+                addPaperMenuItem();
+                break;
+            case 2:
+                displayMenuOptions();
+                break;
+            default:
+                cout << "Invalid choice. Returning to main menu.\n";
+                displayMenuOptions();
+                break;
+        }
+    }else{
     // Start the study session
-    if (studySession == nullptr)
-    {
-        // Ask for paper code, day, and week.
-        // TODO: Automatically set day and week and add data validation
+        if (studySession == nullptr){
+            string paperCode;
+            int day, week;
 
-        string paperCode;
-        int day, week;
+            cout << "Available papers:\n";
+            cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+            cout << "-----------------------------------------------------";
+            // displays paper codes by getting menu's vector<paper> papers
+            for (auto &paper : papers)
+            {
+                cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+            }
+            cout << "\n-----------------------------------------------------\n";
+            paperCode = validate.getValidPaperCode(papers);
 
-        cout << "Enter the paper code: ";
-        cin >> paperCode;
-        cout << "Enter the day: ";
-        cin >> day;
-        cout << "Enter the week: ";
-        cin >> week;
+            string dayPrompt = "Enter the day of the week (1-7): ";
+            string weekPrompt = "Enter the week of the year (1-52): ";
 
-        studySession = new StudySession(paperCode, day, week);
-        studySession->startSession();
-    }
-    else
-    {
-        cout << "A study session is already in progress. Please end the current session before starting a new one." << endl;
-    }
-    cout << "Press 1 to display menu options" << endl;
+            day = validate.getValidInteger(1, 7, dayPrompt);
+            week = validate.getValidInteger(1, 52, weekPrompt);
+
+            studySession = new StudySession(paperCode, day, week);
+            studySession->startSession();
+        }else{
+            cout << "A study session is already in progress. Please end the current session before starting a new one." << endl;
+        }
+        cout << "Press 1 to display menu options" << endl;
+        }
 }
 
 void endStudySession()
@@ -156,16 +168,28 @@ void endStudySession()
     }
     else
     {
-        // No study sessions are in progress
-        cout << "There is not a study session in progress." << endl;
+        // No study sessions are in progress so ask user to start one or return to menu
+        string choicePrompt = "\nThere isn't a study session in progress. Would you like to begin one?\n1. Start study session\n2. Return to main menu\n";
+        int choice = validate.getValidInteger(1, 2, choicePrompt);
+        
+        switch (choice) {
+            case 1:
+                startStudySession();
+                break;
+            case 2:
+                displayMenuOptions();
+                break;
+            default:
+                cout << "Invalid choice. Returning to main menu.\n";
+                displayMenuOptions();
+                break;
+        }
     }
-    cout << "Press 1 to display menu options" << endl;
 }
 
 void addEventMenuItem()
 {
     if(papers.empty()){
-       // cout << "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
         
@@ -174,12 +198,12 @@ void addEventMenuItem()
                 addPaperMenuItem();
                 break;
             case 2:
-                clearScreen();
+                //clearScreen();
                 displayMenuOptions();
                 break;
             default:
                 cout << "Invalid choice. Returning to main menu.\n";
-                clearScreen();
+                //clearScreen();
                 displayMenuOptions();
                 break;
         }
@@ -188,11 +212,13 @@ void addEventMenuItem()
     }else{
         addNewEvent newEvent(papers, calendar);
         newEvent.addNewEventMenu();
+        cout << "Enter 1 to go back to the main menu" << endl;
     }
 }
 void addPaperMenuItem() {
     addPaper newPaper(papers);
     newPaper.addPaperMenu();
+    cout << "Enter 1 to go back to the main menu" << endl;
 }
 
 void exitMenu()
@@ -204,4 +230,5 @@ void exitMenu()
 
 void viewCalendarMenuItem() {
     calendar->display();
+    cout << "\nEnter 1 to go back to the main menu" << endl;
 }

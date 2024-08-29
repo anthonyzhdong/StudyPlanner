@@ -117,3 +117,21 @@ int validation::timeValidation(std::string &prompt, int minTime = 0){
 
 }
 
+string validation::getValidPaperCode(vector<paper>& papers){
+    string code;
+    bool invalid = true;
+
+    while(invalid){
+        cout << "Enter code: ";
+        getline(cin, code);
+        for(auto &paper : papers){
+            if(paper.getPaperCode() == code){
+                return code;
+            }
+        }
+        cout << "Invalid paper code. Please try again.\n";
+    }
+    return code;
+
+}
+
