@@ -6,63 +6,58 @@
 #include <sstream>
 #include "addPaper.h"
 
-using namespace std;
 
-void validation::mockUserInput(std::string& input){
-    std::istringstream iss(input);
-    std::cin.rdbuf(iss.rdbuf());
-}
 
-int validation::getValidInteger(int min, int max, string &prompt){
-    string input;
+int validation::getValidInteger(int min, int max, std::string &prompt){
+    std::string input;
     int number;
 
     while (true) {
-        cout << prompt;
-        getline(cin,input);
+        std::cout << prompt;
+        std::getline(std::cin,input);
 
         // empty input
         if(input.empty()){
-            cout << "Invalid input. Please try again.\n";
+            std::cout << "Invalid input. Please try again.\n";
             continue;
         }
         try{
-            number = stoi(input);
+            number = std::stoi(input);
 
             if(number > max || number < min){
-                cout << "Number is out of range. Please input a number between " << min << " and " << max << "\n";
+                std::cout << "Number is out of range. Please input a number between " << min << " and " << max << "\n";
                 continue;
             }
             return number;
         }
         catch (const std::invalid_argument&) {
-            cout << "Invalid input. Please enter a valid integer.\n";
+            std::cout << "Invalid input. Please enter a valid integer.\n";
         }
         catch (const std::out_of_range&) {
-            cout << "Number is out of range. Please input a number between " << min << " and " << max << "\n";
+            std::cout << "Number is out of range. Please input a number between " << min << " and " << max << "\n";
         }
     }
 }
 
-string validation::getValidString(const std::string &prompt){
-    string input;
+std::string validation::getValidString(const std::string &prompt){
+    std::string input;
     // filter
-    string allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .";
+    std::string allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .";
 
     while (true) {
-        cout << prompt;
-        getline(cin,input);
+        std::cout << prompt;
+        std::getline(cin,input);
         
         // empty input
         if(input.empty()){
-            cout << "Input is too short\n";
+            std::cout << "Input is too short\n";
             continue;
         }
         bool invalid = false;
         // checks each character to see if it's in filter
         for(char character : input){
-            if(allowedCharacters.find(character) == string::npos){
-                cout << "Invalid character: " << character << "\n";
+            if(allowedCharacters.find(character) == std::string::npos){
+                std::cout << "Invalid character: " << character << "\n";
                 invalid = true;
                 break;
             }
@@ -76,15 +71,15 @@ string validation::getValidString(const std::string &prompt){
 
 int validation::timeValidation(std::string &prompt, int minTime = 0){
 
-    string input;
+    std::string input;
     int hours, minutes, inputTime;
 
     while(true){
-        cout << prompt;
-        getline(cin,input);
+        std::cout << prompt;
+        std::getline(cin,input);
 
         if(input.length() != 4){
-            cout << "Invalid input. Please enter a 4 digit value e.g. 0930 for 9:30 AM\n";
+            std::cout << "Invalid input. Please enter a 4 digit value e.g. 0930 for 9:30 AM\n";
             continue;
         }
         bool allDigits = true;
@@ -95,12 +90,12 @@ int validation::timeValidation(std::string &prompt, int minTime = 0){
             }
         }
         if(!allDigits){
-            cout << "Invalid input. Please enter only digits\n";
+            std::cout << "Invalid input. Please enter only digits\n";
             continue;
         }
         try{
-            hours = stoi(input.substr(0,2));
-            minutes = stoi(input.substr(2,2));
+            hours = std::stoi(input.substr(0,2));
+            minutes = std::stoi(input.substr(2,2));
 
             if(hours < 0 || hours > 23 || minutes < 0 || minutes > 59){
                 throw out_of_range("time out of range\n");
@@ -109,47 +104,47 @@ int validation::timeValidation(std::string &prompt, int minTime = 0){
             inputTime = hours * 100 + minutes;
 
             if(inputTime < minTime){
-                cout << "Invalid time. Time must be later than start time of " << minTime << ".\n";
+                std::cout << "Invalid time. Time must be later than start time of " << minTime << ".\n";
                 continue;
             }
             return inputTime;
 
         }catch (const exception&){
-            cout << "Invalid time. Please enter a valid 24-hour time\n";
+            std::cout << "Invalid time. Please enter a valid 24-hour time\n";
             continue;
         }
     }
 
 }
 
-string validation::getValidPaperCode(vector<paper>& papers){
-    string code;
+std::string validation::getValidPaperCode(std::vector<paper>& papers){
+    std::string code;
     bool invalid = true;
 
     while(invalid){
-        cout << "Enter code: ";
-        getline(cin, code);
+        std::cout << "Enter code: ";
+        std::getline(cin, code);
         for(auto &paper : papers){
             if(paper.getPaperCode() == code){
                 return code;
             }
         }
-        cout << "Invalid paper code. Please try again.\n";
+        std::cout << "Invalid paper code. Please try again.\n";
     }
     return code;
 }
 
 bool validation::test(){
     bool passed = true;
-    validation v;
-    string num = "5";
-    mockUserInput(num);
-
-    std::string prompt = "Enter a number between 1 and 10: ";
-    int result = v.getValidInteger(1, 10, prompt);
-    bool test1 = (result == 5);
-
-
-    return true;
+    
+    // Test getValidInteger
+    cout << "TESTING";
+    string p = "\nEnter a number between 1 and 10: \n";
+    int num = getValidInteger(1, 10, p);
+    if (num < 1 || num > 10) {
+        std::cout << "getValidInteger test failed\n";
+        passed = false;
+    }
+    return passed;
 }
 

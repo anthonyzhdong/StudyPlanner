@@ -86,4 +86,6 @@ public:
      * points, and associated events.
      */
     void displayInfo() ;
+
+    bool test();
 };
