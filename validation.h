@@ -1,4 +1,5 @@
 /**
+ * \mainpage
  * @file validation.h
  * @brief Defines the validation class which provides input validation methods.
  */
