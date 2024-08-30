@@ -1,4 +1,5 @@
 /**
+ * \mainpage
  * @file addNewEvent.h
  * @brief Header file for the addNewEvent class, which handles adding new events to the calendar.
  */
