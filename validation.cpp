@@ -21,6 +21,19 @@ int validation::getValidInteger(int min, int max, std::string &prompt){
             std::cout << "Invalid input. Please try again.\n";
             continue;
         }
+
+        bool valid = true;
+        for (size_t i = 0; i < input.length(); ++i) {
+            if (!std::isdigit(input[i])) {
+                valid = false;
+                break;
+            }
+        }
+
+        if (!valid) {
+            std::cout << "Invalid input. Please enter a valid integer.\n";
+            continue;
+        }
         try{
             number = std::stoi(input);
 

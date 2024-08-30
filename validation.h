@@ -18,7 +18,6 @@ class validation{
 
 public:
 
-    void mockUserInput(std::string& input);
     
     /**
      * @brief Get a valid integer input within a specified range.
