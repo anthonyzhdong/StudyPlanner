@@ -9,22 +9,18 @@
 #include "assignment.h"
 #include "eventSkeleton.h"
 
-using namespace std;
 
-// constructor
-paper::paper(string paperName, string paperCode, int paperPoints)
+paper::paper(std::string paperName, std::string paperCode, int paperPoints)
     : paperName(paperName), paperCode(paperCode), paperPoints(paperPoints),
-      events() // initialize the vectors
+      events()
 {
 }
-
-// getter methods
-string paper::getPaperName() 
+std::string paper::getPaperName() 
 {
     return paperName;
 }
 
-string paper::getPaperCode() const
+std::string paper::getPaperCode() const
 {
     return paperCode;
 }
@@ -35,12 +31,12 @@ int paper::getPaperPoints()
 }
 
 // setter methods
-void paper::setPaperName( string& paperName)
+void paper::setPaperName(std::string& paperName)
 {
     this->paperName = paperName;
 }
 
-void paper::setPaperCode( string& paperCode)
+void paper::setPaperCode(std::string& paperCode)
 {
     this->paperCode = paperCode;
 }
@@ -50,36 +46,11 @@ void paper::setPaperPoints(int paperPoints)
     this->paperPoints = paperPoints;
 }
 
-// add lecture, tutorial, lab methods
-// void paper::addLecture( Lecture& lecture)
-// {
-//     lectures.push_back(lecture);
-// }
-
-// void paper::addTutorial( Tutorial& tutorial)
-// {
-//     tutorials.push_back(tutorial);
-// }
-
-// void paper::addLab( Lab& lab)
-// {
-//     labs.push_back(lab);
-// }
 void paper::addEvent(eventSkeleton& event)
 {
     events.push_back(event);
 }
 
-// display paper information
-/**
- * @brief Displays a users papers different attributes.
- *
- * This function prints the papers name, code, and points, as well as
- * all the events associated with the paper.
- *
- * @param none
- * @return none
- */
 void paper::displayInfo()  {
     cout << "Paper: " << paperName << " (" << paperCode << ")" << endl;
     cout << "Points: " << paperPoints << endl;
@@ -87,19 +58,52 @@ void paper::displayInfo()  {
     for ( auto& event : events) {
         cout << "Event on day " << event.getDay() << " of week " << event.getWeek() << endl;
     }
+}
 
-    // cout << "Lectures:" << endl;
-    // for ( auto& lecture : lectures) {
-    //     lecture.displayInfo();
-    // }
+bool paper::test(){
+    bool passed = true;
 
-    // cout << "Labs:" << endl;
-    // for ( auto& lab : labs) {
-    //     lab.displayInfo();
-    // }
+    paper testPaper = paper("Software Engineering", "COSC345", 15);
+    // change values
+    string newName = "Advanced Software Engineering";
+    testPaper.setPaperName(newName);
+    string newCode = "COSC400";
+    testPaper.setPaperCode(newCode);
+    int newPoints = 18;
+    testPaper.setPaperPoints(newPoints);
+    // create events
+    eventSkeleton testEvent1 = eventSkeleton(EventType::LECTURE, "COSC400", 1, 1, 930, 1000, "Mellor 3.1");
+    eventSkeleton testEvent2 = eventSkeleton(EventType::TUTORIAL, "COSC400", 1, 2, 1400, 1500, "Mellor 3.2");
+    eventSkeleton testEvent3 = eventSkeleton(EventType::LAB, "COSC400", 2, 1, 930, 1200, "Mellor 3.3");
+    // add events
+    testPaper.addEvent(testEvent1);
+    testPaper.addEvent(testEvent2);
+    testPaper.addEvent(testEvent3);
+    // test that values are set correctly
+    if (testPaper.getPaperName() != newName){
+        cout << "Error: Paper name not set correctly." << endl;
+        passed = false;
+    }
+    if (testPaper.getPaperCode() != newCode){
+        cout << "Error: Paper code not set correctly." << endl;
+        passed = false;
+    }
+    if (testPaper.getPaperPoints() != newPoints){
+        cout << "Error: Paper points not set correctly." << endl;
+        passed = false;
+    }
+    // test that events are added correctly
+    if (testPaper.events.size() != 3){
+        cout << "Error: Events not added correctly." << endl;
+        passed = false;
+    }
+    if (passed){
+        cout << "Paper test passed." << endl;
+    }else{
+        cout << "Paper test failed." << endl;
+    }
 
-    // cout << "Tutorials:" << endl;
-    // for ( auto& tutorial : tutorials) {
-    //     tutorial.displayInfo();
-    // }
+    return passed;
+
+
 }

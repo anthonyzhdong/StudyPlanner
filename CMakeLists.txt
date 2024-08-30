@@ -71,6 +71,10 @@ else()
   target_compile_options(test_runner PRIVATE -Wall -Wextra -pedantic)
 endif()
 
+# Copy input.txt to the build directory
+configure_file(${CMAKE_SOURCE_DIR}/input.txt ${CMAKE_BINARY_DIR}/input.txt COPYONLY)
+
+
 # Add tests
 enable_testing()
 set(CTEST_OUTPUT_ON_FAILURE TRUE)

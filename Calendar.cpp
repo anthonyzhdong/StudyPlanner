@@ -6,6 +6,7 @@
 #include "lab.h"
 #include "assignment.h"
 #include "exam.h"
+#include "tutorial.h"
 #include <iomanip> 
 #include <sstream>
 #include <map>            
@@ -258,7 +259,11 @@ bool Calendar::test(){
     if(!testCalendar.addEvent(newExam)){
         passed = false;
     }
-    
+
+    Tutorial newtutorial = Tutorial("COSC300", 5, 10, 930, 1030, "Saint Daves");
+    if(!testCalendar.addEvent(newtutorial)){
+        passed = false;
+    }
 
     testCalendar.displayWeek(7);
 
