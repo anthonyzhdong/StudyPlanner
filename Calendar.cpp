@@ -9,6 +9,7 @@
 #include "tutorial.h"
 #include <iomanip> 
 #include <sstream>
+#include "paper.h"
 #include <map>            
 
 using namespace std;
@@ -215,6 +216,10 @@ bool Calendar::removeEvent(eventSkeleton& e) {
 bool Calendar::editEvent(eventSkeleton& e) {
     // Implement logic to edit event
     return true;
+}
+
+vector<paper>& Calendar::getPapers() {
+    return papers;
 }
 
 // int main() {

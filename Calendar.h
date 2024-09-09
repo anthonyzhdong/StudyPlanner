@@ -8,6 +8,7 @@
 #include "eventSkeleton.h"
 #include "assignment.h"
 #include "exam.h"
+#include "paper.h"
 
 // Forward declaration of classes
 class Day;
@@ -45,6 +46,7 @@ private:
      * @return true if the event was added successfully, false otherwise
      */
     bool addEventToCalendar(eventSkeleton& d);
+
 };
 
  
@@ -80,6 +82,7 @@ public:
 class Calendar {
 private:
     std::vector<Week> weeks;
+    vector<paper> papers;
 
 public:
     /**
@@ -124,6 +127,12 @@ public:
      * @param semester The semester number to display.
      */
     void displaySemester(int semester);
+
+    /**
+     * @brief Returns all papers for the calendar
+     * @return All papers for the calendar
+     */
+    vector<paper>& getPapers();
 
     /**
      * @brief Tests the functionality of the Calendar class.
