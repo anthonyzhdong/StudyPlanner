@@ -53,9 +53,10 @@ vector<MenuItem> menuItems = {
     MenuItem("End study session", endStudySession),
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
-{   
+{
+    clearScreen();
     // commented out to see build errors
-    //clearScreen();
+    // clearScreen();
     cout << "\n"
             " ____  _             _         ____  _                             \n"
             "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
@@ -84,6 +85,7 @@ void displayMenu()
         input = validate.getValidInteger(1, menuItems.size(), p);
         if (input >= 1 && input <= menuItems.size())
         {
+            clearScreen();
             menuItems[input - 1].execute();
         }
         else
@@ -109,25 +111,38 @@ int main()
 
 void startStudySession()
 {
-    if(papers.empty()){
+    clearScreen();
+    std::cout << "\n"
+                 "  ____  _             _     ____  _             _         ____                _             \n"
+                 " / ___|| |_ __ _ _ __| |_  / ___|| |_ _   _  __| |_   _  / ___|  ___  ___ ___(_) ___  _ __  \n"
+                 " \\___ \\| __/ _` | '__| __| \\___ \\| __| | | |/ _` | | | | \\___ \\ / _ \\/ __/ __| |/ _ \\| '_ \\ \n"
+                 "  ___) | || (_| | |  | |_   ___) | |_| |_| | (_| | |_| |  ___) |  __/\\__ \\__ \\ | (_) | | | |\n"
+                 " |____/ \\__\\__,_|_|   \\__| |____/ \\__|\\__,_|\\__,_|\\__, | |____/ \\___||___/___/_|\\___/|_| |_|\n"
+                 "                                                  |___/                                      \n";
+    if (papers.empty())
+    {
         string choicePrompt = "\nYou can't start a study sesion as no papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
-        
-        switch (choice) {
-            case 1:
-                addPaperMenuItem();
-                break;
-            case 2:
-                displayMenuOptions();
-                break;
-            default:
-                cout << "Invalid choice. Returning to main menu.\n";
-                displayMenuOptions();
-                break;
+
+        switch (choice)
+        {
+        case 1:
+            addPaperMenuItem();
+            break;
+        case 2:
+            displayMenuOptions();
+            break;
+        default:
+            cout << "Invalid choice. Returning to main menu.\n";
+            displayMenuOptions();
+            break;
         }
-    }else{
-    // Start the study session
-        if (studySession == nullptr){
+    }
+    else
+    {
+        // Start the study session
+        if (studySession == nullptr)
+        {
             string paperCode;
             int day, week;
 
@@ -137,7 +152,8 @@ void startStudySession()
             // displays paper codes by getting menu's vector<paper> papers
             for (auto &paper : papers)
             {
-                cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+                cout << "\n"
+                     << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
             }
             cout << "\n-----------------------------------------------------\n";
             paperCode = validate.getValidPaperCode(papers);
@@ -150,15 +166,24 @@ void startStudySession()
 
             studySession = new StudySession(paperCode, day, week);
             studySession->startSession();
-        }else{
+        }
+        else
+        {
             cout << "A study session is already in progress. Please end the current session before starting a new one." << endl;
         }
         cout << "Press 1 to display menu options" << endl;
-        }
+    }
 }
 
 void endStudySession()
 {
+    clearScreen();
+    std::cout << " _____           _   ____  _             _         ____                _             \n"
+                 "| ____|_ __   __| | / ___|| |_ _   _  __| |_   _  / ___|  ___  ___ ___(_) ___  _ __ \n"
+                 "|  _| | '_ \\ / _` | \\___ \\| __| | | |/ _` | | | | \\___ \\ / _ \\/ __/ __| |/ _ \\| '_ \\ \n"
+                 "| |___| | | | (_| |  ___) | |_| |_| | (_| | |_| |  ___) |  __/\\__ \\__ \\ | (_) | | | |\n"
+                 "|_____|_| |_|\\__,_| |____/ \\__|\\__,_|\\__,_|\\__, | |____/ \\___||___/___/_|\\___/|_| |_|\n"
+                 "                                            |___/                                      \n";
     // End study session
     if (studySession != nullptr)
     {
@@ -175,41 +200,52 @@ void endStudySession()
         // No study sessions are in progress so ask user to start one or return to menu
         string choicePrompt = "\nThere isn't a study session in progress. Would you like to begin one?\n1. Start study session\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
-        
-        switch (choice) {
-            case 1:
-                startStudySession();
-                break;
-            case 2:
-                displayMenuOptions();
-                break;
-            default:
-                cout << "Invalid choice. Returning to main menu.\n";
-                displayMenuOptions();
-                break;
+
+        switch (choice)
+        {
+        case 1:
+            startStudySession();
+            break;
+        case 2:
+            displayMenuOptions();
+            break;
+        default:
+            cout << "Invalid choice. Returning to main menu.\n";
+            displayMenuOptions();
+            break;
         }
     }
 }
 
 void addEventMenuItem()
 {
-    if(papers.empty()){
+    clearScreen();
+    std::cout << "\n"
+                 "     _       _     _   _____                 _   \n"
+                 "    / \\   __| | __| | | ____|_   _____ _ __ | |_ \n"
+                 "   / _ \\ / _` |/ _` | |  _| \\ \\ / / _ \\ '_ \\| __|\n"
+                 "  / ___ \\ (_| | (_| | | |___ \\ V /  __/ | | | |_ \n"
+                 " /_/   \\_\\__,_|\\__,_| |_____| \\_/ \\___|_| |_|\\__|\n"
+                 "                                                 \n";
+    if (papers.empty())
+    {
         string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
-        
-        switch (choice) {
-            case 1:
-                addPaperMenuItem();
-                break;
-            case 2:
-                //clearScreen();
-                displayMenuOptions();
-                break;
-            default:
-                cout << "Invalid choice. Returning to main menu.\n";
-                //clearScreen();
-                displayMenuOptions();
-                break;
+
+        switch (choice)
+        {
+        case 1:
+            addPaperMenuItem();
+            break;
+        case 2:
+            // clearScreen();
+            displayMenuOptions();
+            break;
+        default:
+            cout << "Invalid choice. Returning to main menu.\n";
+            // clearScreen();
+            displayMenuOptions();
+            break;
         }
     }
     else
@@ -221,6 +257,15 @@ void addEventMenuItem()
 }
 void addPaperMenuItem()
 {
+    clearScreen();
+    std::cout << "\n"
+                 "    _       _     _   ____                       \n"
+                 "   / \\   __| | __| | |  _ \\ __ _ _ __   ___ _ __ \n"
+                 "  / _ \\ / _` |/ _` | | |_) / _` | '_ \\ / _ \\ '__|\n"
+                 " / ___ \\ (_| | (_| | |  __/ (_| | |_) |  __/ |   \n"
+                 "/_/   \\_\\__,_|\\__,_| |_|   \\__,_| .__/ \\___|_|   \n"
+                 "                                |_|               \n";
+
     addPaper newPaper(papers);
     newPaper.addPaperMenu();
     cout << "Enter 1 to go back to the main menu" << endl;
