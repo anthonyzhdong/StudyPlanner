@@ -8,6 +8,7 @@
 #include "lecture.h"
 #include "tutorial.h"
 #include "lab.h"
+#include <fstream>
 #pragma once
 
 /**
@@ -78,6 +79,13 @@ public:
      * @param event The event to be added to the paper
      */
     void addEvent(eventSkeleton& event);
+
+    /**
+     * @brief Serialize the paper to a file
+     * 
+     * @param outputFile The file to output to
+     */
+    void serialize(std::ofstream &outputFile) const;
 
     /**
      * @brief Display information about the paper

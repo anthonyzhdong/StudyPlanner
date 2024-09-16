@@ -11,6 +11,7 @@
 #include "MenuItem.h"
 #include "validation.h"
 #include <iomanip>
+#include "CalendarFile.h"
 using namespace std;
 
 bool running = true;
@@ -38,6 +39,8 @@ void addEventMenuItem();
 void exitMenu();
 void addPaperMenuItem();
 void viewCalendarMenuItem();
+void saveToFileMenu();
+void loadFromFileMenu();
 
 vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
@@ -49,6 +52,8 @@ vector<MenuItem> menuItems = {
     MenuItem("Add paper", addPaperMenuItem),
     MenuItem("Start study session", startStudySession),
     MenuItem("End study session", endStudySession),
+    MenuItem("Save calendar to file", saveToFileMenu),
+    MenuItem("Load calendar from file", loadFromFileMenu),
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {   
@@ -235,4 +240,11 @@ void viewCalendarMenuItem()
 {
     calendar->display();
     cout << "\nEnter 1 to go back to the main menu" << endl;
+}
+
+void saveToFileMenu() {
+    CalendarFile::saveToFile(*calendar, "calendar.txt");
+}
+void loadFromFileMenu() {
+    CalendarFile::loadFromFile(*calendar, "calendar.txt");
 }

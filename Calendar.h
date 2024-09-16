@@ -135,6 +135,12 @@ public:
     vector<paper>& getPapers();
 
     /**
+     * @brief Serialises the calendar to a file
+     * @param outputFile The file to output to
+     */
+    void serialize(std::ofstream &outputFile) const;
+
+    /**
      * @brief Tests the functionality of the Calendar class.
      * @return true if all tests pass, false otherwise.
      */

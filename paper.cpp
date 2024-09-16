@@ -60,6 +60,12 @@ void paper::displayInfo()  {
     }
 }
 
+void paper::serialize(std::ofstream &outputFile) const {
+    outputFile << this->paperName << std::endl;
+    outputFile << this->paperCode << std::endl;
+    outputFile << this->paperPoints << std::endl;
+}
+
 bool paper::test(){
     bool passed = true;
 

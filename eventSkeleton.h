@@ -139,6 +139,12 @@ public:
     void displayInfo();
 
     /**
+     * @brief Serialises the event to a file
+     * @param outputFile The file to output to
+     */
+    void serialize(std::ofstream &outputFile) const;
+
+    /**
      * @brief Test the event
      * @return True if the test passes, false otherwise
      */
