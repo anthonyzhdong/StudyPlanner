@@ -141,6 +141,12 @@ public:
     void serialize(std::ofstream &outputFile) const;
 
     /**
+     * @brief Deserialises the calendar to a variable
+     * @param inputFile The calendar file to input
+     */
+    void deserialize(std::ifstream &inputFile);
+
+    /**
      * @brief Tests the functionality of the Calendar class.
      * @return true if all tests pass, false otherwise.
      */

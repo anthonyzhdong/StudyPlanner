@@ -296,6 +296,28 @@ void Calendar::serialize(std::ofstream &outputFile) const {
     }
 }
 
+void Calendar::deserialize(std::ifstream &inputFile) {
+    papers.clear(); // Clear all papers
+    weeks.clear(); // Clear all weeks
+
+
+    // Deserialize the papers
+    size_t numPapers;
+
+    inputFile >> numPapers;
+    inputFile.ignore(); // Ignore the newline symbol
+
+    for (size_t i = 0; i < numPapers; ++i) {
+        paper p("default_paper", "default_code", 18);
+        p.deserialize(inputFile);
+        papers.push_back(p);
+    }
+
+    
+
+    
+}
+
 // int main() {
 //     Calendar calendar;
 //     calendar.display();

@@ -66,6 +66,13 @@ void paper::serialize(std::ofstream &outputFile) const {
     outputFile << this->paperPoints << std::endl;
 }
 
+void paper::deserialize(std::ifstream &inputFile) {
+    std::getline(inputFile, this->paperName);
+    std::getline(inputFile, this->paperCode);
+    inputFile >> this->paperPoints;
+    inputFile.ignore(); // Ignore newline
+}
+
 bool paper::test(){
     bool passed = true;
 

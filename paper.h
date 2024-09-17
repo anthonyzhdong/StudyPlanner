@@ -88,6 +88,13 @@ public:
     void serialize(std::ofstream &outputFile) const;
 
     /**
+     * @brief Deserialize the paper from a file
+     * 
+     * @param inputFile File to input from
+     */
+    void deserialize(std::ifstream &inputFile) ;
+
+    /**
      * @brief Display information about the paper
      * 
      * This method prints out details about the paper, including its name, code,
