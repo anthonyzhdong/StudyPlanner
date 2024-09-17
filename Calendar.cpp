@@ -33,6 +33,7 @@ bool Day::addEvent(eventSkeleton &d)
     }
     else
     {
+        
         return addEventToCalendar(d);
     }
 }
@@ -49,11 +50,11 @@ bool Day::addEventToCalendar(eventSkeleton &d)
             return false;
         }
     }
-    std::cout << "Start Time: " << d.getStartTime() << std::endl;
-    std::cout << "End Time: " << d.getEndTime() << std::endl;
-    std::cout << "Day: " << d.getDay() << std::endl;
-    std::cout << "Week: " << d.getWeek() << std::endl;
-    std::cout << "-----------------------" << std::endl;
+    // std::cout << "Start Time: " << d.getStartTime() << std::endl;
+    // std::cout << "End Time: " << d.getEndTime() << std::endl;
+    // std::cout << "Day: " << d.getDay() << std::endl;
+    // std::cout << "Week: " << d.getWeek() << std::endl;
+    // std::cout << "-----------------------" << std::endl;
     // If no overlap, add the event
     events.push_back(d);
     return true;
@@ -248,12 +249,10 @@ bool Calendar::addEvent(eventSkeleton &e)
     int week = e.getWeek();
     if (weeks[week].addEvent(e))
     {
-        cout << "HERE" << endl;
         return true;
     }
     else
     {
-        cout << "NOT HERE" << endl;
         return false;
     }
 }
@@ -390,7 +389,6 @@ void Calendar::deserialize(std::ifstream &inputFile)
                 eventSkeleton event(eventType, paperCode, day, week, startTime, endTime, location);
 
                 addNewEvent addNewEventManager(papers, this);
-                cout << "HERE" << paperCode << endl;
 
                 this->addEvent(event);
             }
