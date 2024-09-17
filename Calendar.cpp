@@ -11,6 +11,7 @@
 #include <sstream>
 #include "paper.h"
 #include <map>
+#include "addNewEvent.h"
 
 using namespace std;
 
@@ -262,44 +263,51 @@ vector<paper> &Calendar::getPapers()
     return papers;
 }
 
-void Calendar::serialize(std::ofstream &outputFile) const {
+void Calendar::serialize(std::ofstream &outputFile) const
+{
     // Serialize papers
     outputFile << papers.size() << std::endl; // Save the number of papers
-    for (const auto& p : papers) {
+    for (const auto &p : papers)
+    {
         p.serialize(outputFile); // Call serialize function for each paper
     }
 
     // Serialize weeks
-    outputFile << weeks.size() << std::endl; // Save the number of weeks
-    for (const auto& week : weeks) {
-        outputFile << week.weekNumber << std::endl; // Serialize week number
+    outputFile << weeks.size() << std::endl; // Save the number of weeks (always 52)
+    for (const auto &week : weeks)
+    {
+        outputFile << week.weekNumber << std::endl;  // Serialize week number
         outputFile << week.days.size() << std::endl; // Serialize number of days in the week
-        for (const auto& day : week.days) {
+        for (const auto &day : week.days)
+        {
             outputFile << day.dayNumber << std::endl; // Serialize day number
-            
+
             // Serialize events, assignments, and exams
             outputFile << day.events.size() << std::endl;
-            for (const auto& event : day.events) {
+            for (const auto &event : day.events)
+            {
                 event.serialize(outputFile); // Serialize each event
             }
-            
+
             outputFile << day.assignments.size() << std::endl;
-            for (const auto& assignment : day.assignments) {
+            for (const auto &assignment : day.assignments)
+            {
                 assignment.serialize(outputFile); // Serialize each assignment
             }
 
             outputFile << day.exams.size() << std::endl;
-            for (const auto& exam : day.exams) {
+            for (const auto &exam : day.exams)
+            {
                 exam.serialize(outputFile); // Serialize each exam
             }
         }
     }
 }
 
-void Calendar::deserialize(std::ifstream &inputFile) {
+void Calendar::deserialize(std::ifstream &inputFile)
+{
     papers.clear(); // Clear all papers
-    weeks.clear(); // Clear all weeks
-
+    weeks.clear();  // Clear all weeks
 
     // Deserialize the papers
     size_t numPapers;
@@ -307,15 +315,128 @@ void Calendar::deserialize(std::ifstream &inputFile) {
     inputFile >> numPapers;
     inputFile.ignore(); // Ignore the newline symbol
 
-    for (size_t i = 0; i < numPapers; ++i) {
+    for (size_t i = 0; i < numPapers; ++i)
+    {
         paper p("default_paper", "default_code", 18);
         p.deserialize(inputFile);
         papers.push_back(p);
     }
 
-    
+    // Deserialize the weeks (is always 52 but this keeps it consistent)
+    size_t numWeeks;
 
-    
+    inputFile >> numWeeks;
+    inputFile.ignore(); // Ignrore the newline
+
+    for (size_t i = 0; i < numWeeks; ++i)
+    {
+        int weekNumber;
+        inputFile >> weekNumber; // Grab the week number
+        inputFile.ignore();
+
+        Week week(weekNumber); // Create a Week object with the weekNumber
+
+        // Deserialize the days of the week
+        size_t numDays; // Always 7!
+        inputFile >> numDays;
+        inputFile.ignore();
+
+        for (size_t j = 0; j < numDays; ++j)
+        {
+            int dayNumber;
+            inputFile >> dayNumber;
+            inputFile.ignore();
+
+            Day day(dayNumber);
+
+            // Deserialize the events
+            size_t numEvents; // Number of events in the day
+            inputFile >> numEvents;
+            inputFile.ignore();
+
+            for (size_t k = 0; k < numEvents; ++k)
+            {
+                int eventTypeInteger;
+                std::string paperCode, location;
+                int day, week, startTime, endTime;
+
+                inputFile >> eventTypeInteger;
+                inputFile.ignore();
+
+                std::getline(inputFile, paperCode);
+                inputFile >> day >> week >> startTime >> endTime;
+                inputFile.ignore();
+                std::getline(inputFile, location);
+
+                EventType eventType = static_cast<EventType>(eventTypeInteger);
+
+                eventSkeleton event(eventType, paperCode, day, week, startTime, endTime, location);
+
+                addNewEvent addNewEventManager(papers, this);
+
+                this->addEvent(event);
+            }
+            // Deserialize assignments
+            size_t numAssignments;
+            inputFile >> numAssignments;
+            inputFile.ignore(); // Ignore newline after the number of assignments
+
+            for (size_t k = 0; k < numAssignments; ++k)
+            {
+                int eventTypeInteger;
+                std::string paperCode, location;
+                int day, week, startTime, endTime;
+
+                inputFile >> eventTypeInteger;
+                inputFile.ignore();
+
+                std::getline(inputFile, paperCode);
+                inputFile >> day >> week >> startTime >> endTime;
+                inputFile.ignore();
+                std::getline(inputFile, location);
+
+                EventType eventType = static_cast<EventType>(eventTypeInteger);
+
+                eventSkeleton event(eventType, paperCode, day, week, startTime, endTime, location);
+
+                addNewEvent addNewEventManager(papers, this);
+
+                this->addEvent(event);
+            }
+
+            // Deserialize exams
+            size_t numExams;
+            inputFile >> numExams;
+            inputFile.ignore(); // Ignore newline after the number of exams
+
+            for (size_t k = 0; k < numExams; ++k)
+            {
+                int eventTypeInteger;
+                std::string paperCode, location;
+                int day, week, startTime, endTime;
+
+                inputFile >> eventTypeInteger;
+                inputFile.ignore();
+
+                std::getline(inputFile, paperCode);
+                inputFile >> day >> week >> startTime >> endTime;
+                inputFile.ignore();
+                std::getline(inputFile, location);
+
+                EventType eventType = static_cast<EventType>(eventTypeInteger);
+
+                eventSkeleton event(eventType, paperCode, day, week, startTime, endTime, location);
+
+                addNewEvent addNewEventManager(papers, this);
+
+                this->addEvent(event);
+            }
+
+            week.days.push_back(day); // Add the day to the current week
+        }
+
+        weeks.push_back(week); // Add the week to the calendar
+    }
 }
 
 // int main() {
