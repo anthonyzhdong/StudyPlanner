@@ -236,7 +236,7 @@ bool Calendar::addEvent(eventSkeleton &e)
     int week = e.getWeek();
     if (weeks[week].addEvent(e))
     {
-        cout << "HERE" << endl;
+        cout << "HERE ADDED EVENT" << endl;
         return true;
     }
     else
@@ -306,8 +306,13 @@ void Calendar::serialize(std::ofstream &outputFile) const
 
 void Calendar::deserialize(std::ifstream &inputFile)
 {
-    papers.clear(); // Clear all papers
-    weeks.clear();  // Clear all weeks
+    this->papers.clear(); // Clear all papers
+    this->weeks.clear();  // Clear all weeks
+
+    for (int i = 0; i < 52; i++)
+    {
+        weeks.push_back(Week(i));
+    }
 
     // Deserialize the papers
     size_t numPapers;
@@ -319,7 +324,7 @@ void Calendar::deserialize(std::ifstream &inputFile)
     {
         paper p("default_paper", "default_code", 18);
         p.deserialize(inputFile);
-        papers.push_back(p);
+        this->papers.push_back(p);
     }
 
     // Deserialize the weeks (is always 52 but this keeps it consistent)
@@ -373,6 +378,7 @@ void Calendar::deserialize(std::ifstream &inputFile)
                 eventSkeleton event(eventType, paperCode, day, week, startTime, endTime, location);
 
                 addNewEvent addNewEventManager(papers, this);
+                cout << "HERE" << paperCode << endl;
 
                 this->addEvent(event);
             }

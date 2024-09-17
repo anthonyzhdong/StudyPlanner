@@ -7,7 +7,6 @@ namespace CalendarFile
     void saveToFile(Calendar &calendar, const std::string &fileName)
     {
 
-        
         std::ofstream outputFile(fileName);
 
         if (!outputFile.is_open())
@@ -28,8 +27,23 @@ namespace CalendarFile
         }
     };
 
-    
-    void loadFromFile(Calendar &calendar, const std::string &fileName) {
-        
+    void loadFromFile(Calendar &calendar, const std::string &fileName)
+    {
+        std::ifstream inputFile(fileName);
+
+        if (!inputFile.is_open())
+        {
+            std::cerr << "Failed to open file for loading: " << fileName << std::endl;
+            return;
+        }
+
+        if (inputFile.is_open())
+        {
+            calendar.deserialize(inputFile);
+            cout << "Loaded calendar" << endl;
+
+            inputFile.close();
+            cout << "Closed calendar file" << endl;
+        }
     }
 }
