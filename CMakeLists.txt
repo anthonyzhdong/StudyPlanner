@@ -29,6 +29,7 @@ add_executable(menu
   MenuItem.cpp
   validation.h
   validation.cpp
+  CalendarFile.cpp
 ) 
 
 # If you need to link against any libraries, you can use target_link_libraries

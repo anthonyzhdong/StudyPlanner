@@ -11,12 +11,11 @@
 #include "MenuItem.h"
 #include "validation.h"
 #include <iomanip>
+#include "CalendarFile.h"
 using namespace std;
 
 bool running = true;
 Calendar *calendar = new Calendar();
-vector<paper> papers;
-addPaper paperHandler = (papers);
 validation validate;
 
 void clearScreen()
@@ -40,6 +39,8 @@ void addEventMenuItem();
 void exitMenu();
 void addPaperMenuItem();
 void viewCalendarMenuItem();
+void saveToFileMenu();
+void loadFromFileMenu();
 
 vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
@@ -51,6 +52,8 @@ vector<MenuItem> menuItems = {
     MenuItem("Add paper", addPaperMenuItem),
     MenuItem("Start study session", startStudySession),
     MenuItem("End study session", endStudySession),
+    MenuItem("Save calendar to file", saveToFileMenu),
+    MenuItem("Load calendar from file", loadFromFileMenu),
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {
@@ -119,7 +122,7 @@ void startStudySession()
                  "  ___) | || (_| | |  | |_   ___) | |_| |_| | (_| | |_| |  ___) |  __/\\__ \\__ \\ | (_) | | | |\n"
                  " |____/ \\__\\__,_|_|   \\__| |____/ \\__|\\__,_|\\__,_|\\__, | |____/ \\___||___/___/_|\\___/|_| |_|\n"
                  "                                                  |___/                                      \n";
-    if (papers.empty())
+    if (calendar->getPapers().empty())
     {
         string choicePrompt = "\nYou can't start a study sesion as no papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
@@ -150,13 +153,13 @@ void startStudySession()
             cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
             cout << "-----------------------------------------------------";
             // displays paper codes by getting menu's vector<paper> papers
-            for (auto &paper : papers)
+            for (auto &paper : calendar->getPapers())
             {
                 cout << "\n"
                      << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
             }
             cout << "\n-----------------------------------------------------\n";
-            paperCode = validate.getValidPaperCode(papers);
+            paperCode = validate.getValidPaperCode(calendar->getPapers());
 
             string dayPrompt = "Enter the day of the week (1-7): ";
             string weekPrompt = "Enter the week of the year (1-52): ";
@@ -227,8 +230,7 @@ void addEventMenuItem()
                  "  / ___ \\ (_| | (_| | | |___ \\ V /  __/ | | | |_ \n"
                  " /_/   \\_\\__,_|\\__,_| |_____| \\_/ \\___|_| |_|\\__|\n"
                  "                                                 \n";
-    if (papers.empty())
-    {
+    if(calendar->getPapers().empty()){
         string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
 
@@ -250,7 +252,7 @@ void addEventMenuItem()
     }
     else
     {
-        addNewEvent newEvent(papers, calendar);
+        addNewEvent newEvent(calendar->getPapers(), calendar);
         newEvent.addNewEventMenu();
         cout << "Enter 1 to go back to the main menu" << endl;
     }
@@ -266,7 +268,7 @@ void addPaperMenuItem()
                  "/_/   \\_\\__,_|\\__,_| |_|   \\__,_| .__/ \\___|_|   \n"
                  "                                |_|               \n";
 
-    addPaper newPaper(papers);
+    addPaper newPaper(calendar->getPapers());
     newPaper.addPaperMenu();
     cout << "Enter 1 to go back to the main menu" << endl;
 }
@@ -282,4 +284,11 @@ void viewCalendarMenuItem()
 {
     calendar->display();
     cout << "\nEnter 1 to go back to the main menu" << endl;
+}
+
+void saveToFileMenu() {
+    CalendarFile::saveToFile(*calendar, "calendar.txt");
+}
+void loadFromFileMenu() {
+    CalendarFile::loadFromFile(*calendar, "calendar.txt");
 }

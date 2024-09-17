@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <unordered_map>
+#include <fstream>
 using namespace std;
 
 // constructor
@@ -75,6 +76,18 @@ void eventSkeleton::setLocation(string& location){
 
 void eventSkeleton::displayInfo(){
     cout << "Paper Code: " << getPaperCode() << "\nEvent Type: " << getEventTypeString(getEventType()) << "\nDay: " << getDay() << "\nWeek: " << getWeek() << "\nStart Time: " << getStartTime() << "\nEnd Time: " << getEndTime() << "\nLocation: " << getLocation() << endl;
+}
+
+void eventSkeleton::serialize(std::ofstream &outputFile) const {
+    outputFile << static_cast<int>(eventType) << std::endl;
+    
+    // Serialize other members
+    outputFile << paperCode << std::endl;
+    outputFile << day << std::endl;
+    outputFile << week << std::endl;
+    outputFile << startTime << std::endl;
+    outputFile << endTime << std::endl;
+    outputFile << location << std::endl;
 }
 
 bool eventSkeleton::test(){
