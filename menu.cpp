@@ -191,6 +191,7 @@ void endStudySession()
     if (studySession != nullptr)
     {
         studySession->endSession();
+        calendar->addEvent(*studySession);
         double duration = studySession->getDuration();
         cout << "Study session duration: " << duration << " seconds." << endl;
 
