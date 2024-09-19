@@ -166,12 +166,13 @@ int main()
     bool eventLabTestPassed = testEventLab.test();
     bool eventExamTestPassed = testEventExam.test();
 
+    bool timeValidationTestPassed = testTimeValidation();
     bool paperTestPassed = testPaper.test();
     bool calendarFileTestPassed = CalendarFile::test();
     bool menuItemTestPassed = MenuItem::test();
     bool studySessionTestPassed = StudySession::studyTest();
 
-    allTestsPassed &= calendarTestPassed && eventTestPassed && eventAssignmentTestPassed && eventTutorialTestPassed && eventLabTestPassed && eventExamTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
+    allTestsPassed &= calendarTestPassed && eventTestPassed && eventAssignmentTestPassed && eventTutorialTestPassed && eventLabTestPassed && eventExamTestPassed && timeValidationTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
     allTestsPassed &= testGetValidString();
     allTestsPassed &= testAddEvent();
 
