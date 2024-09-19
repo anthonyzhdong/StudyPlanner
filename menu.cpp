@@ -108,9 +108,33 @@ void displayMenu()
     }
 }
 
+bool testAddEventHelper(){
+    Calendar *calendar = new Calendar();
+    addPaper newPaper(calendar->getPapers());
+    newPaper.addPaperMenu();
+    addNewEvent newEvent(calendar->getPapers(), calendar);
+    newEvent.addNewEventMenu();
+    if(calendar->getPapers().empty()){
+        return false;
+    }else{
+        return true;
+    }
+
+}
+
+bool testAddEvent(){
+    bool getValidStringTest = false;
+    for(int i=0; i<5; i++){// Loops through testing each event type
+        getValidStringTest &= testAddEventHelper();
+    }           
+
+    return getValidStringTest;
+}
+
+
 int main()
 {
-
+    testAddEvent();
     displayMenu();
     return 0;
 }

@@ -38,17 +38,13 @@ bool testGetValidString()
     std::ifstream in("input1.txt");
     std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
     std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input.tx
-    bool getValidStringTest = true;
-    for(int i=0; i<5; i++){// Loops through testing each event type
-        getValidStringTest &= testAddEventHelper();
-    }
+    bool getValidStringTest = testGetValidString(false);
     std::cout << "testGetValidString test " << (getValidStringTest ? "passed" : "failed") << std::endl;
-
     // Restore cin to its original buf
     std::cin.rdbuf(cinbuf);
     return getValidStringTest;
+    }
 
- }
 
 bool testAddEventHelper(){
     Calendar *calendar = new Calendar();
@@ -61,13 +57,17 @@ bool testAddEventHelper(){
     }else{
         return true;
     }
+
 }
 
 bool testAddEvent(){
     std::ifstream in("input3.txt");
     std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
-    std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input.tx
-    bool getValidStringTest = testAddEventHelper();
+    std::cin.rdbuf(in.rdbuf());     
+    bool getValidStringTest = true;
+    for(int i=0; i<5; i++){// Loops through testing each event type
+        getValidStringTest &= testAddEventHelper();
+    }           
     std::cout << "testAddEvent test " << (getValidStringTest ? "passed" : "failed") << std::endl;
     // Restore cin to its original buf
     std::cin.rdbuf(cinbuf);
