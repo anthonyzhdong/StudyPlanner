@@ -134,6 +134,11 @@ bool eventSkeleton::test(){
         cout << "Error: Location not set correctly." << endl;
         passed = false;
     }
+
+    if (testEvent.getEventTypeString(testEvent.getEventType()) != "Lecture") {
+        passed = false;
+    }
+    testEvent.displayInfo();
     if(passed){
         cout << "EventSkeleton Test Passed" << endl;
     }else{
