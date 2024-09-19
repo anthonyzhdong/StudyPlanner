@@ -514,6 +514,8 @@ bool Calendar::test()
     }
 
     testCalendar.displayWeek(7);
+    testCalendar.displaySemester(1);
+    testCalendar.display();
 
     if (passed)
     {
