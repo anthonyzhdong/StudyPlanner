@@ -70,7 +70,7 @@ Week::Week(int weekNumber) : weekNumber(weekNumber)
 
 bool Week::addEvent(eventSkeleton &e)
 {
-    int day = e.getDay();
+    int day = e.getDay()-1;
     if (days[day].addEvent(e))
     {
         return true;
@@ -128,7 +128,7 @@ void Calendar::display()
 
 void Calendar::displayWeek(int week)
 {
-    std::cout << "\nWeek " << week << ":" << std::endl;
+    std::cout << "\nWeek " << week+1 << ":" << std::endl;
     std::cout << "==================================================================================================================" << std::endl;
 
     // Print day headers
@@ -246,7 +246,7 @@ void Calendar::displaySemester(int semester)
 
 bool Calendar::addEvent(eventSkeleton &e)
 {
-    int week = e.getWeek();
+    int week = e.getWeek()-1;
     if (weeks[week].addEvent(e))
     {
         return true;
