@@ -12,12 +12,13 @@ void MenuItem::execute() const
 {
     action();
 }
+
 bool testVar = true;
 void testAction() {
     testVar = false;
 }
 
-bool test() {
+bool MenuItem::test() {
     bool passed = true;
     MenuItem testItem("Test item", testAction);
     // Check the name

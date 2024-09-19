@@ -139,6 +139,7 @@ void addNewEvent::addNewEventMenu()
     else
     {
         cout << "Invalid event type.";
+        return;
     }
     
     

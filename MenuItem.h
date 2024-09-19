@@ -18,7 +18,6 @@ private:
     std::function<void()> action;
 
 public:
-
     /**
      * @brief Construct a new MenuItem object
      * @param name The name of the menu item
@@ -36,4 +35,10 @@ public:
      * @brief Execute the action associated with this menu item
      */
     void execute() const;
+
+    /**
+     * @brief Test the menuitem  functionality
+     * @return True if passes, false if not
+     */
+    static bool test();
 };

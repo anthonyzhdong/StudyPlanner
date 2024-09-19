@@ -191,6 +191,7 @@ void endStudySession()
     if (studySession != nullptr)
     {
         studySession->endSession();
+        calendar->addEvent(*studySession);
         double duration = studySession->getDuration();
         cout << "Study session duration: " << duration << " seconds." << endl;
 
@@ -230,7 +231,8 @@ void addEventMenuItem()
                  "  / ___ \\ (_| | (_| | | |___ \\ V /  __/ | | | |_ \n"
                  " /_/   \\_\\__,_|\\__,_| |_____| \\_/ \\___|_| |_|\\__|\n"
                  "                                                 \n";
-    if(calendar->getPapers().empty()){
+    if (calendar->getPapers().empty())
+    {
         string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
 
@@ -282,13 +284,28 @@ void exitMenu()
 
 void viewCalendarMenuItem()
 {
-    calendar->display();
+    clearScreen();
+    string choicePrompt = "Type the week you would like to display, or type 0 to display whole year\n";
+    int choice = validate.getValidInteger(0, 52, choicePrompt);
+
+    if (choice == 0)
+    {
+        calendar->display();
+    }
+    else
+    {
+        calendar->displayWeek(choice);
+    }
     cout << "\nEnter 1 to go back to the main menu" << endl;
 }
 
-void saveToFileMenu() {
+void saveToFileMenu()
+{
     CalendarFile::saveToFile(*calendar, "calendar.txt");
+    cout << "\nEnter 1 to go back to the main menu" << endl;
 }
-void loadFromFileMenu() {
+void loadFromFileMenu()
+{
     CalendarFile::loadFromFile(*calendar, "calendar.txt");
+    cout << "\nEnter 1 to go back to the main menu" << endl;
 }

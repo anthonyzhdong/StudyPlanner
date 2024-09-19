@@ -1,10 +1,11 @@
 #include "CalendarFile.h"
+#include "Calendar.h"
 #include <fstream>
 #include <iostream>
 
 namespace CalendarFile
 {
-    void saveToFile(Calendar &calendar, const std::string &fileName)
+    bool saveToFile(Calendar &calendar, const std::string &fileName)
     {
 
         std::ofstream outputFile(fileName);
@@ -12,7 +13,7 @@ namespace CalendarFile
         if (!outputFile.is_open())
         {
             std::cerr << "Failed to open file for saving: " << fileName << std::endl;
-            return;
+            return false;
         }
         if (outputFile.is_open())
         {
@@ -20,30 +21,55 @@ namespace CalendarFile
             // Save calendar
 
             calendar.serialize(outputFile);
-            cout << "Saved calendar" << endl;
+            cout << "Saved calendar to file " << fileName << endl;
 
             outputFile.close();
-            cout << "Closed calendar file" << endl;
         }
+        return true;
     };
 
-    void loadFromFile(Calendar &calendar, const std::string &fileName)
+    bool loadFromFile(Calendar &calendar, const std::string &fileName)
     {
         std::ifstream inputFile(fileName);
 
         if (!inputFile.is_open())
         {
             std::cerr << "Failed to open file for loading: " << fileName << std::endl;
-            return;
+            return false;
         }
 
         if (inputFile.is_open())
         {
             calendar.deserialize(inputFile);
-            cout << "Loaded calendar" << endl;
+            cout << "Loaded calendar from file " << fileName << endl;
 
             inputFile.close();
-            cout << "Closed calendar file" << endl;
         }
+        return true;
+    }
+
+    bool test()
+    {
+        bool passed = true;
+        Calendar testCalendar;
+
+        eventSkeleton testEvent = eventSkeleton(EventType::LECTURE, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+        paper testPaper = paper("name", "code", 1);
+
+        eventSkeleton testEvent2 = eventSkeleton(EventType::ASSIGNMENT, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+        testCalendar.getPapers().push_back(testPaper);
+        testCalendar.addEvent(testEvent);
+        testCalendar.addEvent(testEvent2);
+        Calendar testLoadCalendar;
+
+        if (!CalendarFile::saveToFile(testCalendar, "testcal.txt"))
+        {
+            passed = false;
+        }
+        if (!CalendarFile::loadFromFile(testLoadCalendar, "testcal.txt"))
+        {
+            passed = false;
+        }
+        return passed;
     }
 }
