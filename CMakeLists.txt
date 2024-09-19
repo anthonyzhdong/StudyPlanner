@@ -80,6 +80,7 @@ endif()
 # Copy input.txt to the build directory
 configure_file(${CMAKE_SOURCE_DIR}/input.txt ${CMAKE_BINARY_DIR}/input.txt COPYONLY)
 configure_file(${CMAKE_SOURCE_DIR}/input1.txt ${CMAKE_BINARY_DIR}/input1.txt COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/input3.txt ${CMAKE_BINARY_DIR}/input3.txt COPYONLY)
 
 
 
