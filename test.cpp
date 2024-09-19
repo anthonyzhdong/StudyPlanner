@@ -45,24 +45,34 @@ bool testGetValidString()
     return getValidStringTest;
 }
 
-bool testTimeValidation() {
-    bool passed = true;
+bool testTimeValidation()
+{
     std::ifstream in("input4.txt");
     std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
-    std::cin.rdbuf(in.rdbuf());  
+    std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input4.txt
 
     validation v;
     std::string prompt = "Enter a time: ";
     int minTime = 0;
+    int result;
+    bool testPassed = false;
 
-    bool result = v.timeValidation(prompt, minTime);
-    // Restore cin to its original buf
-    std::cin.rdbuf(cinbuf);
-    if(result == false){
-        passed = false;
+    // We'll loop until we get 1030 or reach end of file
+    while (!in.eof()) {
+        result = v.timeValidation(prompt, minTime);
+        std::cout << "timeValidation result: " << result << std::endl;
+        
+        if (result == 1030) {
+            testPassed = true;
+            break;
+        }
     }
 
-    return passed;
+    // Restore cin to its original buf
+    std::cin.rdbuf(cinbuf);
+
+    std::cout << "testTimeValidation test " << (testPassed ? "passed" : "failed") << std::endl;
+    return testPassed;
 }
 
 bool testAddEventHelper(){
