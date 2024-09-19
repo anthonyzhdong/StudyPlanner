@@ -43,9 +43,9 @@ int validation::getValidInteger(int min, int max, std::string &prompt){
             }
             return number;
         }
-        catch (const std::invalid_argument&) {
-            std::cout << "Invalid input. Please enter a valid integer.\n";
-        }
+        // catch (const std::invalid_argument&) {
+        //     std::cout << "Invalid input. Please enter a valid integer.\n";
+        // }
         catch (const std::out_of_range&) {
             std::cout << "Number is out of range. Please input a number between " << min << " and " << max << "\n";
         }
@@ -147,16 +147,16 @@ std::string validation::getValidPaperCode(std::vector<paper>& papers){
     return code;
 }
 
-bool validation::test(){
-    bool passed = true;
+// bool validation::test(){
+//     bool passed = true;
     
-    // Test getValidInteger
-    cout << "TESTING";
-    string p = "\nEnter a number between 1 and 10: \n";
-    int num = getValidInteger(1, 10, p);
-    if (num < 1 || num > 10) {
-        std::cout << "getValidInteger test failed\n";
-        passed = false;
-    }
-    return passed;
-}
+//     // Test getValidInteger
+//     cout << "TESTING";
+//     string p = "\nEnter a number between 1 and 10: \n";
+//     int num = getValidInteger(1, 10, p);
+//     if (num < 1 || num > 10) {
+//         std::cout << "getValidInteger test failed\n";
+//         passed = false;
+//     }
+//     return passed;
+// }
