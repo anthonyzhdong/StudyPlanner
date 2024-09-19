@@ -21,10 +21,13 @@ validation validate;
 void clearScreen()
 {
 #ifdef _WIN32
-    std::system("cls");
+    // For Windows
+    std::cout << "\033[2J\033[1;1H";
 #else
-    std::system("clear");
+    // For Unix-like systems
+    std::cout << "\033[2J\033[1;1H";
 #endif
+    std::cout.flush();
 }
 
 // Study session variables
@@ -60,7 +63,7 @@ void displayMenuOptions()
     clearScreen();
     // commented out to see build errors
     // clearScreen();
-    cout << "\n"
+    cout << "\n\033[1m"
             " ____  _             _         ____  _                             \n"
             "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
             "\\___ \\| __| | | |/ _` | | | | | |_) | |/ _` | '_ \\| '_ \\ / _ \\ '__|\n"
