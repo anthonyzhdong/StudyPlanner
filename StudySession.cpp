@@ -1,7 +1,8 @@
 #include "StudySession.h"
 #include <iostream>
 #include <ctime>
-#include <unistd.h>
+#include <thread>
+#include <chrono>
 
 StudySession::StudySession(string paperCode, int day, int week) : eventSkeleton(EventType::STUDY_SESSION, paperCode, day, week, 0, 0, "")
 {
@@ -72,7 +73,7 @@ bool StudySession::test() {
 
 
     testSession.startSession();
-    sleep(500);
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
     testSession.endSession();
 
