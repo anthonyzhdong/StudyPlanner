@@ -258,17 +258,6 @@ bool Calendar::addEvent(eventSkeleton &e)
     }
 }
 
-bool Calendar::removeEvent(eventSkeleton &e)
-{
-    // Implement logic to remove event
-    return true;
-}
-
-bool Calendar::editEvent(eventSkeleton &e)
-{
-    // Implement logic to edit event
-    return true;
-}
 
 vector<paper> &Calendar::getPapers()
 {

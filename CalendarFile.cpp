@@ -57,9 +57,13 @@ namespace CalendarFile
         paper testPaper = paper("name", "code", 1);
 
         eventSkeleton testEvent2 = eventSkeleton(EventType::ASSIGNMENT, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+        Exam newExam = Exam("COSC203", 3, 7, 930, 1230, "Mellor labs g10");
+        Assignment newAssignment = Assignment("COSC203", 3, 7, 900, 0, "");
         testCalendar.getPapers().push_back(testPaper);
         testCalendar.addEvent(testEvent);
         testCalendar.addEvent(testEvent2);
+        testCalendar.addEvent(newExam);
+        testCalendar.addEvent(newAssignment);
         Calendar testLoadCalendar;
 
         if (!CalendarFile::saveToFile(testCalendar, "testcal.txt"))
