@@ -21,7 +21,7 @@ Day::Day(int dayNumber) : dayNumber(dayNumber)
 
 bool Day::addEvent(eventSkeleton &d)
 {
-    if (d.getEventType() ==EventType::ASSIGNMENT)
+    if (d.getEventType() == EventType::ASSIGNMENT)
     {
         assignments.push_back(static_cast<Assignment &>(d));
         return true;
@@ -33,7 +33,7 @@ bool Day::addEvent(eventSkeleton &d)
     }
     else
     {
-        
+
         return addEventToCalendar(d);
     }
 }
@@ -70,7 +70,7 @@ Week::Week(int weekNumber) : weekNumber(weekNumber)
 
 bool Week::addEvent(eventSkeleton &e)
 {
-    int day = e.getDay()-1;
+    int day = e.getDay() - 1;
     if (days[day].addEvent(e))
     {
         return true;
@@ -109,15 +109,16 @@ int incrementTime(int time)
 void Calendar::display()
 {
 
-    std::cout << "\n"+getColour("red",true) +""
-                 "  ____      _                _            \n"
-                 " / ___|__ _| | ___ _ __   __| | __ _ _ __ \n"
-                 "| |   / _` | |/ _ \\ '_ \\ / _` |/ _` | '__|\n"
-                 "| |__| (_| | |  __/ | | | (_| | (_| | |   \n"
-                 " \\____\\__,_|_|\\___|_| |_|\\__,_|\\__,_|_|   \n"
-                 "                                         \n"
-                 "" +getColour("reset",true) +""
-                 "=======================================================================================================================================================================================================";
+    std::cout << "\n" + getColour("red", true) + ""
+                                                 "  ____      _                _            \n"
+                                                 " / ___|__ _| | ___ _ __   __| | __ _ _ __ \n"
+                                                 "| |   / _` | |/ _ \\ '_ \\ / _` |/ _` | '__|\n"
+                                                 "| |__| (_| | |  __/ | | | (_| | (_| | |   \n"
+                                                 " \\____\\__,_|_|\\___|_| |_|\\__,_|\\__,_|_|   \n"
+                                                 "                                         \n"
+                                                 "" +
+                     getColour("reset", true) + ""
+                                                "=======================================================================================================================================================================================================";
     ;
 
     for (int i = 1; i < 53; i++)
@@ -128,8 +129,8 @@ void Calendar::display()
 
 void Calendar::displayWeek(int week)
 {
-    std::cout << getColour("red",false) + "\nWeek " << week << +""+ getColour("reset",false) +":" << std::endl;
-    week = week -1;
+    std::cout << getColour("red", false) + "\nWeek " << week << +"" + getColour("reset", false) + ":" << std::endl;
+    week = week - 1;
     std::cout << "==================================================================================================================" << std::endl;
 
     // Print day headers
@@ -181,7 +182,7 @@ void Calendar::displayWeek(int week)
                     eventName = e.getPaperCode();
                     if (eventName.length() > 10)
                     {
-                        eventName = eventName.substr(0, 10) + "...";
+                        eventName = eventName.replace(10, string::npos, "...");
                     }
                     break; // This currently assumes only one event per hour max. need to change this to allow for assignments to be added
                 }
@@ -237,8 +238,8 @@ std::string Calendar::getColour(std::string colour, bool background)
 
 void Calendar::displaySemester(int semester)
 {
-    int startWeek = (semester - 1) * 16+1;
-    int endWeek = startWeek + 16+1;
+    int startWeek = (semester - 1) * 16 + 1;
+    int endWeek = startWeek + 16 + 1;
     for (int i = startWeek; i < endWeek; i++)
     {
         displayWeek(i);
@@ -247,7 +248,7 @@ void Calendar::displaySemester(int semester)
 
 bool Calendar::addEvent(eventSkeleton &e)
 {
-    int week = e.getWeek()-1;
+    int week = e.getWeek() - 1;
     if (weeks[week].addEvent(e))
     {
         return true;
@@ -519,11 +520,11 @@ bool Calendar::test()
 
     if (passed)
     {
-        cout << ""+ getColour("green", true)+"Calender Test Passed"+ getColour("reset", false) << endl;
+        cout << "" + getColour("green", true) + "Calender Test Passed" + getColour("reset", false) << endl;
     }
     else
     {
-        cout << "" +getColour("red", true)+"Calender Test Failed" << getColour("reset", false)<< endl;
+        cout << "" + getColour("red", true) + "Calender Test Failed" << getColour("reset", false) << endl;
     }
     return passed;
 }
