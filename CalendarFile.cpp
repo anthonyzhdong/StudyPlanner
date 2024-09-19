@@ -20,7 +20,7 @@ namespace CalendarFile
             // Save calendar
 
             calendar.serialize(outputFile);
-            cout << "Saved calendar" << endl;
+            cout << "Saved calendar to file " << fileName << endl;
 
             outputFile.close();
         }
@@ -39,7 +39,7 @@ namespace CalendarFile
         if (inputFile.is_open())
         {
             calendar.deserialize(inputFile);
-            cout << "Loaded calendar" << endl;
+            cout << "Loaded calendar from file " << fileName << endl;
 
             inputFile.close();
         }

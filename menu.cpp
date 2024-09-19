@@ -302,8 +302,10 @@ void viewCalendarMenuItem()
 void saveToFileMenu()
 {
     CalendarFile::saveToFile(*calendar, "calendar.txt");
+    cout << "\nEnter 1 to go back to the main menu" << endl;
 }
 void loadFromFileMenu()
 {
     CalendarFile::loadFromFile(*calendar, "calendar.txt");
+    cout << "\nEnter 1 to go back to the main menu" << endl;
 }
