@@ -8,9 +8,3 @@ cosc101
 saintDaves
 1
 1
-cosc101
-4
-10300
-1030
-2
-2
