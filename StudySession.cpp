@@ -1,6 +1,7 @@
 #include "StudySession.h"
 #include <iostream>
 #include <ctime>
+#include <unistd.h>
 
 StudySession::StudySession(string paperCode, int day, int week) : eventSkeleton(EventType::STUDY_SESSION, paperCode, day, week, 0, 0, "")
 {
@@ -51,3 +52,35 @@ double StudySession::getDuration() {
     }
 }
 
+bool StudySession::test() {
+    bool passed = true;
+    StudySession testSession("COSC345", 1, 5);
+
+    time_t startTimeTest = time(nullptr);
+    testSession.setStartTime(startTimeTest);
+
+    if (testSession.getStartTime() != startTimeTest) {
+        passed = false;
+    }
+
+    time_t endTimeTest = time(nullptr);
+    testSession.setEndTime(endTimeTest);
+
+    if (testSession.getEndTime() != endTimeTest) {
+        passed = false;
+    }
+
+
+    testSession.startSession();
+    sleep(500);
+
+    testSession.endSession();
+
+    if (testSession.getDuration() != 0.5) {
+        passed = false;
+        std::cerr << "Duration expected to be 0.5, was instead: " << testSession.getDuration() << endl;
+    }
+
+
+    return passed;
+}
