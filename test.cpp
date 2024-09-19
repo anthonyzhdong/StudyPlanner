@@ -44,10 +44,7 @@ bool testGetValidString()
     // Restore cin to its original buf
     std::cin.rdbuf(cinbuf);
     return getValidStringTest;
-    }
-
-
-
+}
 
 int main()
 {
@@ -75,7 +72,7 @@ int main()
     bool paperTestPassed = testPaper.test();
     bool calendarFileTestPassed = CalendarFile::test();
     bool menuItemTestPassed = MenuItem::test();
-    bool studySessionTestPassed = StudySession::test();
+    bool studySessionTestPassed = StudySession::studyTest();
 
     allTestsPassed &= calendarTestPassed && eventTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
     allTestsPassed &= testGetValidString();

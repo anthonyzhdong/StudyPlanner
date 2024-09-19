@@ -33,13 +33,13 @@ public:
      * @brief Get the start time of the study session.
      * @return The start time of the study session as a time_t value.
      */
-    time_t getStartTime();
+    time_t getSessionStartTime();
 
     /**
      * @brief Get the end time of the study session.
      * @return The end time of the study session as a time_t value.
      */
-    time_t getEndTime();
+    time_t getSessionEndTime();
 
     /**
      * @brief Start the study session.
@@ -72,5 +72,5 @@ public:
      * @brief Tests the functionality of the StudySession class.
      * @return true if all tests pass, false otherwise.
      */
-    static bool test();
+    static bool studyTest();
 };
