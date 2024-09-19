@@ -43,7 +43,58 @@ bool testGetValidString()
     // Restore cin to its original buf
     std::cin.rdbuf(cinbuf);
     return getValidStringTest;
+}
+
+bool testTimeValidation() {
+    bool passed = true;
+    std::ifstream in("input4.txt");
+    std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
+    std::cin.rdbuf(in.rdbuf());  
+
+    validation v;
+    std::string prompt = "Enter a time: ";
+    int minTime = 0;
+
+    // Test case 1: Invalid input (5 digits)
+    int result = v.timeValidation(prompt, minTime);
+    if (result != 1111) {
+        std::cout << "Test case 1 failed. Expected 1111, got " << result << std::endl;
+        passed = false;
     }
+
+    // Test case 2: Invalid input (non-numeric)
+    result = v.timeValidation(prompt, minTime);
+    if (result != 1030) {
+        std::cout << "Test case 2 failed. Expected 1030, got " << result << std::endl;
+        passed = false;
+    }
+
+    // Test case 3: Invalid time (out of range)
+    result = v.timeValidation(prompt, minTime);
+    if (result != 1030) {
+        std::cout << "Test case 3 failed. Expected 1030, got " << result << std::endl;
+        passed = false;
+    }
+
+    // Test case 4: Invalid input (non-numeric)
+    result = v.timeValidation(prompt, minTime);
+    if (result != 1030) {
+        std::cout << "Test case 4 failed. Expected 1030, got " << result << std::endl;
+        passed = false;
+    }
+
+    // Test case 5: Valid input
+    result = v.timeValidation(prompt, minTime);
+    if (result != 1030) {
+        std::cout << "Test case 5 failed. Expected 1030, got " << result << std::endl;
+        passed = false;
+    }
+
+    // Restore cin to its original buf
+    std::cin.rdbuf(cinbuf);
+
+    return passed;
+}
 
 
 bool testAddEventHelper(){
