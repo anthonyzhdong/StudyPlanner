@@ -46,7 +46,29 @@ bool testGetValidString()
     return getValidStringTest;
     }
 
+bool testAddEventHelper(){
+    Calendar *calendar = new Calendar();
+    addPaper newPaper(calendar->getPapers());
+    newPaper.addPaperMenu();
+    addNewEvent newEvent(calendar->getPapers(), calendar);
+    newEvent.addNewEventMenu();
+    if(calendar->getPapers().empty()){
+        return false;
+    }else{
+        return true;
+    }
+}
 
+bool testAddEvent(){
+    std::ifstream in("input3.txt");
+    std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
+    std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input.tx
+    bool getValidStringTest = testAddEventHelper();
+    std::cout << "testAddEvent test " << (getValidStringTest ? "passed" : "failed") << std::endl;
+    // Restore cin to its original buf
+    std::cin.rdbuf(cinbuf);
+    return getValidStringTest;
+}
 
 
 int main()
@@ -79,6 +101,7 @@ int main()
 
     allTestsPassed &= calendarTestPassed && eventTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
     allTestsPassed &= testGetValidString();
+    allTestsPassed &= testAddEvent();
 
     if (allTestsPassed)
     {
