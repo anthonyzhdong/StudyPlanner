@@ -28,3 +28,25 @@ cosc101
 mellor
 3
 5
+Computer Science
+cosc101
+18
+notapper
+cosc101
+3
+0930
+1030
+saintDaves
+8
+5
+24
+Computer Science
+cosc101
+18
+cosc101
+2
+0930
+1030
+saintDaves
+5
+25
