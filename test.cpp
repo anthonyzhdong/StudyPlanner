@@ -38,7 +38,10 @@ bool testGetValidString()
     std::ifstream in("input1.txt");
     std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
     std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input.tx
-    bool getValidStringTest = testGetValidString(false);
+    bool getValidStringTest = true;
+    for(int i=0; i<5; i++){// Loops through testing each event type
+        getValidStringTest &= testAddEventHelper();
+    }
     std::cout << "testGetValidString test " << (getValidStringTest ? "passed" : "failed") << std::endl;
 
     // Restore cin to its original buf
