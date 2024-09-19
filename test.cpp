@@ -65,8 +65,12 @@ bool testAddEvent(){
     std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
     std::cin.rdbuf(in.rdbuf());     
     bool getValidStringTest = true;
+    Calendar *calendar = new Calendar();
+    addPaper newPaper(calendar->getPapers());
+    newPaper.addPaperMenu();
     for(int i=0; i<2; i++){// Loops through testing each event type
-        getValidStringTest &= testAddEventHelper();
+        addNewEvent newEvent(calendar->getPapers(), calendar);
+        newEvent.addNewEventMenu();
     }           
     std::cout << "testAddEvent test " << (getValidStringTest ? "passed" : "failed") << std::endl;
     // Restore cin to its original buf
