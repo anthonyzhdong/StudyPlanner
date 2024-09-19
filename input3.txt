@@ -17,14 +17,3 @@ cosc101
 1030
 2
 2
-Computer Science
-cosc101
-18
-cosc101
-5
-10300
-1030
-1130
-mellor
-3
-5

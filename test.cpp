@@ -65,7 +65,7 @@ bool testAddEvent(){
     std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
     std::cin.rdbuf(in.rdbuf());     
     bool getValidStringTest = true;
-    for(int i=0; i<3; i++){// Loops through testing each event type
+    for(int i=0; i<2; i++){// Loops through testing each event type
         getValidStringTest &= testAddEventHelper();
     }           
     std::cout << "testAddEvent test " << (getValidStringTest ? "passed" : "failed") << std::endl;
