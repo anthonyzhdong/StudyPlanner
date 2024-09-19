@@ -136,6 +136,7 @@ bool eventSkeleton::test(){
     }
 
     if (testEvent.getEventTypeString(testEvent.getEventType()) != "Tutorial") {
+        cout << "Error: getEventTypeString() not working." << endl;
         passed = false;
     }
     testEvent.displayInfo();
