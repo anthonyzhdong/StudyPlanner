@@ -73,13 +73,13 @@ bool StudySession::test() {
 
 
     testSession.startSession();
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     testSession.endSession();
 
-    if (testSession.getDuration() != 0.5) {
+    if (testSession.getDuration() != 1) {
         passed = false;
-        std::cerr << "Duration expected to be 0.5, was instead: " << testSession.getDuration() << endl;
+        std::cerr << "Duration expected to be 1, was instead: " << testSession.getDuration() << endl;
     }
 
 
