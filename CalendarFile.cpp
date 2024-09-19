@@ -23,7 +23,6 @@ namespace CalendarFile
             cout << "Saved calendar" << endl;
 
             outputFile.close();
-            cout << "Closed calendar file" << endl;
         }
     };
 
@@ -43,7 +42,6 @@ namespace CalendarFile
             cout << "Loaded calendar" << endl;
 
             inputFile.close();
-            cout << "Closed calendar file" << endl;
         }
     }
 }
