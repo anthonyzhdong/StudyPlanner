@@ -54,51 +54,23 @@ bool testTimeValidation() {
     validation v;
     std::string prompt = "Enter a time: ";
     int minTime = 0;
-    if(v.timeValidation(prompt, minTime) != 1030){
-        passed = false;
+
+    // Expected results for each input in input4.txt
+    std::vector<int> expectedResults = {1030, 1030, 1030, 1030, 1030};
+
+    for (int expected : expectedResults) {
+        int result = v.timeValidation(prompt, minTime);
+        if (result != expected) {
+            std::cout << "Test failed. Expected " << expected << ", got " << result << std::endl;
+            passed = false;
+        }
     }
-
-    // Test case 1: Invalid input (5 digits)
-    // int result = v.timeValidation(prompt, minTime);
-    // if (result != 1111) {
-    //     std::cout << "Test case 1 failed. Expected 1111, got " << result << std::endl;
-    //     passed = false;
-    // }
-
-    // // Test case 2: Invalid input (non-numeric)
-    // result = v.timeValidation(prompt, minTime);
-    // if (result != 1030) {
-    //     std::cout << "Test case 2 failed. Expected 1030, got " << result << std::endl;
-    //     passed = false;
-    // }
-
-    // // Test case 3: Invalid time (out of range)
-    // result = v.timeValidation(prompt, minTime);
-    // if (result != 1030) {
-    //     std::cout << "Test case 3 failed. Expected 1030, got " << result << std::endl;
-    //     passed = false;
-    // }
-
-    // // Test case 4: Invalid input (non-numeric)
-    // result = v.timeValidation(prompt, minTime);
-    // if (result != 1030) {
-    //     std::cout << "Test case 4 failed. Expected 1030, got " << result << std::endl;
-    //     passed = false;
-    // }
-
-    // // Test case 5: Valid input
-    // result = v.timeValidation(prompt, minTime);
-    // if (result != 1030) {
-    //     std::cout << "Test case 5 failed. Expected 1030, got " << result << std::endl;
-    //     passed = false;
-    // }
 
     // Restore cin to its original buf
     std::cin.rdbuf(cinbuf);
 
     return passed;
 }
-
 
 bool testAddEventHelper(){
     Calendar *calendar = new Calendar();
