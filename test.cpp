@@ -25,6 +25,29 @@ bool testGetValidInteger()
     return (result >= 1 && result <= 100);
 }
 
+bool testGetValidString()
+{
+    std::ifstream in("input1.txt");
+    std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
+    std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input.tx
+    bool getValidStringTest = testGetValidString(false);
+    std::cout << "testGetValidString test " << (getValidStringTest ? "passed" : "failed") << std::endl;
+
+    // Restore cin to its original buf
+    std::cin.rdbuf(cinbuf);
+    return getValidStringTest;
+    }
+
+bool testGetValidString(bool s)
+{
+    validation v;
+    std::string prompt = "Enter a string ";
+    std::string result = v.getValidString(prompt);
+    std::cout << "getValidString result: " << result << std::endl;
+    return (result.length() > 0);
+}
+
+
 int main()
 {
 
@@ -54,6 +77,7 @@ int main()
     bool studySessionTestPassed = StudySession::test();
 
     allTestsPassed &= calendarTestPassed && eventTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
+    allTestsPassed &= testGetValidString();
 
     if (allTestsPassed)
     {
