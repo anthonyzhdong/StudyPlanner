@@ -237,8 +237,8 @@ std::string Calendar::getColour(std::string colour, bool background)
 
 void Calendar::displaySemester(int semester)
 {
-    int startWeek = (semester - 1) * 16;
-    int endWeek = startWeek + 16;
+    int startWeek = (semester - 1) * 16+1;
+    int endWeek = startWeek + 16+1;
     for (int i = startWeek; i < endWeek; i++)
     {
         displayWeek(i);
