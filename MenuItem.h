@@ -36,4 +36,11 @@ public:
      * @brief Execute the action associated with this menu item
      */
     void execute() const;
+
+    
+    /**
+     * @brief Test the menuitem  functionality
+     * @return True if passes, false if not
+     */
+    bool test();
 };
