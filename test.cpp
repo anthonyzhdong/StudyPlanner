@@ -8,6 +8,7 @@
 #include "addNewEvent.h"
 #include "eventSkeleton.h"
 #include "validation.h"
+#include "CalendarFile.h"
 #include <iostream>
 
 #include <fstream>
@@ -46,8 +47,9 @@ int main(){
     bool calendarTestPassed = calendar.test();
     bool eventTestPassed = testEvent.test();
     bool paperTestPassed = testPaper.test();
+    bool calendarFileTestPassed = CalendarFile::test();
 
-    allTestsPassed &= calendarTestPassed && eventTestPassed && paperTestPassed;
+    allTestsPassed &= calendarTestPassed && eventTestPassed && paperTestPassed && calendarFileTestPassed;
 
     if (allTestsPassed) {
         std::cout << "Allthe  tests passed" << std::endl;

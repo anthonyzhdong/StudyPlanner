@@ -50,3 +50,4 @@ double StudySession::getDuration() {
         return 0.0;
     }
 }
+

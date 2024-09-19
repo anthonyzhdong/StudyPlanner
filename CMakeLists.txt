@@ -64,6 +64,8 @@ add_executable(test_runner
     eventSkeleton.cpp
     validation.cpp
     validation.h
+    CalendarFile.h
+    CalendarFile.cpp
 )
 # Enable warnings for tests
 if(MSVC)
