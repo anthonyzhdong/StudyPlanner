@@ -55,7 +55,7 @@ public:
 * 
 * The Calendar application is designed to help students manage their academic schedules by allowing them to add, view, and edit events, assignments, and exams.
 * 
-* The application is built using C++ and includes classes such as Calendar, Day, Week, Paper, eventSkeleton, Assignment, Exam, and Validation.
+* The application is built using C++ and includes classes such as Calendar, Day, Week, paper, eventSkeleton, assignment, exam, and validation.
 * 
 * The Calendar class represents the entire calendar, which contains multiple weeks. Each week contains multiple days, and each day can have events, assignments, and exams.
 * 
