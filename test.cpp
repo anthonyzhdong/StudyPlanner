@@ -13,6 +13,7 @@
 
 #include <fstream>
 #include <sstream>
+#include "MenuItem.h"
 
 bool testGetValidInteger() {
     validation v;
@@ -48,6 +49,7 @@ int main(){
     bool eventTestPassed = testEvent.test();
     bool paperTestPassed = testPaper.test();
     bool calendarFileTestPassed = CalendarFile::test();
+    bool menuItemTestPassed = MenuItem::test();
 
     allTestsPassed &= calendarTestPassed && eventTestPassed && paperTestPassed && calendarFileTestPassed;
 
