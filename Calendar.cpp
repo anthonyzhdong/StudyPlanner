@@ -517,11 +517,11 @@ bool Calendar::test()
 
     if (passed)
     {
-        cout << "Calender Test Passed" << endl;
+        cout << ""+ getColour("green", true)+"Calender Test Passed"+ getColour("reset", false) << endl;
     }
     else
     {
-        cout << "Calender Test Failed" << endl;
+        cout << "" +getColour("red", true)+"Calender Test Failed" << getColour("reset", false)<< endl;
     }
     return passed;
 }
