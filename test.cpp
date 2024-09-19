@@ -98,10 +98,19 @@ int main()
     // Existing tests
     Calendar calendar;
     eventSkeleton testEvent = eventSkeleton(EventType::LECTURE, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+    eventSkeleton testEventAssignment = eventSkeleton(EventType::ASSIGNMENT, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+    eventSkeleton testEventTutorial = eventSkeleton(EventType::TUTORIAL, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+    eventSkeleton testEventLab = eventSkeleton(EventType::LAB, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");   
+    eventSkeleton testEventExam = eventSkeleton(EventType::EXAM, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
+
     paper testPaper = paper("name", "code", 1);
 
     bool calendarTestPassed = calendar.test();
     bool eventTestPassed = testEvent.test();
+    bool eventAssignmentTestPassed = testEventAssignment.test();
+    bool eventTutorialTestPassed = testEventTutorial.test();
+    bool eventLabTestPassed = testEventLab.test();
+    bool eventExamTestPassed = testEventExam.test();
     bool paperTestPassed = testPaper.test();
     bool calendarFileTestPassed = CalendarFile::test();
     bool menuItemTestPassed = MenuItem::test();
