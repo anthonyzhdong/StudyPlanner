@@ -135,7 +135,7 @@ bool eventSkeleton::test(){
         passed = false;
     }
 
-    if (testEvent.getEventTypeString(testEvent.getEventType()) != "Lecture") {
+    if (testEvent.getEventTypeString(testEvent.getEventType()) != "Tutorial") {
         passed = false;
     }
     testEvent.displayInfo();
