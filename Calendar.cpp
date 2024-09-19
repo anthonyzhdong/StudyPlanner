@@ -21,12 +21,12 @@ Day::Day(int dayNumber) : dayNumber(dayNumber)
 
 bool Day::addEvent(eventSkeleton &d)
 {
-    if (d.getEventType() == EventType::EXAM)
+    if (d.getEventType() ==EventType::ASSIGNMENT)
     {
         assignments.push_back(static_cast<Assignment &>(d));
         return true;
     }
-    else if (d.getEventType() == EventType::ASSIGNMENT)
+    else if (d.getEventType() == EventType::EXAM)
     {
         exams.push_back(static_cast<Exam &>(d));
         return true;
