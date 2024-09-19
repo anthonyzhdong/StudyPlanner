@@ -11,12 +11,12 @@ StudySession::StudySession(const string &paperCode, int day, int week)
     this->endTime = 0;
 }
 
-time_t StudySession::getStartTime()
+time_t StudySession::getSessionStartTime()
 {
     return startTime;
 }
 
-time_t StudySession::getEndTime()
+time_t StudySession::getSessionEndTime()
 {
     return endTime;
 }
@@ -48,15 +48,15 @@ void StudySession::endSession()
 
 double StudySession::getDuration()
 {
-    if (getStartTime() != 0 && getEndTime() != 0)
+    if (getSessionStartTime() != 0 && getSessionEndTime() != 0)
     {
-        double duration = difftime(getEndTime(), getStartTime()); // Gets the difference between end and start time.
+        double duration = difftime(getSessionEndTime(), getSessionStartTime()); // Gets the difference between end and start time.
         return duration;
     }
-    else if (getStartTime() != 0 && getEndTime() == 0)
+    else if (getSessionStartTime() != 0 && getSessionEndTime() == 0)
     {
         // Session has not ended yet.
-        double duration = difftime(time(nullptr), getStartTime()); // Gets the difference between now and start time.
+        double duration = difftime(time(nullptr), getSessionStartTime()); // Gets the difference between now and start time.
         return duration;
     }
     else
@@ -67,7 +67,7 @@ double StudySession::getDuration()
     }
 }
 
-bool StudySession::test()
+bool StudySession::studyTest()
 {
     bool passed = true;
     StudySession testSession("COSC345", 1, 5);
@@ -75,7 +75,7 @@ bool StudySession::test()
     time_t startTimeTest = time(nullptr);
     testSession.setStartTime(startTimeTest);
 
-    if (testSession.getStartTime() != startTimeTest)
+    if (testSession.getSessionStartTime() != startTimeTest)
     {
         passed = false;
     }
@@ -83,7 +83,7 @@ bool StudySession::test()
     time_t endTimeTest = time(nullptr);
     testSession.setEndTime(endTimeTest);
 
-    if (testSession.getEndTime() != endTimeTest)
+    if (testSession.getSessionEndTime() != endTimeTest)
     {
         passed = false;
     }
