@@ -69,4 +69,10 @@ public:
      */
     void endSession();
 
+
+    /**
+     * @brief Tests the functionality of the StudySession class.
+     * @return true if all tests pass, false otherwise.
+     */
+    static bool test();
 };

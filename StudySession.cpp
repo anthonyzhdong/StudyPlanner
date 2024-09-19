@@ -51,3 +51,25 @@ double StudySession::getDuration() {
     }
 }
 
+bool StudySession::test() {
+    bool passed = true;
+    StudySession testSession("COSC345", 1, 5);
+
+    time_t startTimeTest = time(nullptr);
+    testSession.setStartTime(startTimeTest);
+
+    if (testSession.getStartTime() != startTimeTest) {
+        passed = false;
+    }
+
+    time_t endTimeTest = time(nullptr);
+    testSession.setEndTime(endTimeTest);
+
+    if (testSession.getEndTime() != endTimeTest) {
+        passed = false;
+    }
+
+    
+
+    return passed;
+}

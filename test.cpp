@@ -14,8 +14,10 @@
 #include <fstream>
 #include <sstream>
 #include "MenuItem.h"
+#include "StudySession.h"
 
-bool testGetValidInteger() {
+bool testGetValidInteger()
+{
     validation v;
     std::string prompt = "Enter a number between 1 and 100: ";
     int result = v.getValidInteger(1, 40, prompt);
@@ -23,15 +25,14 @@ bool testGetValidInteger() {
     return (result >= 1 && result <= 100);
 }
 
-
-int main(){
-
+int main()
+{
 
     bool allTestsPassed = true;
     // Test getValidInteger with input redirection
     std::ifstream in("input.txt");
     std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
-    std::cin.rdbuf(in.rdbuf()); // redirect std::cin to input.txt
+    std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input.txt
 
     bool getValidIntegerPassed = testGetValidInteger();
     allTestsPassed &= getValidIntegerPassed;
@@ -50,12 +51,16 @@ int main(){
     bool paperTestPassed = testPaper.test();
     bool calendarFileTestPassed = CalendarFile::test();
     bool menuItemTestPassed = MenuItem::test();
+    bool studySessionTestPassed = StudySession::test();
 
-    allTestsPassed &= calendarTestPassed && eventTestPassed && paperTestPassed && calendarFileTestPassed;
+    allTestsPassed &= calendarTestPassed && eventTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
 
-    if (allTestsPassed) {
+    if (allTestsPassed)
+    {
         std::cout << "Allthe  tests passed" << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Somethe tests failed" << std::endl;
         return 1;
     }
@@ -73,9 +78,4 @@ int main(){
     //     std::cout << "Testing Failed" << std::endl;
     //     return 1;
     // }
-    
-
-    
-
-    
 }
