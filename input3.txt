@@ -8,9 +8,6 @@ cosc101
 saintDaves
 1
 1
-Computer Science
-cosc101
-18
 cosc101
 2
 0930
@@ -18,3 +15,22 @@ cosc101
 saintDaves
 2
 2
+cosc101
+3
+0930
+1030
+saintDaves
+3
+3
+cosc101
+4
+0930
+4
+4
+5
+0930
+1030
+saintDaves
+5
+5
+
