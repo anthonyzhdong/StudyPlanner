@@ -22,11 +22,4 @@ cosc101
 saintDaves
 3
 3
-cosc101
-5
-0930
-1030
-saintDaves
-5
-5
 
