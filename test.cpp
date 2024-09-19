@@ -24,6 +24,14 @@ bool testGetValidInteger()
     std::cout << "getValidInteger result: " << result << std::endl;
     return (result >= 1 && result <= 100);
 }
+bool testGetValidString(bool s)
+{
+    validation v;
+    std::string prompt = "Enter a string ";
+    std::string result = v.getValidString(prompt);
+    std::cout << "getValidString result: " << result << std::endl;
+    return (result.length() > 0);
+}
 
 bool testGetValidString()
 {
@@ -38,14 +46,7 @@ bool testGetValidString()
     return getValidStringTest;
     }
 
-bool testGetValidString(bool s)
-{
-    validation v;
-    std::string prompt = "Enter a string ";
-    std::string result = v.getValidString(prompt);
-    std::cout << "getValidString result: " << result << std::endl;
-    return (result.length() > 0);
-}
+
 
 
 int main()
