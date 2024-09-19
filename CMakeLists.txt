@@ -49,22 +49,25 @@ endif()
 # Add the executable for the tests
 add_executable(test_runner
     test.cpp 
-    Calendar.h
-    Calendar.cpp
+    Calendar.h 
+    Calendar.cpp 
     addPaper.h 
     addPaper.cpp 
     paper.h 
-    paper.cpp
+    paper.cpp 
     lab.h 
     lecture.h 
     tutorial.h 
     addNewEvent.h 
     addNewEvent.cpp 
     eventSkeleton.h 
-    eventSkeleton.cpp
-    validation.cpp
+    eventSkeleton.cpp 
+    StudySession.h 
+    StudySession.cpp 
+    MenuItem.h 
+    MenuItem.cpp
     validation.h
-    CalendarFile.h
+    validation.cpp
     CalendarFile.cpp
 )
 # Enable warnings for tests
