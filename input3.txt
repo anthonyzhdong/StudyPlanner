@@ -18,3 +18,33 @@ cosc101
 saintDaves
 2
 2
+Computer Science
+cosc101
+18
+cosc101
+3
+0930
+1030
+saintDaves
+3
+3
+Computer Science
+cosc101
+18
+cosc101
+4
+0930
+1030
+saintDaves
+4
+4
+Computer Science
+cosc101
+18
+cosc101
+5
+0930
+1030
+saintDaves
+5
+5
