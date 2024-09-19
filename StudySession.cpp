@@ -4,7 +4,8 @@
 #include <thread>
 #include <chrono>
 
-StudySession::StudySession(const string paperCode, int day, int week) : eventSkeleton(EventType::STUDY_SESSION, paperCode, day, week, 0, 0, "")
+StudySession::StudySession(const string &paperCode, int day, int week)
+    : eventSkeleton(EventType::STUDY_SESSION, paperCode, day, week, 0, 0, "")
 {
     this->startTime = 0;
     this->endTime = 0;

@@ -18,17 +18,16 @@ class StudySession : public eventSkeleton
 {
 private:
     time_t startTime; /**< Start time of the study session */
-    time_t endTime; /**< End time of the study session */
+    time_t endTime;   /**< End time of the study session */
 
 public:
-
     /**
      * @brief Constructor for the StudySession class.
      * @param paperCode Code of the paper associated with the study session.
      * @param day Day of the study session.
      * @param week Week of the study session.
      */
-    StudySession(string paperCode, int day, int week);
+    StudySession(const std::string &paperCode, int day, int week);
 
     /**
      * @brief Get the start time of the study session.
@@ -57,7 +56,7 @@ public:
      * @brief Get the duration of the study session.
      * @return The duration of the study session in seconds.
      */
-    double getDuration(); 
+    double getDuration();
 
     /**
      * @brief Start the study session.
@@ -68,7 +67,6 @@ public:
      * @brief End the study session.
      */
     void endSession();
-
 
     /**
      * @brief Tests the functionality of the StudySession class.
