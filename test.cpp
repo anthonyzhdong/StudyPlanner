@@ -45,26 +45,24 @@ bool testGetValidString()
     return getValidStringTest;
 }
 
-bool testTimeValidationHelper(bool s)
-{
+bool testTimeValidation() {
+    bool passed = true;
+    std::ifstream in("input4.txt");
+    std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
+    std::cin.rdbuf(in.rdbuf());  
+
     validation v;
     std::string prompt = "Enter a time: ";
     int minTime = 0;
-    int result = v.timeValidation(prompt, minTime);
-    std::cout << "timeValidation result: " << result << std::endl;
-    return (result >= 0 && result <= 2359);  // Basic check for valid time format
-}
 
-bool testTimeValidation()
-{
-    std::ifstream in("input4.txt");
-    std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
-    std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input4.txt
-    bool timeValidationTest = testTimeValidationHelper(false);
-    std::cout << "testTimeValidation test " << (timeValidationTest ? "passed" : "failed") << std::endl;
+    bool result = v.timeValidation(prompt, minTime);
     // Restore cin to its original buf
     std::cin.rdbuf(cinbuf);
-    return timeValidationTest;
+    if(result == false){
+        passed = false;
+    }
+
+    return passed;
 }
 
 bool testAddEventHelper(){
@@ -139,11 +137,11 @@ int main()
     bool menuItemTestPassed = MenuItem::test();
     bool studySessionTestPassed = StudySession::studyTest();
 
-    allTestsPassed &= calendarTestPassed && eventTestPassed && eventAssignmentTestPassed && eventTutorialTestPassed && eventLabTestPassed && eventExamTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
+    allTestsPassed &= calendarTestPassed && eventTestPassed && eventAssignmentTestPassed && eventTutorialTestPassed && eventLabTestPassed && eventExamTestPassed && timeValidationTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
     allTestsPassed &= testGetValidString();
+    allTestsPassed &= testAddEvent();
     bool timeValidationPassed = testTimeValidation();
     allTestsPassed &= timeValidationPassed;
-    allTestsPassed &= testAddEvent();
 
     if (allTestsPassed)
     {
