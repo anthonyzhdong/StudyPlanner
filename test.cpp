@@ -68,7 +68,7 @@ bool testAddEvent(){
     Calendar *calendar = new Calendar();
     addPaper newPaper(calendar->getPapers());
     newPaper.addPaperMenu();
-    for(int i=0; i<1; i++){// Loops through testing each event type
+    for(int i=0; i<2; i++){// Loops through testing each event type
         addNewEvent newEvent(calendar->getPapers(), calendar);
         newEvent.addNewEventMenu();
     }           
