@@ -101,7 +101,7 @@ void paper::practiceFlashcards(){
     std::random_device rd;
     std::mt19937 g(rd());
     std::shuffle(flashcards.begin(), flashcards.end(), g);
-
+    int count = 1;
     for(auto& card: flashcards){
         std::cout << "Question: " << card.getQuestion() << std::endl;
         std::cout << "Press enter to reveal the answer." << std::endl;
@@ -113,13 +113,21 @@ void paper::practiceFlashcards(){
         int rating;
         std::cin >> rating;
         card.setDifficulty(rating);
-
-        std::cout << "Next card? (y/n): ";
-        char next;
-        std::cin >> next;
-        if(next != 'y' && next != 'Y'){
+        
+        if(count == flashcards.size()){
+            std::cout << "End of flashcards." << std::endl;
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clear the buffer
             break;
+        }else{
+            std::cout << "Next card? (y/n): ";
+            char next;
+            std::cin >> next;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clear the buffer
+            if(next != 'y' && next != 'Y'){
+                break;
+            }
         }
+        count++;
     }
 
 

@@ -376,7 +376,20 @@ void flashcardMenu(){
                     break;
                 }
                 case 2:{
+
+                    std::cout << "Available papers:\n";
+                    std::cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+                    std::cout << "-----------------------------------------------------";
+                    // displays paper codes by getting menu's vector<paper> papers
+                    for (auto &paper : calendar->getPapers())
+                    {
+                        std::cout << "\n"
+                            << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+                    }
+                    std::cout << "\n-----------------------------------------------------\n";
+
                     std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+                    
                     std::string question = validate.getValidString("Enter the question: ");
                     std::string answer = validate.getValidString("Enter the answer: ");
 
@@ -392,6 +405,18 @@ void flashcardMenu(){
                     break;
                 }
                 case 3: {
+
+                    std::cout << "Available papers:\n";
+                    std::cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+                    std::cout << "-----------------------------------------------------";
+                    // displays paper codes by getting menu's vector<paper> papers
+                    for (auto &paper : calendar->getPapers())
+                    {
+                        std::cout << "\n"
+                            << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+                    }
+                    std::cout << "\n-----------------------------------------------------\n";
+
                     std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
 
                     for(auto& paper : calendar->getPapers()){
