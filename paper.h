@@ -8,6 +8,7 @@
 #include "lecture.h"
 #include "tutorial.h"
 #include "lab.h"
+#include "flashcard.h"
 #include <fstream>
 #pragma once
 
@@ -21,6 +22,7 @@ private:
     std::string paperCode;
     int paperPoints;
     std::vector<eventSkeleton> events;
+    std::vector<flashcard> flashcards;
 
 public:
     /**
@@ -93,6 +95,10 @@ public:
      * @param inputFile File to input from
      */
     void deserialize(std::ifstream &inputFile) ;
+
+    void addFlashcard(flashcard& flashcard);
+
+    void practiceFlashcards();
 
     /**
      * @brief Display information about the paper
