@@ -1,6 +1,6 @@
 #include "flashcard.h"
 
-flashcard::flashcard(std::string& q,std::string& a) 
+flashcard::flashcard(std::string q,std::string a) 
     : question(q), answer(a), difficulty(3) {} // Start at medium difficulty
 
 std::string flashcard::getQuestion(){ 

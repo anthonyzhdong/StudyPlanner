@@ -6,6 +6,7 @@
 #include "addPaper.h"
 #include "eventSkeleton.h"
 #include "addNewEvent.h"
+#include "flashcard.h"
 #include <limits>
 #include "StudySession.h"
 #include "MenuItem.h"
@@ -62,7 +63,7 @@ vector<MenuItem> menuItems = {
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {
-    clearScreen();
+    //clearScreen();
     // commented out to see build errors
     // clearScreen();
     cout << "\n\033[1m"

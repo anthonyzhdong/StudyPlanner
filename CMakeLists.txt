@@ -55,6 +55,8 @@ add_executable(test_runner
     Calendar.cpp 
     addPaper.h 
     addPaper.cpp 
+    flashcard.h
+    flashcard.cpp
     paper.h 
     paper.cpp 
     lab.h 
