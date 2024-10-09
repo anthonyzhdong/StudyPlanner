@@ -317,12 +317,25 @@ void loadFromFileMenu()
 
 void flashcardMenu(){
     while(true){
-        std::cout << "Flashcard Menu\n1. Add Flashcard\n2. Practice Flashcards\n3. Exit\n";
+        std::cout << "Flashcard Menu\n1. View Flashcards\n2. Add Flashcard\n3. Practice Flashcards\n4. Exit\n";
         std::string prompt = "Enter a number: ";
         int choice = validate.getValidInteger(1, 3, prompt);
 
         switch(choice){
-            case 1:{
+            case 1: {
+
+
+                std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+
+                for(auto& paper : calendar->getPapers()){
+                    if(paper.getPaperCode() == paperCode){
+                        paper.displayFlashcards();
+                        break;
+                    }
+                }
+                break;
+            }
+            case 2:{
                 std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
                 std::string question = validate.getValidString("Enter the question: ");
                 std::string answer = validate.getValidString("Enter the answer: ");
@@ -338,7 +351,7 @@ void flashcardMenu(){
                 }
                 break;
             }
-            case 2: {
+            case 3: {
                 std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
 
                 for(auto& paper : calendar->getPapers()){
@@ -349,7 +362,7 @@ void flashcardMenu(){
                 }
                 break;
             }
-            case 3:
+            case 4:
                 return;
         }
 

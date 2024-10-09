@@ -100,6 +100,8 @@ public:
 
     void practiceFlashcards();
 
+    void displayFlashcards();
+
     /**
      * @brief Display information about the paper
      * 

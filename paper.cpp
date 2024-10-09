@@ -79,6 +79,14 @@ void paper::addFlashcard(flashcard& card) {
     flashcards.push_back(card);
 }
 
+void paper::displayFlashcards(){
+    for(auto& card : flashcards){
+        std::cout << "\nQuestion: " << card.getQuestion() << std::endl;
+        std::cout << "Answer: " << card.getAnswer() << std::endl;
+        std::cout << "Difficulty: " << card.getDifficulty() << std::endl;
+    }
+}
+
 void paper::practiceFlashcards(){
     if(flashcards.empty()){
         std::cout << "No flashcards to practice." << std::endl;
