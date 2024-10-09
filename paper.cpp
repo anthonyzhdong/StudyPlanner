@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <random>
+#include <algorithm>
 #include "paper.h"
 #include "lecture.h"
 #include "tutorial.h"
@@ -71,6 +73,44 @@ void paper::deserialize(std::ifstream &inputFile) {
     std::getline(inputFile, this->paperCode);
     inputFile >> this->paperPoints;
     inputFile.ignore(); // Ignore newline
+}
+
+void paper::addFlashcard(flashcard& card) {
+    flashcards.push_back(card);
+}
+
+void paper::practiceFlashcards(){
+    if(flashcards.empty()){
+        std::cout << "No flashcards to practice." << std::endl;
+        return;
+    }
+    
+    // shuffles the deck randomly
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(flashcards.begin(), flashcards.end(), g);
+
+    for(auto& card: flashcards){
+        std::cout << "Question: " << card.getQuestion() << std::endl;
+        std::cout << "Press enter to reveal the answer." << std::endl;
+        std::cin.ignore();
+        std::cin.get();
+
+        std::cout << "Answer: " << card.getAnswer() << std::endl;
+        std::cout << "Rate the difficulty of this card (0 - easy <-> 5 - hard): ";
+        int rating;
+        std::cin >> rating;
+        card.setDifficulty(rating);
+
+        std::cout << "Next card? (y/n): ";
+        char next;
+        std::cin >> next;
+        if(next != 'y' && next != 'Y'){
+            break;
+        }
+    }
+
+
 }
 
 bool paper::test(){
