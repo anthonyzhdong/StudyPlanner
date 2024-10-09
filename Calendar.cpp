@@ -146,7 +146,7 @@ std::string getDash(int n){
 
 void Calendar::displayWeek(int week){
     week = week - 1;
-    std::cout << getColour("red", false) + "\nWeek " << week << +"" + getColour("reset", false) + ":" << std::endl;
+    std::cout << getColour("red", false) + "\nWeek " << week+1 << +"" + getColour("reset", false) + ":" << std::endl;
     for(int i = 1; i < 8; i++){
         std::cout << displayDay(i, week);
     }
@@ -188,12 +188,12 @@ std::string Calendar::displayDay(int day, int week){
             result +=  getWhiteSpace(8) + e.getPaperCode() + getWhiteSpace(2)+ std::to_string(e.getStartTime()) + " - " + std::to_string(e.getEndTime()) + " @ "+ e.getLocation()+"\n";
         }
         if(assignmentsDay.size() > 0 || examsDay.size() > 0){
-            result += getWhiteSpace(8)+"--------------------\n";
+            result += getWhiteSpace(8)+getDash(8)+"\n";
         }
         if(assignmentsDay.size() > 0){
             result += getWhiteSpace(8)+getColour("yellow",false)+ "Assignments:\n"+ getColour("reset",false);
             for (auto &a : assignmentsDay){
-                result +=  getWhiteSpace(12) + a.getPaperCode() + getWhiteSpace(2)+ std::to_string(a.getStartTime())+"\n";
+                result +=  getWhiteSpace(12) + a.getPaperCode() + " - "+"Due" + getWhiteSpace(2)+ std::to_string(a.getStartTime())+"\n";
             }
         }
         if(examsDay.size() > 0){
