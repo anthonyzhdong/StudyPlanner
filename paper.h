@@ -98,6 +98,8 @@ public:
 
     void addFlashcard(flashcard& flashcard);
 
+    vector<flashcard> getFlashcards();
+
     void practiceFlashcards();
 
     void displayFlashcards();

@@ -79,6 +79,10 @@ void paper::addFlashcard(flashcard& card) {
     flashcards.push_back(card);
 }
 
+vector<flashcard> paper::getFlashcards() {
+    return flashcards;
+}
+
 void paper::displayFlashcards(){
     for(auto& card : flashcards){
         std::cout << "\nQuestion: " << card.getQuestion() << std::endl;
@@ -102,7 +106,7 @@ void paper::practiceFlashcards(){
         std::cout << "Question: " << card.getQuestion() << std::endl;
         std::cout << "Press enter to reveal the answer." << std::endl;
         std::cin.ignore();
-        std::cin.get();
+       // std::cin.get();
 
         std::cout << "Answer: " << card.getAnswer() << std::endl;
         std::cout << "Rate the difficulty of this card (0 - easy <-> 5 - hard): ";
