@@ -44,6 +44,7 @@ void addPaperMenuItem();
 void viewCalendarMenuItem();
 void saveToFileMenu();
 void loadFromFileMenu();
+void flashcardMenu();
 
 vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
@@ -57,6 +58,7 @@ vector<MenuItem> menuItems = {
     MenuItem("End study session", endStudySession),
     MenuItem("Save calendar to file", saveToFileMenu),
     MenuItem("Load calendar from file", loadFromFileMenu),
+    MenuItem("Flashcards", flashcardMenu),
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {
@@ -310,4 +312,50 @@ void loadFromFileMenu()
 {
     CalendarFile::loadFromFile(*calendar, "calendar.txt");
     cout << "\nEnter 1 to go back to the main menu" << endl;
+}
+
+void flashcardMenu(){
+    while(true){
+        std::cout << "Flashcard Menu\n1. Add Flashcard\n2. Practice Flashcards\n3. Exit\n";
+        std::string prompt = "Enter a number: ";
+        int choice = validate.getValidInteger(1, 3, prompt);
+
+        switch(choice){
+            case 1:{
+                std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+                std::string question = validate.getValidString("Enter the question: ");
+                std::string answer = validate.getValidString("Enter the answer: ");
+
+                flashcard newCard(question, answer);
+
+                for(auto& paper : calendar->getPapers()){
+                    if(paper.getPaperCode() == paperCode){
+                        paper.addFlashcard(newCard);
+                        std::cout << "Flashcard added to " << paper.getPaperName() << std::endl;
+                        break;
+                    }
+                }
+                break;
+            }
+            case 2: {
+                std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+
+                for(auto& paper : calendar->getPapers()){
+                    if(paper.getPaperCode() == paperCode) {
+                        paper.practiceFlashcards();
+                        break;
+                    }
+                }
+                break;
+            }
+            case 3:
+                return;
+        }
+
+
+
+    }
+
+
+
 }
