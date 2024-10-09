@@ -12,6 +12,7 @@
 #include "paper.h"
 #include <map>
 #include "addNewEvent.h"
+#include <algorithm>
 
 using namespace std;
 
