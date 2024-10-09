@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 #include "Calendar.h"
 #include "paper.h"
 #include "addPaper.h"
@@ -63,9 +64,9 @@ vector<MenuItem> menuItems = {
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {
-    //clearScreen();
-    // commented out to see build errors
     // clearScreen();
+    //  commented out to see build errors
+    //  clearScreen();
     cout << "\n\033[1m"
             " ____  _             _         ____  _                             \n"
             "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
@@ -306,17 +307,39 @@ void viewCalendarMenuItem()
 
 void saveToFileMenu()
 {
-    CalendarFile::saveToFile(*calendar, "calendar.txt");
-    cout << "\nEnter 1 to go back to the main menu" << endl;
-}
-void loadFromFileMenu()
-{
-    CalendarFile::loadFromFile(*calendar, "calendar.txt");
-    cout << "\nEnter 1 to go back to the main menu" << endl;
+    string filename;
+    cout << "Enter the filename to save the calendar: ";
+    cin >> filename;
+    CalendarFile::saveToFile(*calendar, filename);
+    cout << "\nCalendar saved successfully!" << endl;
+    cout << "Enter 1 to go back to the main menu" << endl;
 }
 
-void flashcardMenu(){
-    //checks if papers exist
+void loadFromFileMenu()
+{
+    string filename;
+    cout << "Enter the filename to load the calendar: ";
+    cin >> filename;
+
+    // Check if the file exists
+    ifstream file(filename);
+    if (!file.good()) // File does not exist or can't be opened
+    {
+        cout << "Error: File '" << filename << "' does not exist or cannot be opened." << endl;
+    }
+    else
+    {
+        CalendarFile::loadFromFile(*calendar, filename);
+        cout << "\nCalendar loaded successfully!" << endl;
+    }
+    file.close();
+
+    cout << "Enter 1 to go back to the main menu" << endl;
+}
+
+void flashcardMenu()
+{
+    // checks if papers exist
     if (calendar->getPapers().empty())
     {
         std::string choicePrompt = "\nYou can't view flashcards as no papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
@@ -340,102 +363,110 @@ void flashcardMenu(){
     {
         // Flashcard menu
         bool flashcardMenu = true;
-        while(flashcardMenu)
-        { 
+        while (flashcardMenu)
+        {
             std::cout << "Flashcard Menu\n1. View Flashcards\n2. Add Flashcard\n3. Practice Flashcards\n4. Exit\n";
             std::string prompt = "Enter a number: ";
             int choice = validate.getValidInteger(1, 4, prompt);
 
-            switch(choice){
-                case 1: {
-                    std::cout << "Available papers:\n";
-                    std::cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-                    std::cout << "-----------------------------------------------------";
-                    // displays paper codes by getting menu's vector<paper> papers
-                    for (auto &paper : calendar->getPapers())
-                    {
-                        std::cout << "\n"
-                            << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
-                    }
-                    std::cout << "\n-----------------------------------------------------\n";
-
-                    std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
-
-
-                    for(auto& paper : calendar->getPapers()){
-                        if(paper.getPaperCode() == paperCode){
-                            if(paper.getFlashcards().empty()){
-                                std::cout << "No flashcards to display." << std::endl;
-                                break;
-                            }else{
-                                paper.displayFlashcards();
-                                break;
-                            }
-                        }
-                    }   
-                    break;
+            switch (choice)
+            {
+            case 1:
+            {
+                std::cout << "Available papers:\n";
+                std::cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+                std::cout << "-----------------------------------------------------";
+                // displays paper codes by getting menu's vector<paper> papers
+                for (auto &paper : calendar->getPapers())
+                {
+                    std::cout << "\n"
+                              << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
                 }
-                case 2:{
+                std::cout << "\n-----------------------------------------------------\n";
 
-                    std::cout << "Available papers:\n";
-                    std::cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-                    std::cout << "-----------------------------------------------------";
-                    // displays paper codes by getting menu's vector<paper> papers
-                    for (auto &paper : calendar->getPapers())
+                std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+
+                for (auto &paper : calendar->getPapers())
+                {
+                    if (paper.getPaperCode() == paperCode)
                     {
-                        std::cout << "\n"
-                            << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
-                    }
-                    std::cout << "\n-----------------------------------------------------\n";
-
-                    std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
-                    
-                    std::string question = validate.getValidString("Enter the question: ");
-                    std::string answer = validate.getValidString("Enter the answer: ");
-
-                    flashcard newCard(question, answer);
-
-                    for(auto& paper : calendar->getPapers()){
-                        if(paper.getPaperCode() == paperCode){
-                            paper.addFlashcard(newCard);
-                            std::cout << "Flashcard added to " << paper.getPaperName() << std::endl;
+                        if (paper.getFlashcards().empty())
+                        {
+                            std::cout << "No flashcards to display." << std::endl;
+                            break;
+                        }
+                        else
+                        {
+                            paper.displayFlashcards();
                             break;
                         }
                     }
-                    break;
                 }
-                case 3: {
-
-                    std::cout << "Available papers:\n";
-                    std::cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-                    std::cout << "-----------------------------------------------------";
-                    // displays paper codes by getting menu's vector<paper> papers
-                    for (auto &paper : calendar->getPapers())
-                    {
-                        std::cout << "\n"
-                            << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
-                    }
-                    std::cout << "\n-----------------------------------------------------\n";
-
-                    std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
-
-                    for(auto& paper : calendar->getPapers()){
-                        if(paper.getPaperCode() == paperCode) {
-                            paper.practiceFlashcards();
-                            break;
-                        }
-                    }
-                    break;
-                }
-                case 4:
-                    flashcardMenu = false;
-                    break;
+                break;
             }
+            case 2:
+            {
 
+                std::cout << "Available papers:\n";
+                std::cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+                std::cout << "-----------------------------------------------------";
+                // displays paper codes by getting menu's vector<paper> papers
+                for (auto &paper : calendar->getPapers())
+                {
+                    std::cout << "\n"
+                              << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+                }
+                std::cout << "\n-----------------------------------------------------\n";
+
+                std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+
+                std::string question = validate.getValidString("Enter the question: ");
+                std::string answer = validate.getValidString("Enter the answer: ");
+
+                flashcard newCard(question, answer);
+
+                for (auto &paper : calendar->getPapers())
+                {
+                    if (paper.getPaperCode() == paperCode)
+                    {
+                        paper.addFlashcard(newCard);
+                        std::cout << "Flashcard added to " << paper.getPaperName() << std::endl;
+                        break;
+                    }
+                }
+                break;
+            }
+            case 3:
+            {
+
+                std::cout << "Available papers:\n";
+                std::cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+                std::cout << "-----------------------------------------------------";
+                // displays paper codes by getting menu's vector<paper> papers
+                for (auto &paper : calendar->getPapers())
+                {
+                    std::cout << "\n"
+                              << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+                }
+                std::cout << "\n-----------------------------------------------------\n";
+
+                std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+
+                for (auto &paper : calendar->getPapers())
+                {
+                    if (paper.getPaperCode() == paperCode)
+                    {
+                        paper.practiceFlashcards();
+                        break;
+                    }
+                }
+                break;
+            }
+            case 4:
+                flashcardMenu = false;
+                break;
+            }
         }
         displayMenuOptions();
     }
-
-
-
 }
