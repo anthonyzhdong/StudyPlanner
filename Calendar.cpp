@@ -127,74 +127,83 @@ void Calendar::display()
     }
 }
 
-void Calendar::displayWeek(int week)
-{
-    std::cout << getColour("red", false) + "\nWeek " << week << +"" + getColour("reset", false) + ":" << std::endl;
+std::string getWhiteSpace(int n){
+    std::string result = "";
+    while(n>0){
+        result+= " ";
+        n--;
+    }
+    return result;
+}
+std::string getDash(int n){
+    std::string result = "";
+    while(n>0){
+        result+= "-";
+        n--;
+    }
+    return result;
+}
+
+void Calendar::displayWeek(int week){
     week = week - 1;
-    std::cout << "==================================================================================================================" << std::endl;
-
-    // Print day headers
-    std::cout << "|     Time    |    Monday   |    Tuesday  |   Wednesday  |   Thursday   |   Friday    |  Saturday   |    Sunday   |" << std::endl;
-    std::cout << "-------------------------------------------------------------------------------------------------------------------" << std::endl;
-
-    // Initialize earliest and latest times
-    int earliestTime = 2400;
-    int latestTime = 0;
-
-    // Find the earliest start time and latest end time across all days in the week
-    for (int j = 0; j < 7; j++)
-    {
-        for (auto &e : weeks[week].days[j].events)
-        {
-            if (e.getStartTime() < earliestTime)
-                earliestTime = e.getStartTime();
-            if (e.getEndTime() > latestTime)
-                latestTime = e.getEndTime();
-        }
+    std::cout << getColour("red", false) + "\nWeek " << week+1 << +"" + getColour("reset", false) + ":" << std::endl;
+    for(int i = 1; i < 8; i++){
+        std::cout << displayDay(i, week);
     }
+}
 
-    // If no events, skip to the next week
-    if (earliestTime == 2400 && latestTime == 0)
-    {
-        std::cout << "|   No Events Scheduled for this Week                                                                             |" << std::endl;
-        std::cout << "===================================================================================================================" << std::endl;
-        return;
-    }
+std::string getDOW(int day)
+{
+    std::map<int, std::string> days;
+    
+    days[0] = "Monday:";
+    days[1] = "Tuesday:";
+    days[2] = "Wednesday:";
+    days[3] = "Thursday:";
+    days[4] = "Friday:";
+    days[5] = "Saturday:";
+    days[6] = "Sunday:";
+    return days[day];
+}
 
-    // Normalize times to the nearest hour
-    earliestTime = (earliestTime / 100) * 100;
-    latestTime = ((latestTime + 99) / 100) * 100; // Round up to the next hour
 
-    // Loop through each time slot from earliest to latest time
-    for (int currentTime = earliestTime; currentTime <= latestTime; currentTime = incrementTime(currentTime))
-    {
-        std::cout << "| " << std::setw(4) << std::setfill(' ') << currentTime << " - "
-                  << std::setw(4) << std::setfill(' ') << incrementTime(currentTime) << " |";
-        for (int j = 0; j < 7; j++)
-        {
-            std::string eventName = "";
-
-            // Check for events that occupy the current time slot
-            for (auto &e : weeks[week].days[j].events)
-            {
-                if (e.getStartTime() <= currentTime && e.getEndTime() > currentTime)
-                {
-                    eventName = e.getPaperCode();
-                    if (eventName.length() > 10)
-                    {
-                        eventName = eventName.replace(10, string::npos, "...");
-                    }
-                    break; // This currently assumes only one event per hour max. need to change this to allow for assignments to be added
-                }
+std::string Calendar::displayDay(int day, int week){
+    day = day - 1;
+    std::string result = getWhiteSpace(4) + getDOW(day) + getWhiteSpace(4)+"\n";
+    vector<eventSkeleton> eventsDay =  weeks[week].days[day].events;
+    vector<Assignment> assignmentsDay =  weeks[week].days[day].assignments;
+    vector<Exam> examsDay = weeks[week].days[day].exams;
+    std::sort(eventsDay.begin(), eventsDay.end(),
+              [](eventSkeleton& a, eventSkeleton& b) {
+                  return a.getStartTime() < b.getStartTime();
+              });
+    if(eventsDay.size() == 0){
+        result += getWhiteSpace(8) + "No events scheduled\n";
+    }else{
+        for (auto &e : eventsDay){
+            std::string eventName =  e.getPaperCode();
+            if (eventName.length() > 10) {
+            eventName.replace(10, string::npos, "...");
             }
-            // Exams aswell and should be in red and yellow.
-            //  Print the event name or empty space
-            std::cout << " " << std::setw(11) << (eventName.empty() ? "" : eventName + " ") << " |";
+            result +=  getWhiteSpace(8) + e.getPaperCode() + getWhiteSpace(2)+ std::to_string(e.getStartTime()) + " - " + std::to_string(e.getEndTime()) + " @ "+ e.getLocation()+"\n";
         }
-        std::cout << std::endl;
+        if(assignmentsDay.size() > 0 || examsDay.size() > 0){
+            result += getWhiteSpace(8)+getDash(8)+"\n";
+        }
+        if(assignmentsDay.size() > 0){
+            result += getWhiteSpace(8)+getColour("yellow",false)+ "Assignments:\n"+ getColour("reset",false);
+            for (auto &a : assignmentsDay){
+                result +=  getWhiteSpace(12) + a.getPaperCode() + " - "+"Due" + getWhiteSpace(2)+ std::to_string(a.getStartTime())+"\n";
+            }
+        }
+        if(examsDay.size() > 0){
+            result += getWhiteSpace(8)+getColour("yellow",false)+"Exams:\n"+getColour("reset",false);
+            for (auto &a : examsDay){
+                result +=  getWhiteSpace(12) + a.getPaperCode() + getWhiteSpace(2)+ std::to_string(a.getStartTime()) + " - " + std::to_string(a.getEndTime()) + " @ "+ a.getLocation()+"\n";
+            }
+        }
     }
-
-    std::cout << "===================================================================================================================" << std::endl;
+   return result;
 }
 
 std::string Calendar::getColour(std::string colour, bool background)

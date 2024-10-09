@@ -129,6 +129,13 @@ public:
     void displaySemester(int semester);
 
     /**
+     * @brief returns string represtantion of specified day and week
+     * @param day The day to display.
+     * @param week The week
+     */
+    std::string displayDay(int day,int week);
+
+    /**
      * @brief Returns all papers for the calendar
      * @return All papers for the calendar
      */
