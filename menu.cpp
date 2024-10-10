@@ -63,15 +63,15 @@ vector<MenuItem> menuItems = {
     MenuItem("Display all menu options", displayMenuOptions),
     MenuItem("View calendar", viewCalendarMenuItem),
     MenuItem("View all papers", viewAllPapersMenuItem),
-    MenuItem("Add event", addEventMenuItem),
     MenuItem("Add paper", addPaperMenuItem),
+    MenuItem("Add event", addEventMenuItem),
     MenuItem("Start study session", startStudySession),
     MenuItem("End study session", endStudySession),
+    MenuItem("View total study hours", viewStudyHoursMenuItem),
+    MenuItem("Flashcards", flashcardMenu),
     MenuItem("Save calendar to file", saveToFileMenu),
     MenuItem("Load calendar from file", loadFromFileMenu),
-    MenuItem("Flashcards", flashcardMenu),
     MenuItem("Toggle Auto Save", autoSaveMenu),
-    MenuItem("View total study hours", viewStudyHoursMenuItem),
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {
@@ -557,6 +557,15 @@ void viewStudyHoursMenuItem()
     {
         // Prompt user to select a paper
         std::cout << "Select a paper to view study hours:\n";
+
+        std::cout << "Available papers:\n";
+        std::cout << std::left << std::setw(8) << "Code" << std::setw(50) << "Name" << "\n";
+        std::cout << "-----------------------------------------------------";
+        for (auto &paper : calendar->getPapers()) {
+            std::cout << "\n" << std::left << std::setw(8) << paper.getPaperCode() << std::setw(50) << paper.getPaperName();
+        }
+        std::cout << "\n-----------------------------------------------------\n";
+
         std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
 
         // Prompt user to enter a week number
