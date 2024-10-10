@@ -152,6 +152,15 @@ std::string getDash(int n)
     return result;
 }
 
+void Calendar::displayWeeksSem(int week, int relativeWeek){
+    week = week - 1;
+    std::cout << getColour("red", false) + "\nWeek "+ std::to_string(relativeWeek)  << +"" + getColour("reset", false) + ":" << std::endl;
+    for (int i = 1; i < 8; i++)
+    {
+        std::cout << displayDay(i, week);
+    }
+}
+
 void Calendar::displayWeek(int week)
 {
     week = week - 1;
@@ -277,9 +286,11 @@ void Calendar::displaySemester(int semester)
 {
     int startWeek = (semester - 1) * 16 + 1;
     int endWeek = startWeek + 16 + 1;
+    int relativeWeek = 1;
     for (int i = startWeek; i < endWeek; i++)
     {
-        displayWeek(i);
+        displayWeeksSem(i,relativeWeek);
+        relativeWeek++;
     }
 }
 

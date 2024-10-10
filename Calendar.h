@@ -159,6 +159,13 @@ public:
     bool test();
 
     /**
+     *  @brief Gives a 1 based index of the semester
+     *  @param week The week to display
+     *  @param relativeWeek The week relative to the semester
+     */
+    void displayWeeksSem(int week,int relativeWeek);
+
+    /**
      * @brief Returns a color code for display purposes.
      * @param colour The color name.
      * @param background Whether the color is for background or foreground.
