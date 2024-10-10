@@ -167,6 +167,15 @@ bool paper::test(){
     testPaper.addEvent(testEvent1);
     testPaper.addEvent(testEvent2);
     testPaper.addEvent(testEvent3);
+
+    flashcard testFlashcard = flashcard("question", "answer");
+    testPaper.addFlashcard(testFlashcard);
+    displayFlashcards();
+
+    if(testPaper.getFlashcards().size() != 1){
+        cout << "Error: Flashcard not added correctly." << endl;
+        passed = false;
+    }
     // test that values are set correctly
     if (testPaper.getPaperName() != newName){
         cout << "Error: Paper name not set correctly." << endl;
