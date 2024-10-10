@@ -168,7 +168,7 @@ bool paper::test(){
     testPaper.addEvent(testEvent2);
     testPaper.addEvent(testEvent3);
     testPaper.practiceFlashcards();
-
+    
     flashcard testFlashcard = flashcard("question", "answer");
     testPaper.addFlashcard(testFlashcard);
     testPaper.displayFlashcards();
