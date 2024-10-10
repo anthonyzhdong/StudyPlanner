@@ -152,9 +152,10 @@ std::string getDash(int n)
     return result;
 }
 
-void Calendar::displayWeeksSem(int week, int relativeWeek){
+void Calendar::displayWeeksSem(int week, int relativeWeek)
+{
     week = week - 1;
-    std::cout << getColour("red", false) + "\nWeek "+ std::to_string(relativeWeek)  << +"" + getColour("reset", false) + ":" << std::endl;
+    std::cout << getColour("red", false) + "\nWeek " + std::to_string(relativeWeek) << +"" + getColour("reset", false) + ":" << std::endl;
     for (int i = 1; i < 8; i++)
     {
         std::cout << displayDay(i, week);
@@ -289,7 +290,7 @@ void Calendar::displaySemester(int semester)
     int relativeWeek = 1;
     for (int i = startWeek; i < endWeek; i++)
     {
-        displayWeeksSem(i,relativeWeek);
+        displayWeeksSem(i, relativeWeek);
         relativeWeek++;
     }
 }
@@ -516,13 +517,13 @@ bool Calendar::test()
     Lab newLab2 = Lab("COSC203", 3, 7, 900, 1000, "Lecture 23");
 
     // Event that does not overlap
-    Lecture newLecut1 = Lecture("COSC203", 3, 7, 1000, 1030, "Lecture 28");
+    Lecture newLecture1 = Lecture("COSC203", 3, 7, 1000, 1030, "Lecture 28");
 
     if (!(testCalendar.addEvent(newLab) == false && testCalendar.addEvent(newLab2) == false))
     { // Test that events cannot overlap
         passed = false;
     }
-    if (!(testCalendar.addEvent(newLecut1) == true))
+    if (!(testCalendar.addEvent(newLecture1) == true))
     { // Test that events that do not overlap can be added
         passed = false;
     }
@@ -554,6 +555,125 @@ bool Calendar::test()
     testCalendar.displaySemester(1);
     testCalendar.display();
 
+    // --- New Tests for getTotalStudyHours ---
+    std::cout << "-----------------------" << std::endl;
+    std::cout << "\n\n\nTesting getTotalStudyHours\n\n\n"
+              << std::endl;
+    std::cout << "-----------------------\n-----------------------" << std::endl;
+
+    // Test Case 1: No events for the paper
+    double hours1 = testCalendar.getTotalStudyHours("MATH101", 7);
+    double expected1 = 0.0;
+    if (hours1 != expected1)
+    {
+        std::cout << "Test Case 1 Failed: Expected " << expected1 << " hours, got " << hours1 << " hours." << std::endl;
+        passed = false;
+    }
+    else
+    {
+        std::cout << "Test Case 1 Passed: No events for MATH101 in week 7." << std::endl;
+    }
+
+    // Test Case 2: Single event for the paper
+    double hours2 = testCalendar.getTotalStudyHours("COSC203", 7);
+    double expected2 = 1.0 + 3.0; // Lecture (1 hour) + Exam (3 hours)
+    if (hours2 != expected2)
+    {
+        std::cout << "Test Case 2 Failed: Expected " << expected2 << " hours, got " << hours2 << " hours." << std::endl;
+        passed = false;
+    }
+    else
+    {
+        std::cout << "Test Case 2 Passed: Correct total study hours for COSC203 in week 7." << std::endl;
+    }
+
+    // Test Case 3: Multiple events for the same paper across different weeks
+    // Adding events in week 8
+    Lecture lectureWeek8 = Lecture("COSC203", 3, 8, 1000, 1200, "Lecture Theatre");
+    testCalendar.addEvent(lectureWeek8);
+    Exam examWeek8 = Exam("COSC203", 3, 8, 1400, 1600, "Mellor labs g10");
+
+    testCalendar.addEvent(examWeek8);
+
+    double hours3_week7 = testCalendar.getTotalStudyHours("COSC203", 7);
+    double expected3_week7 = 1.0 + 3.0; // Same as Test Case 2
+    double hours3_week8 = testCalendar.getTotalStudyHours("COSC203", 8);
+    double expected3_week8 = 2.0 + 2.0; // Lecture (2 hours) + Exam (2 hours)
+
+    bool test3_passed = true;
+
+    if (hours3_week7 != expected3_week7)
+    {
+        std::cout << "Test Case 3 Failed for Week 7: Expected " << expected3_week7 << " hours, got " << hours3_week7 << " hours." << std::endl;
+        test3_passed = false;
+    }
+    if (hours3_week8 != expected3_week8)
+    {
+        std::cout << "Test Case 3 Failed for Week 8: Expected " << expected3_week8 << " hours, got " << hours3_week8 << " hours." << std::endl;
+        test3_passed = false;
+    }
+    if (test3_passed)
+    {
+        std::cout << "Test Case 3 Passed: Correct total study hours for COSC203 across weeks 7 and 8." << std::endl;
+    }
+    else
+    {
+        passed = false;
+    }
+
+    // Test Case 4: Events that cross midnight
+    // Adding an event that starts at 2300 and ends at 0100 next day
+    // For simplicity, assuming getTotalStudyHours counts duration correctly
+    Lecture lateLecture = Lecture("COSC203", 3, 7, 2300, 100, "Night Hall");
+    testCalendar.addEvent(lateLecture);
+
+    double hours4 = testCalendar.getTotalStudyHours("COSC203", 7);
+    double expected4 = 1.0 + 3.0 + 2.0; // Existing hours + 2 hours for lateLecture
+
+    if (hours4 != expected4)
+    {
+        std::cout << "Test Case 4 Failed: Expected " << expected4 << " hours, got " << hours4 << " hours." << std::endl;
+        passed = false;
+    }
+    else
+    {
+        std::cout << "Test Case 4 Passed: Correctly handled events that cross midnight for COSC203 in week 7." << std::endl;
+    }
+
+    // Test Case 5: Invalid week number
+    double hours5 = testCalendar.getTotalStudyHours("COSC203", 60);
+    double expected5 = 0.0;
+    if (hours5 != expected5)
+    {
+        std::cout << "Test Case 5 Failed: Expected " << expected5 << " hours for invalid week, got " << hours5 << " hours." << std::endl;
+        passed = false;
+    }
+    else
+    {
+        std::cout << "Test Case 5 Passed: Correctly handled invalid week number." << std::endl;
+    }
+
+    // Test Case 6: Multiple papers in the same week
+    // Adding events for another paper
+    Assignment assignmentCOSC300 = Assignment("COSC300", 5, 7, 1100, 1200, "");
+    testCalendar.addEvent(assignmentCOSC300);
+
+    double hours6 = testCalendar.getTotalStudyHours("COSC300", 7);
+    double expected6 = 1.0; // One assignment (assuming duration 1 hour)
+
+    if (hours6 != expected6)
+    {
+        std::cout << "Test Case 6 Failed: Expected " << expected6 << " hours for COSC300 in week 7, got " << hours6 << " hours." << std::endl;
+        passed = false;
+    }
+    else
+    {
+        std::cout << "Test Case 6 Passed: Correct total study hours for COSC300 in week 7." << std::endl;
+    }
+
+    std::cout << "-----------------------" << std::endl;
+
+    // Final Test Result
     if (passed)
     {
         cout << "" + getColour("green", true) + "Calender Test Passed" + getColour("reset", false) << endl;
