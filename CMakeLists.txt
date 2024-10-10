@@ -59,8 +59,8 @@ add_executable(test_runner
     addPaper.cpp 
     flashcard.h
     flashcard.cpp
-    flashcardM.h
-    flashcardM.cpp
+    # flashcardM.h
+    # flashcardM.cpp
     paper.h 
     paper.cpp 
     lab.h 
