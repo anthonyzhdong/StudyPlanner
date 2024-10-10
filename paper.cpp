@@ -167,10 +167,11 @@ bool paper::test(){
     testPaper.addEvent(testEvent1);
     testPaper.addEvent(testEvent2);
     testPaper.addEvent(testEvent3);
+    testPaper.practiceFlashcards();
 
     flashcard testFlashcard = flashcard("question", "answer");
     testPaper.addFlashcard(testFlashcard);
-    displayFlashcards();
+    testPaper.displayFlashcards();
 
     if(testPaper.getFlashcards().size() != 1){
         cout << "Error: Flashcard not added correctly." << endl;
