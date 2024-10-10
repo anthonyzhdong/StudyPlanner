@@ -250,16 +250,28 @@ void startStudySession()
             string paperCode;
             int day, week;
 
-            cout << "Available papers:\n";
-            cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-            cout << "-----------------------------------------------------";
-            // displays paper codes by getting menu's vector<paper> papers
+            // cout << "Available papers:\n";
+            // cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+            // cout << "-----------------------------------------------------";
+            // // displays paper codes by getting menu's vector<paper> papers
+            // for (auto &paper : calendar->getPapers())
+            // {
+            //     cout << "\n"
+            //          << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+            // }
+            // cout << "\n-----------------------------------------------------\n";
+            std::cout << "\n==================== Available Papers ====================\n\n";
+            std::cout << "  " << std::left << std::setw(10) << "Code" << std::setw(50) << "Name" << "\n";
+            std::cout << "  " << std::string(56, '-') << "\n";
+
             for (auto &paper : calendar->getPapers())
             {
-                cout << "\n"
-                     << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+                std::cout << "  " << std::left 
+                        << std::setw(10) << paper.getPaperCode() 
+                        << std::setw(50) << paper.getPaperName() << "\n";
             }
-            cout << "\n-----------------------------------------------------\n";
+
+            std::cout << "\n" << std::string(58, '=') << "\n";
             paperCode = validate.getValidPaperCode(calendar->getPapers());
 
             string dayPrompt = "Enter the day of the week (1-7): ";
@@ -295,6 +307,7 @@ void endStudySession()
         calendar->addEvent(*studySession);
         double duration = studySession->getDuration();
         cout << "Study session duration: " << duration << " seconds." << endl;
+        cout << "\nEnter 1 to go back to the main menu" << endl;
 
         // Now for cleanup
         delete studySession;    // Delete from memory
@@ -532,8 +545,16 @@ void flashcardMenu()
         bool flashcardMenuRunning = true;
         while (flashcardMenuRunning)
         {
-            std::cout << "Flashcard Menu\n1. View Flashcards\n2. Add Flashcard\n3. Practice Flashcards\n4. Exit\n";
-            std::string prompt = "Enter a number: ";
+
+            clearScreen();
+            std::cout << "════════════════════════ Flashcard Menu ════════════════════════\n\n";
+            std::cout << "  1. 📚 View Flashcards\n";
+            std::cout << "  2. ➕ Add Flashcard\n";
+            std::cout << "  3. 🔄 Practice Flashcards\n";
+            std::cout << "  4. 🚪 Exit\n";
+            std::cout << "\n═══════════════════════════════════════════════════════════════\n\n";
+
+            std::string prompt = "Enter a number (1-4): ";
             int choice = validate.getValidInteger(1, 4, prompt);
 
             switch (choice)
@@ -542,7 +563,7 @@ void flashcardMenu()
                 fcMenu.viewFlashcards();
                 while (true)
                 {
-                    std::cout << "\nPress 'b' to go back to the Flashcard Menu\n";
+                    std::cout << "\nType 'b' to go back to the Flashcard Menu\n";
                     char userInput;
                     std::cin >> userInput;
 
@@ -558,9 +579,11 @@ void flashcardMenu()
                 }
                 break;
             case 2:
+                clearScreen();
                 fcMenu.addFlashcard();
                 break;
             case 3:
+                clearScreen();
                 fcMenu.practiceFlashcards();
                 break;
             case 4:
@@ -609,13 +632,25 @@ void viewStudyHoursMenuItem()
         // Prompt user to select a paper
         std::cout << "Select a paper to view study hours:\n";
 
-        std::cout << "Available papers:\n";
-        std::cout << std::left << std::setw(8) << "Code" << std::setw(50) << "Name" << "\n";
-        std::cout << "-----------------------------------------------------";
-        for (auto &paper : calendar->getPapers()) {
-            std::cout << "\n" << std::left << std::setw(8) << paper.getPaperCode() << std::setw(50) << paper.getPaperName();
+        // std::cout << "Available papers:\n";
+        // std::cout << std::left << std::setw(8) << "Code" << std::setw(50) << "Name" << "\n";
+        // std::cout << "-----------------------------------------------------";
+        // for (auto &paper : calendar->getPapers()) {
+        //     std::cout << "\n" << std::left << std::setw(8) << paper.getPaperCode() << std::setw(50) << paper.getPaperName();
+        // }
+        // std::cout << "\n-----------------------------------------------------\n";
+        std::cout << "\n==================== Available Papers ====================\n\n";
+        std::cout << "  " << std::left << std::setw(10) << "Code" << std::setw(50) << "Name" << "\n";
+        std::cout << "  " << std::string(56, '-') << "\n";
+
+        for (auto &paper : calendar->getPapers())
+        {
+            std::cout << "  " << std::left 
+                    << std::setw(10) << paper.getPaperCode() 
+                    << std::setw(50) << paper.getPaperName() << "\n";
         }
-        std::cout << "\n-----------------------------------------------------\n";
+
+        std::cout << "\n" << std::string(58, '=') << "\n";
 
         std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
 

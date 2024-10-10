@@ -37,15 +37,18 @@ void addNewEvent::addNewEventMenu()
     string paperCode, location;
     int startTime, endTime, day, week, typeChoice, repeat;
 
-    cout << "Available papers:\n";
-    cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-    cout << "-----------------------------------------------------";
-    // displays paper codes by getting menu's vector<paper> papers
+    std::cout << "\n==================== Available Papers ====================\n\n";
+    std::cout << "  " << std::left << std::setw(10) << "Code" << std::setw(50) << "Name" << "\n";
+    std::cout << "  " << std::string(56, '-') << "\n";
+
     for (auto &paper : papers)
     {
-        cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+        std::cout << "  " << std::left 
+                << std::setw(10) << paper.getPaperCode() 
+                << std::setw(50) << paper.getPaperName() << "\n";
     }
-    cout << "\n-----------------------------------------------------\n";
+
+    std::cout << "\n" << std::string(58, '=') << "\n";
     paperCode = validate.getValidPaperCode(papers);
 
     cout << "Events:\n1. Lecture\n2. Tutorial\n3. Lab\n4. Assignment\n5. Exam\n";
