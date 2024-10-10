@@ -47,7 +47,10 @@ bool Day::addEventToCalendar(eventSkeleton &d)
         if ((d.getStartTime() < e.getEndTime() && d.getEndTime() > e.getStartTime()) ||
             (e.getStartTime() < d.getEndTime() && e.getEndTime() > d.getStartTime()) || (d.getStartTime() == e.getStartTime() && d.getEndTime() == e.getEndTime()))
         {
-            std::cout << "Event overlaps with another event" << std::endl;
+            std::cout <<  Calendar::getColour("red",false) + "Event overlaps with another event" << std::endl;
+            std::cout << "Other event details:\n";
+            e.displayInfo();
+            std::cout << Calendar::getColour("reset",false);
             return false;
         }
     }

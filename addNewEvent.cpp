@@ -104,23 +104,26 @@ void addNewEvent::addNewEventMenu()
     if (eventType == EventType::TUTORIAL)
     {
         Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
-        calendar->addEvent(newTutorial);
-        cout << "Event details:\n";
-        newTutorial.displayInfo();
+        if(calendar->addEvent(newTutorial)){
+            cout << "Event details:\n";
+            newTutorial.displayInfo();
+        }
     }
     else if (eventType == EventType::LAB)
     {
         Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
-        calendar->addEvent(newLab);
-        cout << "Event details:\n";
-        newLab.displayInfo();
+        if(calendar->addEvent(newLab)){
+            cout << "Event details:\n";
+            newLab.displayInfo();
+        }
     }
     else if (eventType == EventType::LECTURE)
     {
         Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
-        calendar->addEvent(newLecture);
-        cout << "Event details:\n";
-        newLecture.displayInfo();
+        if(calendar->addEvent(newLecture)){
+            cout << "Event details:\n";
+            newLecture.displayInfo();
+        }
     }
     else if (eventType == EventType::ASSIGNMENT)
     {
