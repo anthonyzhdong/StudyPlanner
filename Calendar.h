@@ -165,5 +165,5 @@ public:
      * @param background Whether the color is for background or foreground.
      * @return A string representing the color code.
      */
-    std::string getColour(string colour,bool background);
+    static std::string getColour(string colour,bool background);
 };
