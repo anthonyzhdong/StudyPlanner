@@ -350,12 +350,22 @@ void exitMenu()
 void viewCalendarMenuItem()
 {
     clearScreen();
-    string choicePrompt = "Type the week you would like to display, or type 0 to display whole year\n";
-    int choice = validate.getValidInteger(0, 52, choicePrompt);
+    string choicePrompt =
+    "Select a time period to display:\n"
+    "     0: Whole year\n"
+    "  1-52: Specific week\n"
+    "    53: Semester 1\n"
+    "    54: Semester 2\n"
+    "\nEnter your choice: ";
+    int choice = validate.getValidInteger(0, 54, choicePrompt);
 
     if (choice == 0)
     {
         calendar->display();
+    }else if(choice == 53){
+        calendar->displaySemester(1);
+    }else if(choice == 54){
+        calendar->displaySemester(2);
     }
     else
     {

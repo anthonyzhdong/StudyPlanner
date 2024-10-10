@@ -21,7 +21,7 @@ void addPaper::addPaperMenu() {
 
     paper newPaper(paperName, paperCode, paperPoints);
     papers.push_back(newPaper);
-
+    
     //displays paper info
     papers.back().displayInfo();
     cout << "Paper added successfully!" << endl;
