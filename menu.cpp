@@ -60,19 +60,20 @@ vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
     // Do not include the parentheses as it is a pointer to a function.
     // When the user selects the item, it will execute the function.
-    MenuItem("Display all menu options", displayMenuOptions),
-    MenuItem("View calendar", viewCalendarMenuItem),
-    MenuItem("View all papers", viewAllPapersMenuItem),
-    MenuItem("Add event", addEventMenuItem),
-    MenuItem("Add paper", addPaperMenuItem),
-    MenuItem("Start study session", startStudySession),
-    MenuItem("End study session", endStudySession),
-    MenuItem("Save calendar to file", saveToFileMenu),
-    MenuItem("Load calendar from file", loadFromFileMenu),
-    MenuItem("Flashcards", flashcardMenu),
-    MenuItem("Toggle Auto Save", autoSaveMenu),
-    MenuItem("View total study hours", viewStudyHoursMenuItem),
-    MenuItem("Exit", exitMenu)};
+    MenuItem("📋 Display all menu options", displayMenuOptions),
+    MenuItem("📅 View calendar", viewCalendarMenuItem),
+    MenuItem("📚 View all papers", viewAllPapersMenuItem),
+    MenuItem("➕ Add paper", addPaperMenuItem),
+    MenuItem("🗓️ Add event", addEventMenuItem),
+    MenuItem("▶️ Start study session", startStudySession),
+    MenuItem("⏹️ End study session", endStudySession),
+    MenuItem("⏱️ View total study hours", viewStudyHoursMenuItem),
+    MenuItem("🔍 Flashcards", flashcardMenu),
+    MenuItem("💾 Save calendar to file", saveToFileMenu),
+    MenuItem("📂 Load calendar from file", loadFromFileMenu),
+    MenuItem("🔄 Toggle Auto Save", autoSaveMenu),
+    MenuItem("🚪 Exit", exitMenu)
+};
 void displayMenuOptions()
 {
     // clearScreen();
@@ -91,19 +92,50 @@ void displayMenuOptions()
     //     cout << i + 1 << ". " << menuItems[i].getName() << "\n";
     // }
     // cout << "Enter a number: ";
-    const int width = 70;
-    const string separator(width, '=');
-    const string title = "Study Planner Menu";
 
-    cout << separator << "\n\n";
 
-    for (size_t i = 0; i < menuItems.size(); ++i)
-    {
-        cout << left << setw(3) << i + 1 << ". " << left << setw(width - 5) << menuItems[i].getName() << "\n";
-    }
+    // const int width = 70;
+    // const string separator(width, '=');
+    // const string title = "Study Planner Menu";
 
-    cout << "\n"
-         << separator << "\n";
+    // cout << separator << "\n\n";
+
+    // for (size_t i = 0; i < menuItems.size(); ++i)
+    // {
+    //     cout << left << setw(3) << i + 1 << ". " << left << setw(width - 5) << menuItems[i].getName() << "\n";
+    // }
+
+    // cout << "\n"
+    //      << separator << "\n";
+    // cout << "Enter a number: ";
+
+    cout << "═════════════════════════════════════════════════════════════════════\n";
+    cout << "\033[1m1. 📋 Display all menu options\033[0m\n";
+    cout << "═════════════════════════════════════════════════════════════════════\n\n";
+    
+    cout << "\033[1mView and Manage:\033[0m\n";
+    cout << "2. 📅 View calendar\n";
+    cout << "3. 📚 View all papers\n";
+    cout << "4. ➕ Add paper\n";
+    cout << "5. 🗓️ Add event\n\n";
+    
+    cout << "\033[1mStudy Sessions:\033[0m\n";
+    cout << "6. ▶️ Start study session\n";
+    cout << "7. ⏹️ End study session\n";
+    cout << "8. ⏱️ View total study hours\n\n";
+    
+    cout << "\033[1mStudy Tools:\033[0m\n";
+    cout << "9. 🔍 Flashcards\n\n";
+    
+    cout << "\033[1mFile Operations:\033[0m\n";
+    cout << "10. 💾 Save calendar to file\n";
+    cout << "11. 📂 Load calendar from file\n";
+    cout << "12. 🔄 Toggle Auto Save\n\n";
+    
+    cout << "═════════════════════════════════════════════════════════════════════\n";
+    cout << "\033[1m13. 🚪 Exit\033[0m\n";
+    cout << "═════════════════════════════════════════════════════════════════════\n\n";
+    
     cout << "Enter a number: ";
 }
 
@@ -146,21 +178,40 @@ int main()
 void viewAllPapersMenuItem()
 {
     clearScreen();
-    if (calendar->getPapers().size() == 0)
+    
+    std::cout << R"(
+ __     ___                 ____                           
+ \ \   / (_) _____      __ |  _ \ __ _ _ __   ___ _ __ ___ 
+  \ \ / /| |/ _ \ \ /\ / / | |_) / _` | '_ \ / _ \ '__/ __|
+   \ V / | |  __/\ V  V /  |  __/ (_| | |_) |  __/ |  \__ \
+    \_/  |_|\___| \_/\_/   |_|   \__,_| .__/ \___|_|  |___/
+                                      |_|                  
+)" << '\n';
+
+    std::cout << "════════════════════════ All Papers ════════════════════════\n\n";
+
+    if (calendar->getPapers().empty())
     {
-        cout << "You have not added any papers." << endl;
+        std::cout << "  📚 You have not added any papers yet.\n";
+        std::cout << "  ➕ Use the 'Add paper' option in the main menu to add papers.\n";
     }
     else
     {
-        cout << "Papers:" << endl;
+        std::cout << "  Total papers: " << calendar->getPapers().size() << "\n\n";
 
-        for (auto &p : calendar->getPapers())
+        for (auto& p : calendar->getPapers())
         {
+            //std::cout << "═══════════════════════════════════════════════════════════\n";
             p.displayInfo();
-            cout << "---------------------------" << endl;
+           // std::cout << "═══════════════════════════════════════════════════════════\n\n";
         }
     }
+
+    std::cout << "\nType 1 to return to the main menu\n";
+    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    //std::cin.get();
 }
+
 
 void startStudySession()
 {
@@ -199,16 +250,28 @@ void startStudySession()
             string paperCode;
             int day, week;
 
-            cout << "Available papers:\n";
-            cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-            cout << "-----------------------------------------------------";
-            // displays paper codes by getting menu's vector<paper> papers
+            // cout << "Available papers:\n";
+            // cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
+            // cout << "-----------------------------------------------------";
+            // // displays paper codes by getting menu's vector<paper> papers
+            // for (auto &paper : calendar->getPapers())
+            // {
+            //     cout << "\n"
+            //          << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+            // }
+            // cout << "\n-----------------------------------------------------\n";
+            std::cout << "\n==================== Available Papers ====================\n\n";
+            std::cout << "  " << std::left << std::setw(10) << "Code" << std::setw(50) << "Name" << "\n";
+            std::cout << "  " << std::string(56, '-') << "\n";
+
             for (auto &paper : calendar->getPapers())
             {
-                cout << "\n"
-                     << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+                std::cout << "  " << std::left 
+                        << std::setw(10) << paper.getPaperCode() 
+                        << std::setw(50) << paper.getPaperName() << "\n";
             }
-            cout << "\n-----------------------------------------------------\n";
+
+            std::cout << "\n" << std::string(58, '=') << "\n";
             paperCode = validate.getValidPaperCode(calendar->getPapers());
 
             string dayPrompt = "Enter the day of the week (1-7): ";
@@ -244,6 +307,7 @@ void endStudySession()
         calendar->addEvent(*studySession);
         double duration = studySession->getDuration();
         cout << "Study session duration: " << duration << " seconds." << endl;
+        cout << "\nEnter 1 to go back to the main menu" << endl;
 
         // Now for cleanup
         delete studySession;    // Delete from memory
@@ -350,12 +414,22 @@ void exitMenu()
 void viewCalendarMenuItem()
 {
     clearScreen();
-    string choicePrompt = "Type the week you would like to display, or type 0 to display whole year\n";
-    int choice = validate.getValidInteger(0, 52, choicePrompt);
+    string choicePrompt =
+    "Select a time period to display:\n"
+    "     0: Whole year\n"
+    "  1-52: Specific week\n"
+    "    53: Semester 1\n"
+    "    54: Semester 2\n"
+    "\nEnter your choice: ";
+    int choice = validate.getValidInteger(0, 54, choicePrompt);
 
     if (choice == 0)
     {
         calendar->display();
+    }else if(choice == 53){
+        calendar->displaySemester(1);
+    }else if(choice == 54){
+        calendar->displaySemester(2);
     }
     else
     {
@@ -471,8 +545,16 @@ void flashcardMenu()
         bool flashcardMenuRunning = true;
         while (flashcardMenuRunning)
         {
-            std::cout << "Flashcard Menu\n1. View Flashcards\n2. Add Flashcard\n3. Practice Flashcards\n4. Exit\n";
-            std::string prompt = "Enter a number: ";
+
+            clearScreen();
+            std::cout << "════════════════════════ Flashcard Menu ════════════════════════\n\n";
+            std::cout << "  1. 📚 View Flashcards\n";
+            std::cout << "  2. ➕ Add Flashcard\n";
+            std::cout << "  3. 🔄 Practice Flashcards\n";
+            std::cout << "  4. 🚪 Exit\n";
+            std::cout << "\n═══════════════════════════════════════════════════════════════\n\n";
+
+            std::string prompt = "Enter a number (1-4): ";
             int choice = validate.getValidInteger(1, 4, prompt);
 
             switch (choice)
@@ -481,7 +563,7 @@ void flashcardMenu()
                 fcMenu.viewFlashcards();
                 while (true)
                 {
-                    std::cout << "\nPress 'b' to go back to the Flashcard Menu\n";
+                    std::cout << "\nType 'b' to go back to the Flashcard Menu\n";
                     char userInput;
                     std::cin >> userInput;
 
@@ -497,9 +579,11 @@ void flashcardMenu()
                 }
                 break;
             case 2:
+                clearScreen();
                 fcMenu.addFlashcard();
                 break;
             case 3:
+                clearScreen();
                 fcMenu.practiceFlashcards();
                 break;
             case 4:
@@ -547,6 +631,27 @@ void viewStudyHoursMenuItem()
     {
         // Prompt user to select a paper
         std::cout << "Select a paper to view study hours:\n";
+
+        // std::cout << "Available papers:\n";
+        // std::cout << std::left << std::setw(8) << "Code" << std::setw(50) << "Name" << "\n";
+        // std::cout << "-----------------------------------------------------";
+        // for (auto &paper : calendar->getPapers()) {
+        //     std::cout << "\n" << std::left << std::setw(8) << paper.getPaperCode() << std::setw(50) << paper.getPaperName();
+        // }
+        // std::cout << "\n-----------------------------------------------------\n";
+        std::cout << "\n==================== Available Papers ====================\n\n";
+        std::cout << "  " << std::left << std::setw(10) << "Code" << std::setw(50) << "Name" << "\n";
+        std::cout << "  " << std::string(56, '-') << "\n";
+
+        for (auto &paper : calendar->getPapers())
+        {
+            std::cout << "  " << std::left 
+                    << std::setw(10) << paper.getPaperCode() 
+                    << std::setw(50) << paper.getPaperName() << "\n";
+        }
+
+        std::cout << "\n" << std::string(58, '=') << "\n";
+
         std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
 
         // Prompt user to enter a week number

@@ -3,13 +3,18 @@
 flashcardM::flashcardM(Calendar* cal) : calendar(cal) {}
 
 void flashcardM::displayPapers() {
-    std::cout << "Available papers:\n";
-    std::cout << std::left << std::setw(8) << "Code" << std::setw(50) << "Name" << "\n";
-    std::cout << "-----------------------------------------------------";
-    for (auto &paper : calendar->getPapers()) {
-        std::cout << "\n" << std::left << std::setw(8) << paper.getPaperCode() << std::setw(50) << paper.getPaperName();
+    std::cout << "\n==================== Available Papers ====================\n\n";
+    std::cout << "  " << std::left << std::setw(10) << "Code" << std::setw(50) << "Name" << "\n";
+    std::cout << "  " << std::string(56, '-') << "\n";
+
+    for (auto &paper : calendar->getPapers())
+    {
+        std::cout << "  " << std::left 
+                << std::setw(10) << paper.getPaperCode() 
+                << std::setw(50) << paper.getPaperName() << "\n";
     }
-    std::cout << "\n-----------------------------------------------------\n";
+
+    std::cout << "\n" << std::string(58, '=') << "\n";
 }
 
 void flashcardM::viewFlashcards() {

@@ -95,7 +95,15 @@ void eventSkeleton::setLocation(string &location)
 
 void eventSkeleton::displayInfo()
 {
-    cout << "Paper Code: " << getPaperCode() << "\nEvent Type: " << getEventTypeString(getEventType()) << "\nDay: " << getDay() << "\nWeek: " << getWeek() << "\nStart Time: " << getStartTime() << "\nEnd Time: " << getEndTime() << "\nLocation: " << getLocation() << endl;
+    std::cout << "═══════════════ Event Information ═══════════════\n";
+    std::cout << "Paper Code: " << getPaperCode() << '\n';
+    std::cout << "Event Type: " << getEventTypeString(getEventType()) << '\n';
+    std::cout << "Day:        " << getDay() << '\n';
+    std::cout << "Week:       " << getWeek() << '\n';
+    std::cout << "Start Time: " << getStartTime() << '\n';
+    std::cout << "End Time:   " << getEndTime() << '\n';
+    std::cout << "Location:   " << getLocation() << '\n';
+    std::cout << "═══════════════════════════════════════════════════\n";
 }
 
 void eventSkeleton::serialize(std::ofstream &outputFile) const

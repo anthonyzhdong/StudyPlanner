@@ -37,15 +37,18 @@ void addNewEvent::addNewEventMenu()
     string paperCode, location;
     int startTime, endTime, day, week, typeChoice, repeat;
 
-    cout << "Available papers:\n";
-    cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
-    cout << "-----------------------------------------------------";
-    // displays paper codes by getting menu's vector<paper> papers
+    std::cout << "\n==================== Available Papers ====================\n\n";
+    std::cout << "  " << std::left << std::setw(10) << "Code" << std::setw(50) << "Name" << "\n";
+    std::cout << "  " << std::string(56, '-') << "\n";
+
     for (auto &paper : papers)
     {
-        cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+        std::cout << "  " << std::left 
+                << std::setw(10) << paper.getPaperCode() 
+                << std::setw(50) << paper.getPaperName() << "\n";
     }
-    cout << "\n-----------------------------------------------------\n";
+
+    std::cout << "\n" << std::string(58, '=') << "\n";
     paperCode = validate.getValidPaperCode(papers);
 
     cout << "Events:\n1. Lecture\n2. Tutorial\n3. Lab\n4. Assignment\n5. Exam\n";
@@ -110,50 +113,103 @@ void addNewEvent::addNewEventMenu()
     {
         Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newTutorial)){
-            cout << "Event details:\n";
+          //  cout << "Event details:\n";
+            cout << "\n";
             newTutorial.displayInfo();
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newTutorial);
+                    break;
+                }
+            }
         }
         for(int i = 1; i < repeat; i++){
             Tutorial newTutorial = Tutorial(paperCode, day, week+i, startTime, endTime, location);
             calendar->addEvent(newTutorial);
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newTutorial);
+                    break;
+                }
+            }
         }
     }else if (eventType == EventType::LAB)
     {
         Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newLab)){
-            cout << "Event details:\n";
+           // cout << "Event details:\n";
+            cout << "\n";
             newLab.displayInfo();
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newLab);
+                    break;
+                }
+            }
         }
         for(int i = 1; i < repeat; i++){
             Lab newLab = Lab(paperCode, day, week+i, startTime, endTime, location);
             calendar->addEvent(newLab);
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newLab);
+                    break;
+                }
+            }
         }
     }
     else if (eventType == EventType::LECTURE)
     {
         Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newLecture)){
-            cout << "Event details:\n";
+           // cout << "Event details:\n";
+            cout << "\n";
             newLecture.displayInfo();
+            for(auto& p : papers) {
+            if(p.getPaperCode() == paperCode) {
+                p.addEvent(newLecture);
+                break;
+            }
+        }
         }
         for(int i = 1; i < repeat; i++){
             Lecture newLecture = Lecture(paperCode, day, week+i, startTime, endTime, location);
             calendar->addEvent(newLecture);
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newLecture);
+                    break;
+                }
+            }
         }
     }
     else if (eventType == EventType::ASSIGNMENT)
     {
         Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
         calendar->addEvent(newAssignment);
-        cout << "Event details:\n";
+       // cout << "Event details:\n";
+        cout << "\n";
         newAssignment.displayInfo();
+        for(auto& p : papers) {
+            if(p.getPaperCode() == paperCode) {
+                p.addEvent(newAssignment);
+                break;
+            }
+        }
     }
     else if (eventType == EventType::EXAM)
     {
         Exam newExam = Exam(paperCode, day, week, startTime, endTime, location);
         calendar->addEvent(newExam);
-        cout << "Event details:\n";
+       // cout << "Event details:\n";
+        cout << "\n";
         newExam.displayInfo();
+        for(auto& p : papers) {
+            if(p.getPaperCode() == paperCode) {
+                p.addEvent(newExam);
+                break;
+            }
+        }
     }
     else
     {
