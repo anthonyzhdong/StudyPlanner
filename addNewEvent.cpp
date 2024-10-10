@@ -30,7 +30,6 @@ vector<eventSkeleton> addNewEvent::getEvents()
     return events;
 }
 
-
 void addNewEvent::addNewEventMenu()
 {
     EventType eventType;
@@ -43,7 +42,8 @@ void addNewEvent::addNewEventMenu()
     // displays paper codes by getting menu's vector<paper> papers
     for (auto &paper : papers)
     {
-        cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+        cout << "\n"
+             << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
     }
     cout << "\n-----------------------------------------------------\n";
     paperCode = validate.getValidPaperCode(papers);
@@ -72,8 +72,9 @@ void addNewEvent::addNewEventMenu()
         cout << "bad input";
     }
 
-    // prompts to pass into validator 
+    // prompts to pass into validator
     string dayPrompt = "Enter the day of the week (1-7): ";
+    string howOftenPrompt = "Enter 1 to add to a specific week, or 2 to add to every week: ";
     string weekPrompt = "Enter the week of the year (1-52): ";
     string assignPrompt = "Enter due time: ";
     string startPrompt = "Enter start time: ";
@@ -81,23 +82,26 @@ void addNewEvent::addNewEventMenu()
     string locationPrompt = "Enter location: ";
     string repeatPrompt = "How many weeks should this repeat for? (1 for no repeat): ";
 
-    if (eventType == EventType::ASSIGNMENT)
+    int howOften = validate.getValidInteger(1, 2, howOftenPrompt);
+    if (howOften == 1)
     {
-        endTime = validate.timeValidation(assignPrompt, 0);
+        if (eventType == EventType::ASSIGNMENT)
+        {
+            endTime = validate.timeValidation(assignPrompt, 0);
 
-        day = validate.getValidInteger(1, 7, dayPrompt);
+            day = validate.getValidInteger(1, 7, dayPrompt);
 
-        week = validate.getValidInteger(1, 52, weekPrompt);
-    }
-    else
-    {
-        startTime = validate.timeValidation(startPrompt,0);
+            week = validate.getValidInteger(1, 52, weekPrompt);
+        }
+        else
+        {
+            startTime = validate.timeValidation(startPrompt, 0);
 
-        endTime = validate.timeValidation(endPrompt, startTime);
+            endTime = validate.timeValidation(endPrompt, startTime);
 
-        location = validate.getValidString(locationPrompt);
-        
-        day = validate.getValidInteger(1, 7, dayPrompt);
+            location = validate.getValidString(locationPrompt);
+
+            day = validate.getValidInteger(1, 7, dayPrompt);
 
         week = validate.getValidInteger(1, 52, weekPrompt);
 

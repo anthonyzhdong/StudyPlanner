@@ -391,8 +391,8 @@ void autoSaveMenu()
 void saveToFileMenu()
 {
     string filename;
-    cout << "Enter the filename to save the calendar: ";
-    cin >> filename;
+    string prompt = "Enter the filename to save the calendar: ";
+    filename = validate.getValidString(prompt);
     if (!CalendarFile::saveToFile(*calendar, filename))
     {
         return;
@@ -412,8 +412,8 @@ void saveToFileMenu()
 void loadFromFileMenu()
 {
     string filename;
-    cout << "Enter the filename to load the calendar: ";
-    cin >> filename;
+    string prompt = "Enter the filename to load the calendar: ";
+    filename = validate.getValidString(prompt);
 
     // Check if the file exists
     ifstream file(filename);
