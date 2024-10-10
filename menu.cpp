@@ -60,19 +60,20 @@ vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
     // Do not include the parentheses as it is a pointer to a function.
     // When the user selects the item, it will execute the function.
-    MenuItem("Display all menu options", displayMenuOptions),
-    MenuItem("View calendar", viewCalendarMenuItem),
-    MenuItem("View all papers", viewAllPapersMenuItem),
-    MenuItem("Add paper", addPaperMenuItem),
-    MenuItem("Add event", addEventMenuItem),
-    MenuItem("Start study session", startStudySession),
-    MenuItem("End study session", endStudySession),
-    MenuItem("View total study hours", viewStudyHoursMenuItem),
-    MenuItem("Flashcards", flashcardMenu),
-    MenuItem("Save calendar to file", saveToFileMenu),
-    MenuItem("Load calendar from file", loadFromFileMenu),
-    MenuItem("Toggle Auto Save", autoSaveMenu),
-    MenuItem("Exit", exitMenu)};
+    MenuItem("📋 Display all menu options", displayMenuOptions),
+    MenuItem("📅 View calendar", viewCalendarMenuItem),
+    MenuItem("📚 View all papers", viewAllPapersMenuItem),
+    MenuItem("➕ Add paper", addPaperMenuItem),
+    MenuItem("🗓️ Add event", addEventMenuItem),
+    MenuItem("▶️ Start study session", startStudySession),
+    MenuItem("⏹️ End study session", endStudySession),
+    MenuItem("⏱️ View total study hours", viewStudyHoursMenuItem),
+    MenuItem("🔍 Flashcards", flashcardMenu),
+    MenuItem("💾 Save calendar to file", saveToFileMenu),
+    MenuItem("📂 Load calendar from file", loadFromFileMenu),
+    MenuItem("🔄 Toggle Auto Save", autoSaveMenu),
+    MenuItem("🚪 Exit", exitMenu)
+};
 void displayMenuOptions()
 {
     // clearScreen();
@@ -91,19 +92,50 @@ void displayMenuOptions()
     //     cout << i + 1 << ". " << menuItems[i].getName() << "\n";
     // }
     // cout << "Enter a number: ";
-    const int width = 70;
-    const string separator(width, '=');
-    const string title = "Study Planner Menu";
 
-    cout << separator << "\n\n";
 
-    for (size_t i = 0; i < menuItems.size(); ++i)
-    {
-        cout << left << setw(3) << i + 1 << ". " << left << setw(width - 5) << menuItems[i].getName() << "\n";
-    }
+    // const int width = 70;
+    // const string separator(width, '=');
+    // const string title = "Study Planner Menu";
 
-    cout << "\n"
-         << separator << "\n";
+    // cout << separator << "\n\n";
+
+    // for (size_t i = 0; i < menuItems.size(); ++i)
+    // {
+    //     cout << left << setw(3) << i + 1 << ". " << left << setw(width - 5) << menuItems[i].getName() << "\n";
+    // }
+
+    // cout << "\n"
+    //      << separator << "\n";
+    // cout << "Enter a number: ";
+
+    cout << "═════════════════════════════════════════════════════════════════════\n";
+    cout << "\033[1m1. 📋 Display all menu options\033[0m\n";
+    cout << "═════════════════════════════════════════════════════════════════════\n\n";
+    
+    cout << "\033[1mView and Manage:\033[0m\n";
+    cout << "2. 📅 View calendar\n";
+    cout << "3. 📚 View all papers\n";
+    cout << "4. ➕ Add paper\n";
+    cout << "5. 🗓️ Add event\n\n";
+    
+    cout << "\033[1mStudy Sessions:\033[0m\n";
+    cout << "6. ▶️ Start study session\n";
+    cout << "7. ⏹️ End study session\n";
+    cout << "8. ⏱️ View total study hours\n\n";
+    
+    cout << "\033[1mStudy Tools:\033[0m\n";
+    cout << "9. 🔍 Flashcards\n\n";
+    
+    cout << "\033[1mFile Operations:\033[0m\n";
+    cout << "10. 💾 Save calendar to file\n";
+    cout << "11. 📂 Load calendar from file\n";
+    cout << "12. 🔄 Toggle Auto Save\n\n";
+    
+    cout << "═════════════════════════════════════════════════════════════════════\n";
+    cout << "\033[1m13. 🚪 Exit\033[0m\n";
+    cout << "═════════════════════════════════════════════════════════════════════\n\n";
+    
     cout << "Enter a number: ";
 }
 

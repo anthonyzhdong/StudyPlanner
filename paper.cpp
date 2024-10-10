@@ -54,6 +54,7 @@ void paper::addEvent(eventSkeleton& event)
 }
 
 void paper::displayInfo()  {
+    std::cout << "\n═══════════════════════ Paper Details ═══════════════════════\n\n";
     cout << "Paper: " << paperName << " (" << paperCode << ")" << endl;
     cout << "Points: " << paperPoints << endl;
     cout << "Events:" << endl;

@@ -13,9 +13,7 @@ void addPaper::addPaperMenu() {
     int paperPoints;
 
     paperName = validate.getValidString("Enter the paper name: ");
-
-    paperCode = validate.getValidString("Enter the paper code: ");
-    
+    paperCode = validate.getValidString("Enter the paper code: ");  
     std::string pointsPrompt =  "Enter the paper points: ";
     paperPoints = validate.getValidInteger(1, 1000, pointsPrompt);
 
@@ -24,5 +22,5 @@ void addPaper::addPaperMenu() {
     
     //displays paper info
     papers.back().displayInfo();
-    cout << "Paper added successfully!" << endl;
+    cout << "Paper added successfully!\n" << endl;
 }

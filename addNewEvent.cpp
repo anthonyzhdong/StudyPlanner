@@ -109,7 +109,7 @@ void addNewEvent::addNewEventMenu()
     {
         Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newTutorial)){
-            cout << "Event details:\n";
+          //  cout << "Event details:\n";
             newTutorial.displayInfo();
         }
         for(int i = 1; i < repeat; i++){
@@ -120,7 +120,7 @@ void addNewEvent::addNewEventMenu()
     {
         Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newLab)){
-            cout << "Event details:\n";
+           // cout << "Event details:\n";
             newLab.displayInfo();
         }
         for(int i = 1; i < repeat; i++){
@@ -132,7 +132,7 @@ void addNewEvent::addNewEventMenu()
     {
         Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newLecture)){
-            cout << "Event details:\n";
+           // cout << "Event details:\n";
             newLecture.displayInfo();
         }
         for(int i = 1; i < repeat; i++){
@@ -144,14 +144,14 @@ void addNewEvent::addNewEventMenu()
     {
         Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
         calendar->addEvent(newAssignment);
-        cout << "Event details:\n";
+       // cout << "Event details:\n";
         newAssignment.displayInfo();
     }
     else if (eventType == EventType::EXAM)
     {
         Exam newExam = Exam(paperCode, day, week, startTime, endTime, location);
         calendar->addEvent(newExam);
-        cout << "Event details:\n";
+       // cout << "Event details:\n";
         newExam.displayInfo();
     }
     else
