@@ -167,6 +167,11 @@ std::string getDOW(int day)
     return days[day];
 }
 
+std::string formatTime(int time) {
+    int hours = time / 100; 
+    int minutes = time % 100; 
+    return std::to_string(hours) + ":" + (minutes < 10 ? "0" : "") + std::to_string(minutes);
+}
 
 std::string Calendar::displayDay(int day, int week){
     day = day - 1;
@@ -186,7 +191,7 @@ std::string Calendar::displayDay(int day, int week){
             if (eventName.length() > 10) {
             eventName.replace(10, string::npos, "...");
             }
-            result +=  getWhiteSpace(8) + e.getPaperCode() + getWhiteSpace(2)+ std::to_string(e.getStartTime()) + " - " + std::to_string(e.getEndTime()) + " @ "+ e.getLocation()+"\n";
+            result +=  getWhiteSpace(8) + e.getPaperCode() + getWhiteSpace(2)+ formatTime(e.getStartTime()) + " - " + formatTime(e.getEndTime()) + " @ "+ e.getLocation()+"\n";
         }
         if(assignmentsDay.size() > 0 || examsDay.size() > 0){
             result += getWhiteSpace(8)+getDash(8)+"\n";
@@ -194,13 +199,13 @@ std::string Calendar::displayDay(int day, int week){
         if(assignmentsDay.size() > 0){
             result += getWhiteSpace(8)+getColour("yellow",false)+ "Assignments:\n"+ getColour("reset",false);
             for (auto &a : assignmentsDay){
-                result +=  getWhiteSpace(12) + a.getPaperCode() + " - "+"Due" + getWhiteSpace(2)+ std::to_string(a.getStartTime())+"\n";
+                result +=  getWhiteSpace(12) + a.getPaperCode() + " - "+"Due" + getWhiteSpace(2)+ formatTime(a.getStartTime())+"\n";
             }
         }
         if(examsDay.size() > 0){
             result += getWhiteSpace(8)+getColour("yellow",false)+"Exams:\n"+getColour("reset",false);
             for (auto &a : examsDay){
-                result +=  getWhiteSpace(12) + a.getPaperCode() + getWhiteSpace(2)+ std::to_string(a.getStartTime()) + " - " + std::to_string(a.getEndTime()) + " @ "+ a.getLocation()+"\n";
+                result +=  getWhiteSpace(12) + a.getPaperCode() + getWhiteSpace(2)+ formatTime(a.getStartTime()) + " - " + formatTime(a.getEndTime()) + " @ "+ a.getLocation()+"\n";
             }
         }
     }
