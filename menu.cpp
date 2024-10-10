@@ -118,7 +118,7 @@ void displayMenu()
     {
 
         input = validate.getValidInteger(1, menuItems.size(), p);
-        if (input >= 1 && input <= menuItems.size())
+        if (input >= 1 && input <= static_cast<int>(menuItems.size()))
         {
             clearScreen();
             menuItems[input - 1].execute();

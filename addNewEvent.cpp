@@ -70,6 +70,7 @@ void addNewEvent::addNewEventMenu()
         break;
     default:
         cout << "bad input";
+        return;
     }
 
     // prompts to pass into validator 
