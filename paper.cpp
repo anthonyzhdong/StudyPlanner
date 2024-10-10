@@ -83,11 +83,26 @@ vector<flashcard> paper::getFlashcards() {
     return flashcards;
 }
 
-void paper::displayFlashcards(){
-    for(auto& card : flashcards){
-        std::cout << "\nQuestion: " << card.getQuestion() << std::endl;
-        std::cout << "Answer: " << card.getAnswer() << std::endl;
-        std::cout << "Difficulty: " << card.getDifficulty() << std::endl;
+void paper::displayFlashcards() {
+
+    int width = 60;
+    std::string separator(width, '-');
+
+    std::cout << "\nFlashcards for " << getPaperName() << " (" << getPaperCode() << "):\n" << separator << "\n";
+
+    for (size_t i = 0; i < flashcards.size(); ++i) {
+        auto& card = flashcards[i];
+        std::cout << "Flashcard " << (i + 1) << ":\n";
+        std::cout << "Q: " << card.getQuestion() << "\n\n";
+        std::cout << "A: " << card.getAnswer() << "\n";
+        
+        std::cout << "Difficulty: ";
+        for (int j = 0; j < 5; ++j) {
+            std::cout << (j < card.getDifficulty() ? "★" : "☆");
+        }
+        std::cout << " (" << card.getDifficulty() << "/5)\n";
+        
+        std::cout << separator << "\n";
     }
 }
 

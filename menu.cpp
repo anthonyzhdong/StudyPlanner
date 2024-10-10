@@ -76,18 +76,33 @@ void displayMenuOptions()
     // clearScreen();
     //  commented out to see build errors
     //  clearScreen();
+
     cout << "\n\033[1m"
-            " ____  _             _         ____  _                             \n"
-            "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
-            "\\___ \\| __| | | |/ _` | | | | | |_) | |/ _` | '_ \\| '_ \\ / _ \\ '__|\n"
-            " ___) | |_| |_| | (_| | |_| | |  __/| | (_| | | | | | | |  __/ |   \n"
-            "|____/ \\__|\\__,_|\\__,_|\\__, | |_|   |_|\\__,_|_| |_|_| |_|\\___|_|   \n"
-            "                       |___/                                        \n";
+    " ____  _             _         ____  _                             \n"
+    "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
+    "\\___ \\| __| | | |/ _` | | | | | |_) | |/ _` | '_ \\| '_ \\ / _ \\ '__|\n"
+    " ___) | |_| |_| | (_| | |_| | |  __/| | (_| | | | | | | |  __/ |   \n"
+    "|____/ \\__|\\__,_|\\__,_|\\__, | |_|   |_|\\__,_|_| |_|_| |_|\\___|_|   \n"
+    "                       |___/                                        \n";
+
+    // for (size_t i = 0; i < menuItems.size(); ++i)
+    // {
+    //     cout << i + 1 << ". " << menuItems[i].getName() << "\n";
+    // }
+    // cout << "Enter a number: ";
+    const int width = 70;
+    const string separator(width, '=');
+    const string title = "Study Planner Menu";
+
+
+    cout << separator << "\n\n";
 
     for (size_t i = 0; i < menuItems.size(); ++i)
     {
-        cout << i + 1 << ". " << menuItems[i].getName() << "\n";
+        cout << left << setw(3) << i + 1 << ". " << left << setw(width - 5) << menuItems[i].getName() << "\n";
     }
+
+    cout << "\n" << separator << "\n";
     cout << "Enter a number: ";
 }
 
@@ -458,6 +473,18 @@ void flashcardMenu()
             {
             case 1:
                 fcMenu.viewFlashcards();
+                while(true){
+                    std::cout << "\nPress 'b' to go back to the Flashcard Menu\n";
+                    char userInput;
+                    std::cin >> userInput;
+
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+                    if (userInput == 'b' || userInput == 'B') {
+                        break;
+                    }else{
+                        std::cout << "Invalid input. Please try again.\n";
+                    }
+                }
                 break;
             case 2:
                 fcMenu.addFlashcard();

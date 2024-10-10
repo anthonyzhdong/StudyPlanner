@@ -2,27 +2,6 @@
 
 flashcardM::flashcardM(Calendar* cal) : calendar(cal) {}
 
-// void flashcardM::display() {
-//     if (calendar->getPapers().empty()) {
-//         std::cout << "\nYou can't view flashcards as no papers have been added yet.\n";
-//         return;
-//     }
-
-//     bool running = true;
-//     while (running) {
-//         std::cout << "Flashcard Menu\n1. View Flashcards\n2. Add Flashcard\n3. Practice Flashcards\n4. Exit\n";
-//         std::string prompt = "Enter a number: ";
-//         int choice = validate.getValidInteger(1, 4, prompt);
-
-//         switch (choice) {
-//             case 1: viewFlashcards(); break;
-//             case 2: addFlashcard(); break;
-//             case 3: practiceFlashcards(); break;
-//             case 4: running = false; break;
-//         }
-//     }
-// }
-
 void flashcardM::displayPapers() {
     std::cout << "Available papers:\n";
     std::cout << std::left << std::setw(8) << "Code" << std::setw(50) << "Name" << "\n";
