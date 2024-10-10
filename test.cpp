@@ -24,7 +24,7 @@ bool testGetValidInteger()
     std::cout << "getValidInteger result: " << result << std::endl;
     return (result >= 1 && result <= 100);
 }
-bool testGetValidString()
+bool testGetValidStringHelper()
 {
     validation v;
     std::string prompt = "Enter a string ";
@@ -38,7 +38,7 @@ bool testGetValidString()
     std::ifstream in("input1.txt");
     std::streambuf *cinbuf = std::cin.rdbuf(); // save old buf
     std::cin.rdbuf(in.rdbuf());                // redirect std::cin to input.tx
-    bool getValidStringTest = testGetValidString();
+    bool getValidStringTest = testGetValidStringHelper();
     std::cout << "testGetValidString test " << (getValidStringTest ? "passed" : "failed") << std::endl;
     // Restore cin to its original buf
     std::cin.rdbuf(cinbuf);
