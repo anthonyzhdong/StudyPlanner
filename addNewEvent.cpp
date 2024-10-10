@@ -110,22 +110,48 @@ void addNewEvent::addNewEventMenu()
         Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newTutorial)){
           //  cout << "Event details:\n";
+            cout << "\n";
             newTutorial.displayInfo();
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newTutorial);
+                    break;
+                }
+            }
         }
         for(int i = 1; i < repeat; i++){
             Tutorial newTutorial = Tutorial(paperCode, day, week+i, startTime, endTime, location);
             calendar->addEvent(newTutorial);
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newTutorial);
+                    break;
+                }
+            }
         }
     }else if (eventType == EventType::LAB)
     {
         Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newLab)){
            // cout << "Event details:\n";
+            cout << "\n";
             newLab.displayInfo();
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newLab);
+                    break;
+                }
+            }
         }
         for(int i = 1; i < repeat; i++){
             Lab newLab = Lab(paperCode, day, week+i, startTime, endTime, location);
             calendar->addEvent(newLab);
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newLab);
+                    break;
+                }
+            }
         }
     }
     else if (eventType == EventType::LECTURE)
@@ -133,11 +159,24 @@ void addNewEvent::addNewEventMenu()
         Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newLecture)){
            // cout << "Event details:\n";
+            cout << "\n";
             newLecture.displayInfo();
+            for(auto& p : papers) {
+            if(p.getPaperCode() == paperCode) {
+                p.addEvent(newLecture);
+                break;
+            }
+        }
         }
         for(int i = 1; i < repeat; i++){
             Lecture newLecture = Lecture(paperCode, day, week+i, startTime, endTime, location);
             calendar->addEvent(newLecture);
+            for(auto& p : papers) {
+                if(p.getPaperCode() == paperCode) {
+                    p.addEvent(newLecture);
+                    break;
+                }
+            }
         }
     }
     else if (eventType == EventType::ASSIGNMENT)
@@ -145,14 +184,28 @@ void addNewEvent::addNewEventMenu()
         Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
         calendar->addEvent(newAssignment);
        // cout << "Event details:\n";
+        cout << "\n";
         newAssignment.displayInfo();
+        for(auto& p : papers) {
+            if(p.getPaperCode() == paperCode) {
+                p.addEvent(newAssignment);
+                break;
+            }
+        }
     }
     else if (eventType == EventType::EXAM)
     {
         Exam newExam = Exam(paperCode, day, week, startTime, endTime, location);
         calendar->addEvent(newExam);
        // cout << "Event details:\n";
+        cout << "\n";
         newExam.displayInfo();
+        for(auto& p : papers) {
+            if(p.getPaperCode() == paperCode) {
+                p.addEvent(newExam);
+                break;
+            }
+        }
     }
     else
     {

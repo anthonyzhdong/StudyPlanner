@@ -54,13 +54,30 @@ void paper::addEvent(eventSkeleton& event)
 }
 
 void paper::displayInfo()  {
-    std::cout << "\n═══════════════════════ Paper Details ═══════════════════════\n\n";
-    cout << "Paper: " << paperName << " (" << paperCode << ")" << endl;
-    cout << "Points: " << paperPoints << endl;
-    cout << "Events:" << endl;
-    for ( auto& event : events) {
-        cout << "Event on day " << event.getDay() << " of week " << event.getWeek() << endl;
+   // std::cout << "\n═══════════════════════ Paper Details ═══════════════════════\n\n";
+    std::cout << "\n  📘 Paper: " << paperName << " (" << paperCode << ")\n";
+    std::cout << "  🏆 Points: " << paperPoints << "\n";
+    if (events.empty()) {
+        std::cout << "  📅 Events: No events scheduled\n";
+    } else {
+        std::cout << "  📅 Events (" << events.size() << "):\n";
+        // for ( auto& event : events) {
+        //     cout << "    🔹 Event on day " << event.getDay() << " of week " << event.getWeek() << endl;
+        // }
+        for (auto& event : events) {
+            std::cout << "    🔹 " << event.getEventTypeString(event.getEventType())
+                    << " on Week " << event.getWeek() 
+                    << ", Day " << event.getDay()
+                    << " from " << event.getStartTime()
+                    << " to " << event.getEndTime()
+                    << " at " << event.getLocation() << "\n";
+        }
     }
+
+    if (!flashcards.empty()) {
+        std::cout << "  🗂️ Flashcards: " << flashcards.size() << " card(s)\n";
+    }
+
 }
 
 void paper::serialize(std::ofstream &outputFile) const {

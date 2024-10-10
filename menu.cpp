@@ -178,21 +178,40 @@ int main()
 void viewAllPapersMenuItem()
 {
     clearScreen();
-    if (calendar->getPapers().size() == 0)
+    
+    std::cout << R"(
+ __     ___                 ____                           
+ \ \   / (_) _____      __ |  _ \ __ _ _ __   ___ _ __ ___ 
+  \ \ / /| |/ _ \ \ /\ / / | |_) / _` | '_ \ / _ \ '__/ __|
+   \ V / | |  __/\ V  V /  |  __/ (_| | |_) |  __/ |  \__ \
+    \_/  |_|\___| \_/\_/   |_|   \__,_| .__/ \___|_|  |___/
+                                      |_|                  
+)" << '\n';
+
+    std::cout << "════════════════════════ All Papers ════════════════════════\n\n";
+
+    if (calendar->getPapers().empty())
     {
-        cout << "You have not added any papers." << endl;
+        std::cout << "  📚 You have not added any papers yet.\n";
+        std::cout << "  ➕ Use the 'Add paper' option in the main menu to add papers.\n";
     }
     else
     {
-        cout << "Papers:" << endl;
+        std::cout << "  Total papers: " << calendar->getPapers().size() << "\n\n";
 
-        for (auto &p : calendar->getPapers())
+        for (auto& p : calendar->getPapers())
         {
+            //std::cout << "═══════════════════════════════════════════════════════════\n";
             p.displayInfo();
-            cout << "---------------------------" << endl;
+           // std::cout << "═══════════════════════════════════════════════════════════\n\n";
         }
     }
+
+    std::cout << "\nType 1 to return to the main menu\n";
+    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    //std::cin.get();
 }
+
 
 void startStudySession()
 {
