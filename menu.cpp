@@ -35,6 +35,10 @@ void clearScreen()
 // Study session variables
 StudySession *studySession = nullptr;
 
+// Auto save variable
+bool autoSave = false;
+std::string *saveFile = nullptr;
+
 // Menu items
 // To add a menu item, add a declaration first here so they are recognised as a function.
 void displayMenuOptions();
@@ -47,6 +51,7 @@ void viewCalendarMenuItem();
 void saveToFileMenu();
 void loadFromFileMenu();
 void flashcardMenu();
+void autoSaveMenu();
 
 vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
@@ -61,6 +66,7 @@ vector<MenuItem> menuItems = {
     MenuItem("Save calendar to file", saveToFileMenu),
     MenuItem("Load calendar from file", loadFromFileMenu),
     MenuItem("Flashcards", flashcardMenu),
+    MenuItem("Toggle Auto Save", autoSaveMenu),
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {
@@ -204,6 +210,11 @@ void endStudySession()
         // Now for cleanup
         delete studySession;    // Delete from memory
         studySession = nullptr; // Assign to null pointer.
+
+        if (autoSave)
+        {
+            CalendarFile::saveToFile(*calendar, *saveFile);
+        }
     }
     else
     {
@@ -262,6 +273,11 @@ void addEventMenuItem()
     {
         addNewEvent newEvent(calendar->getPapers(), calendar);
         newEvent.addNewEventMenu();
+
+        if (autoSave)
+        {
+            CalendarFile::saveToFile(*calendar, *saveFile);
+        }
         cout << "Enter 1 to go back to the main menu" << endl;
     }
 }
@@ -278,6 +294,11 @@ void addPaperMenuItem()
 
     addPaper newPaper(calendar->getPapers());
     newPaper.addPaperMenu();
+
+    if (autoSave)
+    {
+        CalendarFile::saveToFile(*calendar, *saveFile);
+    }
     cout << "Enter 1 to go back to the main menu" << endl;
 }
 
@@ -305,12 +326,47 @@ void viewCalendarMenuItem()
     cout << "\nEnter 1 to go back to the main menu" << endl;
 }
 
+void autoSaveMenu()
+{
+    if (saveFile == nullptr)
+    {
+        cout << "You need to save or load the calendar first!" << endl;
+    }
+    else
+    {
+
+        if (autoSave)
+        {
+            // Toggle to false
+            autoSave = false;
+            cout << "Auto save has been disabled." << endl;
+        }
+        else
+        {
+            // Toggle to true
+            autoSave = true;
+            cout << "Auto save has been enabled." << endl;
+        }
+    }
+}
+
 void saveToFileMenu()
 {
     string filename;
     cout << "Enter the filename to save the calendar: ";
     cin >> filename;
-    CalendarFile::saveToFile(*calendar, filename);
+    if (!CalendarFile::saveToFile(*calendar, filename))
+    {
+        return;
+    }
+    if (saveFile == nullptr)
+    {
+        saveFile = new std::string(filename);
+    }
+    else
+    {
+        *saveFile = filename;
+    }
     cout << "\nCalendar saved successfully!" << endl;
     cout << "Enter 1 to go back to the main menu" << endl;
 }
@@ -329,7 +385,18 @@ void loadFromFileMenu()
     }
     else
     {
-        CalendarFile::loadFromFile(*calendar, filename);
+        if (!CalendarFile::loadFromFile(*calendar, filename))
+        {
+            return;
+        }
+        if (saveFile == nullptr)
+        {
+            saveFile = new std::string(filename);
+        }
+        else
+        {
+            *saveFile = filename;
+        }
         cout << "\nCalendar loaded successfully!" << endl;
     }
     file.close();
