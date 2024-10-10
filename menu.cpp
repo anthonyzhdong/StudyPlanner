@@ -52,6 +52,7 @@ void saveToFileMenu();
 void loadFromFileMenu();
 void flashcardMenu();
 void autoSaveMenu();
+void viewAllPapersMenuItem();
 
 vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
@@ -59,6 +60,7 @@ vector<MenuItem> menuItems = {
     // When the user selects the item, it will execute the function.
     MenuItem("Display all menu options", displayMenuOptions),
     MenuItem("View calendar", viewCalendarMenuItem),
+    MenuItem("View all papers", viewAllPapersMenuItem),
     MenuItem("Add event", addEventMenuItem),
     MenuItem("Add paper", addPaperMenuItem),
     MenuItem("Start study session", startStudySession),
@@ -122,6 +124,20 @@ int main()
 {
     displayMenu();
     return 0;
+}
+
+void viewAllPapersMenuItem() {
+    clearScreen();
+    if (calendar->getPapers().size() == 0) {
+        cout << "You have not added any papers." << endl;
+    } else {
+        cout << "Papers:" << endl;
+
+        for (auto& p : calendar->getPapers()) {
+            p.displayInfo();
+            cout << "---------------------------" << endl;   
+        }
+    }
 }
 
 void startStudySession()
