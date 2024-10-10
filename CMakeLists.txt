@@ -16,6 +16,8 @@ add_executable(menu
   addPaper.cpp 
   flashcard.h
   flashcard.cpp
+  flashcardM.h
+  flashcardM.cpp
   paper.h 
   paper.cpp 
   lab.h 
