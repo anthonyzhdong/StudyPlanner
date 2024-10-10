@@ -24,6 +24,10 @@ private:
      * @return A valid paper code as a string.
      */
     std::string getValidPaperCode();
+    /**
+     * @brief repeats event for given weeks.
+     * @return void
+     */
 public:
     
     /**

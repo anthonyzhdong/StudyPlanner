@@ -35,7 +35,7 @@ void addNewEvent::addNewEventMenu()
 {
     EventType eventType;
     string paperCode, location;
-    int startTime, endTime, day, week, typeChoice;
+    int startTime, endTime, day, week, typeChoice, repeat;
 
     cout << "Available papers:\n";
     cout << left << setw(8) << "Code" << setw(50) << "Name" << "\n";
@@ -79,6 +79,7 @@ void addNewEvent::addNewEventMenu()
     string startPrompt = "Enter start time: ";
     string endPrompt = "Enter end time: ";
     string locationPrompt = "Enter location: ";
+    string repeatPrompt = "How many weeks should this repeat for? (1 for no repeat): ";
 
     if (eventType == EventType::ASSIGNMENT)
     {
@@ -99,6 +100,8 @@ void addNewEvent::addNewEventMenu()
         day = validate.getValidInteger(1, 7, dayPrompt);
 
         week = validate.getValidInteger(1, 52, weekPrompt);
+
+        repeat = validate.getValidInteger(1, 52, repeatPrompt);
     }
 
     if (eventType == EventType::TUTORIAL)
@@ -108,13 +111,20 @@ void addNewEvent::addNewEventMenu()
             cout << "Event details:\n";
             newTutorial.displayInfo();
         }
-    }
-    else if (eventType == EventType::LAB)
+        for(int i = 1; i < repeat; i++){
+            Tutorial newTutorial = Tutorial(paperCode, day, week+i, startTime, endTime, location);
+            calendar->addEvent(newTutorial);
+        }
+    }else if (eventType == EventType::LAB)
     {
         Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
         if(calendar->addEvent(newLab)){
             cout << "Event details:\n";
             newLab.displayInfo();
+        }
+        for(int i = 1; i < repeat; i++){
+            Lab newLab = Lab(paperCode, day, week+i, startTime, endTime, location);
+            calendar->addEvent(newLab);
         }
     }
     else if (eventType == EventType::LECTURE)
@@ -123,6 +133,10 @@ void addNewEvent::addNewEventMenu()
         if(calendar->addEvent(newLecture)){
             cout << "Event details:\n";
             newLecture.displayInfo();
+        }
+        for(int i = 1; i < repeat; i++){
+            Lecture newLecture = Lecture(paperCode, day, week+i, startTime, endTime, location);
+            calendar->addEvent(newLecture);
         }
     }
     else if (eventType == EventType::ASSIGNMENT)

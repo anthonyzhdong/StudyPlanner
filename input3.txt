@@ -8,6 +8,7 @@ cosc101
 saintDaves
 1
 1
+1
 cosc101
 2
 0930
@@ -15,6 +16,7 @@ cosc101
 saintDaves
 2
 2
+1
 cosc101
 3
 0930
@@ -22,4 +24,5 @@ cosc101
 saintDaves
 3
 3
+1
 
