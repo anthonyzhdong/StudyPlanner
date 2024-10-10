@@ -54,6 +54,7 @@ void loadFromFileMenu();
 void flashcardMenu();
 void autoSaveMenu();
 void viewAllPapersMenuItem();
+void viewStudyHoursMenuItem();
 
 vector<MenuItem> menuItems = {
     // Add a MenuItem() here, linking to a pointer to the function that manages the item.
@@ -70,6 +71,7 @@ vector<MenuItem> menuItems = {
     MenuItem("Load calendar from file", loadFromFileMenu),
     MenuItem("Flashcards", flashcardMenu),
     MenuItem("Toggle Auto Save", autoSaveMenu),
+    MenuItem("View total study hours", viewStudyHoursMenuItem),
     MenuItem("Exit", exitMenu)};
 void displayMenuOptions()
 {
@@ -78,12 +80,11 @@ void displayMenuOptions()
     //  clearScreen();
 
     cout << "\n\033[1m"
-    " ____  _             _         ____  _                             \n"
-    "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
-    "\\___ \\| __| | | |/ _` | | | | | |_) | |/ _` | '_ \\| '_ \\ / _ \\ '__|\n"
-    " ___) | |_| |_| | (_| | |_| | |  __/| | (_| | | | | | | |  __/ |   \n"
-    "|____/ \\__|\\__,_|\\__,_|\\__, | |_|   |_|\\__,_|_| |_|_| |_|\\___|_|   \n"
-    "                       |___/                                        \n";
+            " ____  _             _         ____  _                             \n"
+            "/ ___|| |_ _   _  __| |_   _  |  _ \\| | __ _ _ __  _ __   ___ _ __ \n"
+            "\\___ \\| __| | | |/ _` | | | | | |_) | |/ _` | '_ \\| '_ \\ / _ \\ '__|\n"
+            " ___) | |_| |_| | (_| | |_| | |  __/| | (_| | | | | | | |  __/ |   \n"
+            "|____/ \\__|\\__,_|\\__,_|\\__, | |_|   |_|\\__,_|_| |_|_| |_|\\___|_|   \n";
 
     // for (size_t i = 0; i < menuItems.size(); ++i)
     // {
@@ -94,7 +95,6 @@ void displayMenuOptions()
     const string separator(width, '=');
     const string title = "Study Planner Menu";
 
-
     cout << separator << "\n\n";
 
     for (size_t i = 0; i < menuItems.size(); ++i)
@@ -102,7 +102,8 @@ void displayMenuOptions()
         cout << left << setw(3) << i + 1 << ". " << left << setw(width - 5) << menuItems[i].getName() << "\n";
     }
 
-    cout << "\n" << separator << "\n";
+    cout << "\n"
+         << separator << "\n";
     cout << "Enter a number: ";
 }
 
@@ -142,16 +143,21 @@ int main()
     return 0;
 }
 
-void viewAllPapersMenuItem() {
+void viewAllPapersMenuItem()
+{
     clearScreen();
-    if (calendar->getPapers().size() == 0) {
+    if (calendar->getPapers().size() == 0)
+    {
         cout << "You have not added any papers." << endl;
-    } else {
+    }
+    else
+    {
         cout << "Papers:" << endl;
 
-        for (auto& p : calendar->getPapers()) {
+        for (auto &p : calendar->getPapers())
+        {
             p.displayInfo();
-            cout << "---------------------------" << endl;   
+            cout << "---------------------------" << endl;
         }
     }
 }
@@ -473,15 +479,19 @@ void flashcardMenu()
             {
             case 1:
                 fcMenu.viewFlashcards();
-                while(true){
+                while (true)
+                {
                     std::cout << "\nPress 'b' to go back to the Flashcard Menu\n";
                     char userInput;
                     std::cin >> userInput;
 
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
-                    if (userInput == 'b' || userInput == 'B') {
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    if (userInput == 'b' || userInput == 'B')
+                    {
                         break;
-                    }else{
+                    }
+                    else
+                    {
                         std::cout << "Invalid input. Please try again.\n";
                     }
                 }
@@ -498,6 +508,60 @@ void flashcardMenu()
             }
         }
 
+        displayMenuOptions();
+    }
+}
+
+void viewStudyHoursMenuItem()
+{
+    clearScreen();
+    std::cout << "\n"
+              << " _____     _        _   ____  _             _         _   _                      \n"
+              << "|_   _|__ | |_ __ _| | / ___|| |_ _   _  __| |_   _  | | | | ___  _   _ _ __ ___ \n"
+              << "  | |/ _ \\| __/ _` | | \\___ \\| __| | | |/ _` | | | | | |_| |/ _ \\| | | | '__/ __|\n"
+              << "  | | (_) | || (_| | |  ___) | |_| |_| | (_| | |_| | |  _  | (_) | |_| | |  \\__ \\ \n"
+              << "  |_|\\___/ \\__\\__,_|_| |____/ \\__|\\__,_|\\__,_|\\__, | |_| |_|\\___/ \\__,_|_|  |___/\n"
+              << "                                               |___/                              \n";
+
+    // Check if there are any papers available
+    if (calendar->getPapers().empty())
+    {
+        std::string choicePrompt = "\nNo papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+        int choice = validate.getValidInteger(1, 2, choicePrompt);
+
+        switch (choice)
+        {
+        case 1:
+            addPaperMenuItem();
+            break;
+        case 2:
+            displayMenuOptions();
+            break;
+        default:
+            std::cout << "Invalid choice. Returning to main menu.\n";
+            displayMenuOptions();
+            break;
+        }
+    }
+    else
+    {
+        // Prompt user to select a paper
+        std::cout << "Select a paper to view study hours:\n";
+        std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+
+        // Prompt user to enter a week number
+        std::string weekPrompt = "Enter the week number (1-52): ";
+        int week = validate.getValidInteger(1, 52, weekPrompt);
+
+        // Calculate total study hours
+        double totalHours = calendar->getTotalStudyHours(paperCode, week);
+
+        // Display the result
+        std::cout << "\nTotal hours spent studying paper '" << paperCode << "' in week " << week << ": "
+                  << std::fixed << std::setprecision(2) << totalHours << " hours.\n";
+
+        string backPrompt = "\nEnter 1 to go back to the main menu: ";
+        validate.getValidInteger(1, 1, backPrompt); // Wait for user to input '1' to return
         displayMenuOptions();
     }
 }

@@ -47,10 +47,10 @@ bool Day::addEventToCalendar(eventSkeleton &d)
         if ((d.getStartTime() < e.getEndTime() && d.getEndTime() > e.getStartTime()) ||
             (e.getStartTime() < d.getEndTime() && e.getEndTime() > d.getStartTime()) || (d.getStartTime() == e.getStartTime() && d.getEndTime() == e.getEndTime()))
         {
-            std::cout <<  Calendar::getColour("red",false) + "Event overlaps with another event" << std::endl;
+            std::cout << Calendar::getColour("red", false) + "Event overlaps with another event" << std::endl;
             std::cout << "Other event details:\n";
             e.displayInfo();
-            std::cout << Calendar::getColour("reset",false);
+            std::cout << Calendar::getColour("reset", false);
             return false;
         }
     }
@@ -131,27 +131,33 @@ void Calendar::display()
     }
 }
 
-std::string getWhiteSpace(int n){
+std::string getWhiteSpace(int n)
+{
     std::string result = "";
-    while(n>0){
-        result+= " ";
+    while (n > 0)
+    {
+        result += " ";
         n--;
     }
     return result;
 }
-std::string getDash(int n){
+std::string getDash(int n)
+{
     std::string result = "";
-    while(n>0){
-        result+= "-";
+    while (n > 0)
+    {
+        result += "-";
         n--;
     }
     return result;
 }
 
-void Calendar::displayWeek(int week){
+void Calendar::displayWeek(int week)
+{
     week = week - 1;
-    std::cout << getColour("red", false) + "\nWeek " << week+1 << +"" + getColour("reset", false) + ":" << std::endl;
-    for(int i = 1; i < 8; i++){
+    std::cout << getColour("red", false) + "\nWeek " << week + 1 << +"" + getColour("reset", false) + ":" << std::endl;
+    for (int i = 1; i < 8; i++)
+    {
         std::cout << displayDay(i, week);
     }
 }
@@ -159,7 +165,7 @@ void Calendar::displayWeek(int week){
 std::string getDOW(int day)
 {
     std::map<int, std::string> days;
-    
+
     days[0] = "Monday:";
     days[1] = "Tuesday:";
     days[2] = "Wednesday:";
@@ -170,49 +176,62 @@ std::string getDOW(int day)
     return days[day];
 }
 
-std::string formatTime(int time) {
-    int hours = time / 100; 
-    int minutes = time % 100; 
+std::string formatTime(int time)
+{
+    int hours = time / 100;
+    int minutes = time % 100;
     return std::to_string(hours) + ":" + (minutes < 10 ? "0" : "") + std::to_string(minutes);
 }
 
-std::string Calendar::displayDay(int day, int week){
+std::string Calendar::displayDay(int day, int week)
+{
     day = day - 1;
-    std::string result = getWhiteSpace(4) + getDOW(day) + getWhiteSpace(4)+"\n";
-    vector<eventSkeleton> eventsDay =  weeks[week].days[day].events;
-    vector<Assignment> assignmentsDay =  weeks[week].days[day].assignments;
+    std::string result = getWhiteSpace(4) + getDOW(day) + getWhiteSpace(4) + "\n";
+    vector<eventSkeleton> eventsDay = weeks[week].days[day].events;
+    vector<Assignment> assignmentsDay = weeks[week].days[day].assignments;
     vector<Exam> examsDay = weeks[week].days[day].exams;
     std::sort(eventsDay.begin(), eventsDay.end(),
-              [](eventSkeleton& a, eventSkeleton& b) {
+              [](eventSkeleton &a, eventSkeleton &b)
+              {
                   return a.getStartTime() < b.getStartTime();
               });
-    if(eventsDay.size() == 0){
+    if (eventsDay.size() == 0)
+    {
         result += getWhiteSpace(8) + "No events scheduled\n";
-    }else{
-        for (auto &e : eventsDay){
-            std::string eventName =  e.getPaperCode();
-            if (eventName.length() > 10) {
-            eventName.replace(10, string::npos, "...");
+    }
+    else
+    {
+        for (auto &e : eventsDay)
+        {
+            std::string eventName = e.getPaperCode();
+            if (eventName.length() > 10)
+            {
+                eventName.replace(10, string::npos, "...");
             }
-            result +=  getWhiteSpace(8) + e.getPaperCode() + getWhiteSpace(2)+ formatTime(e.getStartTime()) + " - " + formatTime(e.getEndTime()) + " @ "+ e.getLocation()+"\n";
+            result += getWhiteSpace(8) + e.getPaperCode() + getWhiteSpace(2) + formatTime(e.getStartTime()) + " - " + formatTime(e.getEndTime()) + " @ " + e.getLocation() + "\n";
         }
-        if(assignmentsDay.size() > 0 || examsDay.size() > 0){
-            result += getWhiteSpace(8)+getDash(8)+"\n";
+        if (assignmentsDay.size() > 0 || examsDay.size() > 0)
+        {
+            result += getWhiteSpace(8) + getDash(8) + "\n";
         }
-        if(assignmentsDay.size() > 0){
-            result += getWhiteSpace(8)+getColour("yellow",false)+ "Assignments:\n"+ getColour("reset",false);
-            for (auto &a : assignmentsDay){
-                result +=  getWhiteSpace(12) + a.getPaperCode() + " - "+"Due" + getWhiteSpace(2)+ formatTime(a.getStartTime())+"\n";
+        if (assignmentsDay.size() > 0)
+        {
+            result += getWhiteSpace(8) + getColour("yellow", false) + "Assignments:\n" + getColour("reset", false);
+            for (auto &a : assignmentsDay)
+            {
+                result += getWhiteSpace(12) + a.getPaperCode() + " - " + "Due" + getWhiteSpace(2) + formatTime(a.getStartTime()) + "\n";
             }
         }
-        if(examsDay.size() > 0){
-            result += getWhiteSpace(8)+getColour("yellow",false)+"Exams:\n"+getColour("reset",false);
-            for (auto &a : examsDay){
-                result +=  getWhiteSpace(12) + a.getPaperCode() + getWhiteSpace(2)+ formatTime(a.getStartTime()) + " - " + formatTime(a.getEndTime()) + " @ "+ a.getLocation()+"\n";
+        if (examsDay.size() > 0)
+        {
+            result += getWhiteSpace(8) + getColour("yellow", false) + "Exams:\n" + getColour("reset", false);
+            for (auto &a : examsDay)
+            {
+                result += getWhiteSpace(12) + a.getPaperCode() + getWhiteSpace(2) + formatTime(a.getStartTime()) + " - " + formatTime(a.getEndTime()) + " @ " + a.getLocation() + "\n";
             }
         }
     }
-   return result;
+    return result;
 }
 
 std::string Calendar::getColour(std::string colour, bool background)
@@ -276,7 +295,6 @@ bool Calendar::addEvent(eventSkeleton &e)
         return false;
     }
 }
-
 
 vector<paper> &Calendar::getPapers()
 {
@@ -534,4 +552,52 @@ bool Calendar::test()
         cout << "" + getColour("red", true) + "Calender Test Failed" << getColour("reset", false) << endl;
     }
     return passed;
+}
+
+double Calendar::getTotalStudyHours(const std::string &paperCode, int week)
+{
+    double totalHours = 0.0;
+
+    // Validate week number
+    if (week < 1 || week > 52)
+    {
+        std::cerr << "Invalid week number: " << week << ". Please enter a value between 1 and 52." << std::endl;
+        return totalHours;
+    }
+
+    // Access the target week
+    Week &targetWeek = weeks[week - 1];
+
+    // Iterate through each day in the week
+    for (const Day &day : targetWeek.days)
+    {
+        // Iterate through each event in the day
+        for (const auto &event : day.events)
+        {
+            // Check if the event is related to the specified paper
+            if (event.getPaperCode() == paperCode)
+            {
+                int start = event.getStartTime();
+                int end = event.getEndTime();
+
+                // Convert HHMM to decimal hours
+                int startHour = start / 100;
+                int startMin = start % 100;
+                int endHour = end / 100;
+                int endMin = end % 100;
+
+                double duration = (endHour + endMin / 60.0) - (startHour + startMin / 60.0);
+
+                // Handle events that might cross midnight
+                if (duration < 0)
+                {
+                    duration += 24;
+                }
+
+                totalHours += duration;
+            }
+        }
+    }
+
+    return totalHours;
 }
