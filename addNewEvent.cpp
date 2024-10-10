@@ -30,7 +30,6 @@ vector<eventSkeleton> addNewEvent::getEvents()
     return events;
 }
 
-
 void addNewEvent::addNewEventMenu()
 {
     EventType eventType;
@@ -43,7 +42,8 @@ void addNewEvent::addNewEventMenu()
     // displays paper codes by getting menu's vector<paper> papers
     for (auto &paper : papers)
     {
-        cout << "\n" << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
+        cout << "\n"
+             << left << setw(8) << paper.getPaperCode() << setw(50) << paper.getPaperName() << endl;
     }
     cout << "\n-----------------------------------------------------\n";
     paperCode = validate.getValidPaperCode(papers);
@@ -72,78 +72,170 @@ void addNewEvent::addNewEventMenu()
         cout << "bad input";
     }
 
-    // prompts to pass into validator 
+    // prompts to pass into validator
     string dayPrompt = "Enter the day of the week (1-7): ";
+    string howOftenPrompt = "Enter 1 to add to a specific week, or 2 to add to every week: ";
     string weekPrompt = "Enter the week of the year (1-52): ";
     string assignPrompt = "Enter due time: ";
     string startPrompt = "Enter start time: ";
     string endPrompt = "Enter end time: ";
     string locationPrompt = "Enter location: ";
 
-    if (eventType == EventType::ASSIGNMENT)
+    int howOften = validate.getValidInteger(1, 2, howOftenPrompt);
+    if (howOften == 1)
     {
-        endTime = validate.timeValidation(assignPrompt, 0);
+        if (eventType == EventType::ASSIGNMENT)
+        {
+            endTime = validate.timeValidation(assignPrompt, 0);
 
-        day = validate.getValidInteger(1, 7, dayPrompt);
+            day = validate.getValidInteger(1, 7, dayPrompt);
 
-        week = validate.getValidInteger(1, 52, weekPrompt);
+            week = validate.getValidInteger(1, 52, weekPrompt);
+        }
+        else
+        {
+            startTime = validate.timeValidation(startPrompt, 0);
+
+            endTime = validate.timeValidation(endPrompt, startTime);
+
+            location = validate.getValidString(locationPrompt);
+
+            day = validate.getValidInteger(1, 7, dayPrompt);
+
+            week = validate.getValidInteger(1, 52, weekPrompt);
+        }
+
+        if (eventType == EventType::TUTORIAL)
+        {
+            Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
+            if (calendar->addEvent(newTutorial))
+            {
+                cout << "Event details:\n";
+                newTutorial.displayInfo();
+            }
+        }
+        else if (eventType == EventType::LAB)
+        {
+            Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
+            if (calendar->addEvent(newLab))
+            {
+                cout << "Event details:\n";
+                newLab.displayInfo();
+            }
+        }
+        else if (eventType == EventType::LECTURE)
+        {
+            Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
+            if (calendar->addEvent(newLecture))
+            {
+                cout << "Event details:\n";
+                newLecture.displayInfo();
+            }
+        }
+        else if (eventType == EventType::ASSIGNMENT)
+        {
+            Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
+            calendar->addEvent(newAssignment);
+            cout << "Event details:\n";
+            newAssignment.displayInfo();
+        }
+        else if (eventType == EventType::EXAM)
+        {
+            Exam newExam = Exam(paperCode, day, week, startTime, endTime, location);
+            calendar->addEvent(newExam);
+            cout << "Event details:\n";
+            newExam.displayInfo();
+        }
+        else
+        {
+            cout << "Invalid event type.";
+            return;
+        }
     }
     else
     {
-        startTime = validate.timeValidation(startPrompt,0);
+        if (eventType == EventType::ASSIGNMENT)
+        {
+            endTime = validate.timeValidation(assignPrompt, 0);
 
-        endTime = validate.timeValidation(endPrompt, startTime);
+            day = validate.getValidInteger(1, 7, dayPrompt);
+        }
+        else
+        {
+            startTime = validate.timeValidation(startPrompt, 0);
 
-        location = validate.getValidString(locationPrompt);
-        
-        day = validate.getValidInteger(1, 7, dayPrompt);
+            endTime = validate.timeValidation(endPrompt, startTime);
 
-        week = validate.getValidInteger(1, 52, weekPrompt);
-    }
+            location = validate.getValidString(locationPrompt);
 
-    if (eventType == EventType::TUTORIAL)
-    {
-        Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
-        if(calendar->addEvent(newTutorial)){
-            cout << "Event details:\n";
-            newTutorial.displayInfo();
+            day = validate.getValidInteger(1, 7, dayPrompt);
+        }
+
+        if (eventType == EventType::TUTORIAL)
+        {
+            for (int i = 1; i <= 52; ++i)
+            {
+                week = i;
+                Tutorial newTutorial = Tutorial(paperCode, day, week, startTime, endTime, location);
+                if (calendar->addEvent(newTutorial))
+                {
+                    cout << "Event details:\n";
+                    newTutorial.displayInfo();
+                }
+            }
+        }
+        else if (eventType == EventType::LAB)
+        {
+            for (int i = 1; i <= 52; ++i)
+            {
+                week = i;
+                Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
+                if (calendar->addEvent(newLab))
+                {
+                    cout << "Event details:\n";
+                    newLab.displayInfo();
+                }
+            }
+        }
+        else if (eventType == EventType::LECTURE)
+        {
+            for (int i = 1; i <= 52; ++i)
+            {
+                week = i;
+                Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
+                if (calendar->addEvent(newLecture))
+                {
+                    cout << "Event details:\n";
+                    newLecture.displayInfo();
+                }
+            }
+        }
+        else if (eventType == EventType::ASSIGNMENT)
+        {
+            for (int i = 1; i <= 52; ++i)
+            {
+                week = i;
+                Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
+                calendar->addEvent(newAssignment);
+                cout << "Event details:\n";
+                newAssignment.displayInfo();
+            }
+        }
+        else if (eventType == EventType::EXAM)
+        {
+            for (int i = 1; i <= 52; ++i)
+            {
+                week = i;
+                Exam newExam = Exam(paperCode, day, week, startTime, endTime, location);
+                calendar->addEvent(newExam);
+                cout << "Event details:\n";
+                newExam.displayInfo();
+            }
+        }
+        else
+        {
+            cout << "Invalid event type.";
+            return;
         }
     }
-    else if (eventType == EventType::LAB)
-    {
-        Lab newLab = Lab(paperCode, day, week, startTime, endTime, location);
-        if(calendar->addEvent(newLab)){
-            cout << "Event details:\n";
-            newLab.displayInfo();
-        }
-    }
-    else if (eventType == EventType::LECTURE)
-    {
-        Lecture newLecture = Lecture(paperCode, day, week, startTime, endTime, location);
-        if(calendar->addEvent(newLecture)){
-            cout << "Event details:\n";
-            newLecture.displayInfo();
-        }
-    }
-    else if (eventType == EventType::ASSIGNMENT)
-    {
-        Assignment newAssignment = Assignment(paperCode, day, week, startTime, endTime, location);
-        calendar->addEvent(newAssignment);
-        cout << "Event details:\n";
-        newAssignment.displayInfo();
-    }
-    else if (eventType == EventType::EXAM)
-    {
-        Exam newExam = Exam(paperCode, day, week, startTime, endTime, location);
-        calendar->addEvent(newExam);
-        cout << "Event details:\n";
-        newExam.displayInfo();
-    }
-    else
-    {
-        cout << "Invalid event type.";
-        return;
-    }
-    
-    
 }
