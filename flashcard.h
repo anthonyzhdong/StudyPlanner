@@ -13,4 +13,6 @@ class flashcard
     std::string getAnswer();
     int getDifficulty();
     void setDifficulty(int diff);
+    bool test();
+    
 };

@@ -10,7 +10,7 @@
 #include "validation.h"
 #include "CalendarFile.h"
 #include <iostream>
-
+#include "flashcard.h"
 #include <fstream>
 #include <sstream>
 #include "MenuItem.h"
@@ -133,6 +133,9 @@ int main()
     eventSkeleton testEventExam = eventSkeleton(EventType::EXAM, "COSC345", 1, 1, 930, 1000, "Mellor 3.1");
 
     paper testPaper = paper("name", "code", 1);
+    flashcard testFlashcard = flashcard("question", "answer");
+
+    bool flashcardTestPassed = testFlashcard.test();
 
     bool calendarTestPassed = calendar.test();
     bool eventTestPassed = testEvent.test();
@@ -147,7 +150,7 @@ int main()
     bool menuItemTestPassed = MenuItem::test();
     bool studySessionTestPassed = StudySession::studyTest();
 
-    allTestsPassed &= calendarTestPassed && eventTestPassed && eventAssignmentTestPassed && eventTutorialTestPassed && eventLabTestPassed && eventExamTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed;
+    allTestsPassed &= calendarTestPassed && eventTestPassed && eventAssignmentTestPassed && eventTutorialTestPassed && eventLabTestPassed && eventExamTestPassed && paperTestPassed && calendarFileTestPassed && menuItemTestPassed && studySessionTestPassed && flashcardTestPassed;
     allTestsPassed &= testGetValidString();
     allTestsPassed &= testAddEvent();
     //bool timeValidationPassed = testTimeValidation();
