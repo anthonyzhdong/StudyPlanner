@@ -129,7 +129,7 @@ void paper::practiceFlashcards(){
         std::cin >> rating;
         card.setDifficulty(rating);
         
-        if(count == flashcards.size()){
+        if(count == static_cast<int>(flashcards.size())){
             std::cout << "End of flashcards." << std::endl;
                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clear the buffer
             break;
