@@ -101,8 +101,9 @@ void addNewEvent::addNewEventMenu()
         day = validate.getValidInteger(1, 7, dayPrompt);
 
         week = validate.getValidInteger(1, 52, weekPrompt);
-
-        repeat = validate.getValidInteger(1, 52, repeatPrompt);
+        if(eventType != EventType::EXAM){
+            repeat = validate.getValidInteger(1, 52, repeatPrompt);
+        }
     }
 
     if (eventType == EventType::TUTORIAL)
