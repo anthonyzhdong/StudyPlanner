@@ -188,12 +188,12 @@ void viewAllPapersMenuItem()
                                       |_|                  
 )" << '\n';
 
-    std::cout << "════════════════════════ All Papers ════════════════════════\n\n";
+    //std::cout << "════════════════════════ All Papers ════════════════════════\n\n";
 
     if (calendar->getPapers().empty())
     {
         //std::cout << "  📚 You have not added any papers yet.\n";
-        std::cout << "  ➕ Use the 'Add paper' option in the main menu to add papers.\n";
+       // std::cout << "  ➕ Use the 'Add paper' option in the main menu to add papers.\n";
         string choicePrompt = "  📚 You have not added any papers yet.\n  ➕ Enter '1' to add a paper.\n  🚪 Enter '2' to return to the main menu\n\n";
         //string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
@@ -245,7 +245,9 @@ void startStudySession()
                  "                                                  |___/                                      \n";
     if (calendar->getPapers().empty())
     {
-        string choicePrompt = "\nYou can't start a study sesion as no papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+        //string choicePrompt = "\nYou can't start a study sesion as no papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+
+        string choicePrompt = "  📚 You can't start a study sesion as no papers have been added yet.\n  ➕ Enter '1' to add a paper.\n  🚪 Enter '2' to return to the main menu\n\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
 
         switch (choice)
@@ -341,7 +343,9 @@ void endStudySession()
     else
     {
         // No study sessions are in progress so ask user to start one or return to menu
-        string choicePrompt = "\nThere isn't a study session in progress. Would you like to begin one?\n1. Start study session\n2. Return to main menu\n";
+        //string choicePrompt = "\nThere isn't a study session in progress. Would you like to begin one?\n1. Start study session\n2. Return to main menu\n";
+
+        string choicePrompt = "  📚 There isn't a study session in progress. Would you like to begin one?\n   ▶️ Enter '1' to start a study session.\n  🚪 Enter '2' to return to the main menu\n\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
 
         switch (choice)
@@ -372,7 +376,9 @@ void addEventMenuItem()
                  "                                                 \n";
     if (calendar->getPapers().empty())
     {
-        string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+        //string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+
+        string choicePrompt = "  📚 You have not added any papers yet.\n  ➕ Enter '1' to add a paper.\n  🚪 Enter '2' to return to the main menu\n\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
 
         switch (choice)
@@ -434,6 +440,7 @@ void exitMenu()
 void viewCalendarMenuItem()
 {
     clearScreen();
+    std::cout << "════════════════════════ Calendar Menu ════════════════════════\n\n";
     string choicePrompt =
     "Select a time period to display:\n"
     "     0: Whole year\n"
@@ -542,22 +549,27 @@ void flashcardMenu()
     // checks if papers exist
     if (calendar->getPapers().empty())
     {
-        std::string choicePrompt = "\nYou can't view flashcards as no papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+        std::cout << "════════════════════════ Flashcards ════════════════════════\n\n";
+        //std::cout << "  ➕ Use the 'Add paper' option in the main menu to add papers.\n";
+        string choicePrompt = "  📚 You have not added any papers yet.\n  ➕ Enter '1' to add a paper.\n  🚪 Enter '2' to return to the main menu\n\n";
+        //string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
         int choice = validate.getValidInteger(1, 2, choicePrompt);
-
         switch (choice)
         {
         case 1:
             addPaperMenuItem();
             break;
         case 2:
+            // clearScreen();
             displayMenuOptions();
             break;
         default:
             cout << "Invalid choice. Returning to main menu.\n";
+            // clearScreen();
             displayMenuOptions();
             break;
         }
+
     }
     else
     {
