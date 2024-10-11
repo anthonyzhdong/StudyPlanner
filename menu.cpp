@@ -192,8 +192,28 @@ void viewAllPapersMenuItem()
 
     if (calendar->getPapers().empty())
     {
-        std::cout << "  📚 You have not added any papers yet.\n";
+        //std::cout << "  📚 You have not added any papers yet.\n";
         std::cout << "  ➕ Use the 'Add paper' option in the main menu to add papers.\n";
+        string choicePrompt = "  📚 You have not added any papers yet.\n  ➕ Enter '1' to add a paper.\n  🚪 Enter '2' to return to the main menu\n\n";
+        //string choicePrompt = "No papers have been added yet. What would you like to do?\n1. Add a paper\n2. Return to main menu\n";
+        int choice = validate.getValidInteger(1, 2, choicePrompt);
+        switch (choice)
+        {
+        case 1:
+            addPaperMenuItem();
+            break;
+        case 2:
+            // clearScreen();
+            displayMenuOptions();
+            break;
+        default:
+            cout << "Invalid choice. Returning to main menu.\n";
+            // clearScreen();
+            displayMenuOptions();
+            break;
+        }
+
+
     }
     else
     {
