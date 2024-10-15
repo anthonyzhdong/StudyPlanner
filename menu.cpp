@@ -583,11 +583,12 @@ void flashcardMenu()
             std::cout << "  1. 📚 View Flashcards\n";
             std::cout << "  2. ➕ Add Flashcard\n";
             std::cout << "  3. 🔄 Practice Flashcards\n";
-            std::cout << "  4. 🚪 Exit\n";
+            std::cout << "  4. 🗑️  Delete Flashcards\n";
+            std::cout << "  5. 🚪 Exit\n";
             std::cout << "\n═══════════════════════════════════════════════════════════════\n\n";
 
-            std::string prompt = "Enter a number (1-4): ";
-            int choice = validate.getValidInteger(1, 4, prompt);
+            std::string prompt = "Enter a number (1-5): ";
+            int choice = validate.getValidInteger(1, 5, prompt);
 
             switch (choice)
             {
@@ -619,6 +620,10 @@ void flashcardMenu()
                 fcMenu.practiceFlashcards();
                 break;
             case 4:
+                clearScreen();
+                fcMenu.deleteFlashcard();
+                break;
+            case 5:
                 flashcardMenuRunning = false;
                 break;
             }

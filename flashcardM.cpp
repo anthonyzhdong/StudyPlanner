@@ -62,3 +62,23 @@ void flashcardM::practiceFlashcards() {
         }
     }
 }
+
+void flashcardM::deleteFlashcard(){
+    displayPapers();
+    std::string paperCode = validate.getValidPaperCode(calendar->getPapers());
+
+    for (auto &paper : calendar->getPapers()) {
+        if (paper.getPaperCode() == paperCode && !paper.getFlashcards().empty()) {
+            paper.displayFlashcards();
+            std::string deletePrompt = "Enter the index of the flashcard to delete: ";
+            int index = validate.getValidInteger(1, paper.getFlashcards().size(), deletePrompt) - 1;
+            paper.deleteFlashcard(index);
+            std::cout << "Flashcard deleted." << std::endl;
+            break;
+        }else{
+            std::cout << "No flashcards to delete." << std::endl;
+        }
+    }
+
+
+}

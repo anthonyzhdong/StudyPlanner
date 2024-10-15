@@ -166,6 +166,13 @@ void paper::practiceFlashcards(){
 
 }
 
+void paper::deleteFlashcard(int index){
+
+    flashcards.erase(flashcards.begin() + index);
+
+
+}
+
 bool paper::test(){
     bool passed = true;
 

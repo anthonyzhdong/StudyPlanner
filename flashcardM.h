@@ -17,5 +17,6 @@ public:
     void viewFlashcards();
     void addFlashcard();
     void practiceFlashcards();
+    void deleteFlashcard();
    // void display();
 };

@@ -103,6 +103,8 @@ public:
     void practiceFlashcards();
 
     void displayFlashcards();
+    
+    void deleteFlashcard(int index);
 
     /**
      * @brief Display information about the paper
